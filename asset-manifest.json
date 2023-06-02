@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.e0cda7ae.css",
-    "main.js": "/static/js/main.b2cdbeae.js",
-    "static/media/Waiter.svg": "/static/media/Waiter.0d84c4d13a30cf5dfb11e16d2ddff0c1.svg",
-    "index.html": "/index.html",
-    "main.e0cda7ae.css.map": "/static/css/main.e0cda7ae.css.map",
-    "main.b2cdbeae.js.map": "/static/js/main.b2cdbeae.js.map"
+    "main.css": "/Giberno_Form/static/css/main.e0cda7ae.css",
+    "main.js": "/Giberno_Form/static/js/main.f0daa56c.js",
+    "static/media/Waiter.svg": "/Giberno_Form/static/media/Waiter.0d84c4d13a30cf5dfb11e16d2ddff0c1.svg",
+    "index.html": "/Giberno_Form/index.html",
+    "main.e0cda7ae.css.map": "/Giberno_Form/static/css/main.e0cda7ae.css.map",
+    "main.f0daa56c.js.map": "/Giberno_Form/static/js/main.f0daa56c.js.map"
   },
   "entrypoints": [
     "static/css/main.e0cda7ae.css",
-    "static/js/main.b2cdbeae.js"
+    "static/js/main.f0daa56c.js"
   ]
 }
