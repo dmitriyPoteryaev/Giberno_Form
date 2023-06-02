@@ -1,0 +1,137 @@
+.Tips {
+    display: flex;
+    flex-direction: column;
+  }
+  .Tips__title {
+    color: #010d35;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 22px;
+    margin-bottom: 16px;
+  
+    align-items: flex-start;
+  }
+  
+  .Tips__infoWaiter {
+    display: flex;
+  }
+  
+  .Tips__photoWaiter {
+    border-radius: 50%;
+    height: 35px;
+    margin-right: 12px;
+    min-width: 35px;
+  }
+  .Tips__NameWaiter {
+    display: flex;
+    flex-direction: column;
+  
+    margin-left: 10px;
+  
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .Tips__Position { 
+  
+    color: rgb(128, 134, 154);
+  
+  }
+  .Tips__name { 
+  
+    color: #343d5d;
+  
+  }
+  
+  .Tips__wrapperInput {
+  
+    position: relative;
+  
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  
+    height: 40px;
+    margin-top: 10px;
+    padding: 0;
+    font-weight: 600;
+  
+    font-size: 17px;
+    line-height: 22px;
+  }
+  .Tips__inputTip {
+  
+    width: 50%;
+    height: 90%;
+    text-align: right;
+    border: 0;
+    outline: none;
+  
+    font-size: 20px;
+    font-weight: 800;
+  }
+  .Tips__typeCurrency {
+  
+    position: absolute;
+    transform: translateX(-50%);
+    left: calc(50% + 15px);
+  
+    font-weight: 800;
+  
+  }
+  
+  .Tips__allPercentagesForTips {
+  
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* all styles for cross button */
+  
+  .wrap_buttonCross {
+  
+    cursor: pointer;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .cross{
+    align-items: center;
+    background: #f7f8fa;
+    border: 1px solid #edeef1;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    height: 24px;
+    justify-content: center;
+    outline: none;
+    width: 24px;
+  
+  }
+  
+  .cross::before {
+  
+    background: #ec4e4e;
+    border-radius: 5px;
+    content: "";
+    display: block;
+    height: 12px;
+    left: 50%;
+    position: absolute;
+    width: 1.5px;
+    transform: translateX(-50%) rotate(45deg)
+  }
+  
+  .cross::after {
+    background: #ec4e4e;
+    border-radius: 5px;
+    content: "";
+    display: block;
+    height: 12px;
+    left: 50%;
+    position: absolute;
+    width: 1.5px;
+    transform: translateX(-50%) rotate(-45deg);
+  
+  }
+  

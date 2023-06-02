@@ -1,0 +1,21 @@
+.pageOrder {
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.OrderContent {
+    
+    padding: 16px 16px 220px;
+
+}
+.wrapperBlock {
+
+    background-color: #fff;
+    border: 1px solid #e6e7eb;
+    border-radius: 12px;
+    list-style-type: none;
+    padding: 12px;
+    margin-bottom: 12px;
+    
+}

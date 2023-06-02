@@ -1,0 +1,23 @@
+.header {
+    background: #010d35;
+    color: #fff;
+    height: 64px;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 0 16px;
+    width: 100%;
+  
+  }
+  .header__container {
+    align-items: center;
+    display: flex;
+    height: 100%;
+  }
+  .header__title {
+    border-right: 1px solid #fff;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-right: 8px;
+    padding-right: 8px;
+  }
