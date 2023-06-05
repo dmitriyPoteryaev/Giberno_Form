@@ -13,10 +13,21 @@ const GeneralAmount = memo((props: any) => {
 
   return (
     <div className={GeneralAmountClasses}>
-      <div className="GeneralAmount__title">Общий счёт</div>
-      <div className="GeneralAmount__eat">Cчёт за еду - {general_order}</div>
-      <div className="GeneralAmount__tips">Чаевые - {tips}</div>
-      <div className="">Общее кол-во {+general_order + +tips}</div>
+      <div className="GeneralAmount__sepateOrders">
+        <div className="GeneralAmount__sepateOrders_container general_Order">
+          <div>Общий счёт: </div>
+          <div>{general_order} ₽</div>
+        </div>
+        <div className="GeneralAmount__sepateOrders_container">
+          <div>Чаевые: </div>
+          <div>{`${tips} ₽`}</div>
+        </div>
+      </div>
+      <div className="GeneralAmount__divider"></div>
+      <div className="GeneralAmount__sepateOrders_container itog">
+        <div>Итог к оплате: </div>
+        <div>{+general_order + +tips} ₽</div>
+      </div>
     </div>
   );
 });

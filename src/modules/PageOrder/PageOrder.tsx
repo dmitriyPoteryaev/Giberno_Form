@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import GeneralAmount from "./components/GeneralAmount";
 import ListOrders from "./components/ListOrders";
 import Tips from "./components/Tips";
+import СonditionsOrder from "./components/СonditionsOrder";
 
 const PageOrder = observer(() => {
   const { getDataAboutOrders, InfoAboutOrder, cbTips } = orderStore;
@@ -34,6 +35,7 @@ const PageOrder = observer(() => {
           general_order={InfoAboutOrder?.general_order}
           tips={cbTips}
         />
+        <СonditionsOrder />
       </div>
     </div>
   );

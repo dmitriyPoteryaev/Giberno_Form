@@ -2,10 +2,42 @@
   display: flex;
   flex-direction: column;
 }
-.GeneralAmount__title {
-  font-weight: 800;
-  margin-bottom: 10px;
-}
 .GeneralAmount__eat {
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  padding-bottom: 16px;
+}
+.GeneralAmount__sepateOrders {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  color: #343d5d;
+}
+.GeneralAmount__sepateOrders_container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.general_Order {
+  font-weight: 600;
+  line-height: 25px;
+  margin-bottom: 6px;
+}
+.GeneralAmount__divider {
+  background: #edeef1;
+  height: 1px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+.itog {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25px;
 }

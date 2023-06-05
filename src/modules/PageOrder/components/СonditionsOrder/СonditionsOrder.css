@@ -1,0 +1,59 @@
+.СonditionsOrder {
+  display: flex;
+  flex-direction: column;
+}
+.СonditionsOrder__container {
+  align-items: center;
+  display: inline-flex;
+}
+
+/* style for checkbox */
+
+.custom-checkbox {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  height: 14px;
+  width: 14px;
+  margin-right: 16px
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  border-radius: 3px;
+  border: 1px black solid;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: white;
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark::after {
+  display: block;
+}
+
+.custom-checkbox .checkmark::after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #2196f3;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
