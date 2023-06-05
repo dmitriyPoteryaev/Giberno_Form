@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useRef } from "react";
 
 import "./Tips.css";
 import { orderStore } from "@store/index";
@@ -6,20 +6,28 @@ import classNames from "classnames";
 
 import ButtonChangeTips from "./ButtonChangeTips";
 
-const ALL_PERCENTAGES_TIPS = {
-  "0 %": 0,
-  "10 %": 0.1,
-  "15 %": 0.15,
-  "20 %": 0.2,
-  "25 %": 0.25,
+const ALL_PER_TIPS: any = {
+  "0": false,
+  "10": false,
+  "15": false,
+  "20": false,
+  "25": false,
 };
 
 const Tips = (props: any) => {
-  const { wrapperClassName, name_waiter } = props;
+  const { wrapperClassName, name_waiter, general_order } = props;
 
-  const { ChangeAmountPriceWithTips, InfoAboutOrder } = orderStore;
+  const { ChangeAmountTips, cbTips } = orderStore;
 
-  const [valueTips, setvalueTips] = useState<number>(0);
+  const [AllPercentagesTips, setAllPercentagesTips] = useState<string>(" ");
+
+  const general_orderREf = useRef<number>();
+
+  general_orderREf.current = general_order;
+
+  const tipsREf = useRef<string>();
+
+  tipsREf.current = cbTips;
 
   const svg_waiter: string = require("@assets/Waiter.svg").default;
 
@@ -33,22 +41,37 @@ const Tips = (props: any) => {
     Tips__wrapperInput: true,
   });
 
-  const handlerChangeValueTips = (currentValue: number): void => {
-    if (currentValue > 999999 || currentValue < 0) {
+  const handlerChangeValueTips = useCallback((currentValueBtn: any) => {
+    if (
+      +currentValueBtn.target.value > 999999 ||
+      +currentValueBtn.target.value < 0 ||
+      +currentValueBtn.target.value.toString().match(/\.(\d+)/)?.[1].length > 2
+    ) {
       return;
     }
 
-    const difvalue: number = valueTips - currentValue;
-
-    if (difvalue) {
-      ChangeAmountPriceWithTips(-difvalue);
-    } else {
-      ChangeAmountPriceWithTips(difvalue);
+    if (currentValueBtn.target.className === "cross") {
+      ChangeAmountTips("0");
     }
 
-    setvalueTips(currentValue);
-  };
+    if (
+      currentValueBtn.type === "click" &&
+      general_orderREf.current &&
+      tipsREf.current !== undefined
+    ) {
+      const calculated =
+        (general_orderREf.current *
+          +currentValueBtn.target.innerHTML.slice(0, -2)) /
+        100;
+      ChangeAmountTips(calculated.toString());
+    }
+    if (currentValueBtn.type === "change" && tipsREf.current !== undefined) {
+      ChangeAmountTips(currentValueBtn.target.value);
+    }
 
+    setAllPercentagesTips(currentValueBtn.target.innerHTML);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className={TipsClasses}>
       <div className="Tips__title"> Чаевые </div>
@@ -66,32 +89,23 @@ const Tips = (props: any) => {
       <label className={WrraperInputClasses}>
         <input
           type="number"
-          onChange={(event) => handlerChangeValueTips(+event.target.value)}
-          value={valueTips}
+          value={cbTips}
           className="Tips__inputTip"
+          onChange={handlerChangeValueTips}
         />
         <span className="Tips__typeCurrency">₽</span>
         <div className="wrap_buttonCross">
-          <button
-            className="cross"
-            onClick={() => handlerChangeValueTips(0)}
-          ></button>
+          <button className="cross" onClick={handlerChangeValueTips}></button>
         </div>
       </label>
       <div className="Tips__allPercentagesForTips">
-        {Object.keys(ALL_PERCENTAGES_TIPS).map((percentages, i) => (
+        {Object.keys(ALL_PER_TIPS).map((percentages, i) => (
           <ButtonChangeTips
             key={percentages}
-            onClick={() =>
-              handlerChangeValueTips(
-                +(
-                  InfoAboutOrder.general_order *
-                  Object.values(ALL_PERCENTAGES_TIPS)[i]
-                ).toFixed(2)
-              )
-            }
+            onClick={handlerChangeValueTips}
+            disabled={AllPercentagesTips}
           >
-            {percentages}
+            {`${percentages} %`}
           </ButtonChangeTips>
         ))}
       </div>

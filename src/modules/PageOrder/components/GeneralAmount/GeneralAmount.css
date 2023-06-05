@@ -1,0 +1,11 @@
+.GeneralAmount {
+  display: flex;
+  flex-direction: column;
+}
+.GeneralAmount__title {
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.GeneralAmount__eat {
+  margin-bottom: 10px;
+}

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 
 import "./ListOrders.css";
 import classNames from "classnames";
 
-const ListOrders = (props: any) => {
+const ListOrders = memo((props: any) => {
   const { wrapperClassName, orders } = props;
 
   const OrderClasses = classNames({
@@ -30,6 +30,6 @@ const ListOrders = (props: any) => {
       ))}
     </ul>
   );
-};
+});
 
 export default ListOrders;

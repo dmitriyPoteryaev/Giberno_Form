@@ -1,9 +1,36 @@
-import React from "react";
+import React, { memo } from "react";
 
-const ButtonChangeTips = (props: any) => {
-  const { children, onClick } = props;
+import "./ButtonChangeTips.css";
+import classNames from "classnames";
 
-  return <button onClick={onClick}>{children}</button>;
-};
+const ButtonChangeTips = memo(
+  (props: any) => {
+    const { children, onClick, disabled } = props;
+    const WrraperButtonChangeClasses = classNames({
+      Tips__BtnChangeTips: true,
+      Tips__BtnChangeTips_active: disabled === children,
+    });
+
+    return (
+      <button
+        className={WrraperButtonChangeClasses}
+        disabled={disabled === children}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    );
+  },
+  (prevProps, nexProps) => {
+    if (
+      nexProps.children === nexProps.disabled ||
+      prevProps.children === prevProps.disabled
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+);
 
 export default ButtonChangeTips;

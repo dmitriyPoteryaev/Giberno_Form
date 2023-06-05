@@ -1,15 +1,15 @@
 import { orderAPI } from "@api/orders";
-import { makeAutoObservable, action } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 const { getInfoAboutOrder } = orderAPI;
 
 class OrdersStore {
   OrdersStoreState: any = {};
 
+  tips: string = "0";
+
   constructor() {
-    makeAutoObservable(this, {
-      ChangeAmountPriceWithTips: action,
-    });
+    makeAutoObservable(this);
   }
 
   getDataAboutOrders = () => {
@@ -18,15 +18,15 @@ class OrdersStore {
     });
   };
 
+  get cbTips() {
+    return this.tips;
+  }
   get InfoAboutOrder() {
     return this.OrdersStoreState;
   }
 
-  ChangeAmountPriceWithTips = (value: number) => {
-    this.OrdersStoreState = {
-      ...this.OrdersStoreState,
-      general_order: this.OrdersStoreState.general_order + value,
-    };
+  ChangeAmountTips = (value: string) => {
+    this.tips = value;
   };
 }
 

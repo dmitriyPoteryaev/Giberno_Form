@@ -5,11 +5,12 @@ import Header from "@shared/components/Header";
 import { orderStore } from "@store/index";
 import { observer } from "mobx-react-lite";
 
+import GeneralAmount from "./components/GeneralAmount";
 import ListOrders from "./components/ListOrders";
 import Tips from "./components/Tips";
 
 const PageOrder = observer(() => {
-  const { getDataAboutOrders, InfoAboutOrder } = orderStore;
+  const { getDataAboutOrders, InfoAboutOrder, cbTips } = orderStore;
 
   useEffect(() => {
     getDataAboutOrders();
@@ -26,9 +27,14 @@ const PageOrder = observer(() => {
         <Tips
           wrapperClassName="wrapperBlock"
           name_waiter={InfoAboutOrder?.name_waiter}
+          general_order={InfoAboutOrder?.general_order}
+        />
+        <GeneralAmount
+          wrapperClassName="wrapperBlock"
+          general_order={InfoAboutOrder?.general_order}
+          tips={cbTips}
         />
       </div>
-      <div>{InfoAboutOrder?.general_order?.toFixed(2)}</div>
     </div>
   );
 });

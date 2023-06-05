@@ -1,0 +1,20 @@
+.Tips__BtnChangeTips {
+
+    background: #f7f8fa;
+    border: 1px solid #f7f8fa;
+    border-radius: 6px;
+    color: #80869a;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 4px;
+}
+.Tips__BtnChangeTips_active  {
+
+    border-color: #6764ff;
+    color: #010d35;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+}
