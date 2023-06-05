@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Giberno_Form/static/css/main.e0cda7ae.css",
-    "main.js": "/Giberno_Form/static/js/main.f0daa56c.js",
-    "static/media/Waiter.svg": "/Giberno_Form/static/media/Waiter.0d84c4d13a30cf5dfb11e16d2ddff0c1.svg",
+    "main.css": "/Giberno_Form/static/css/main.5da7dee7.css",
+    "main.js": "/Giberno_Form/static/js/main.6ffe4917.js",
+    "static/media/Waiter.svg": "/Giberno_Form/static/media/Waiter.62f84c34653c2b0be47e32deb8650f7d.svg",
     "index.html": "/Giberno_Form/index.html",
-    "main.e0cda7ae.css.map": "/Giberno_Form/static/css/main.e0cda7ae.css.map",
-    "main.f0daa56c.js.map": "/Giberno_Form/static/js/main.f0daa56c.js.map"
+    "main.5da7dee7.css.map": "/Giberno_Form/static/css/main.5da7dee7.css.map",
+    "main.6ffe4917.js.map": "/Giberno_Form/static/js/main.6ffe4917.js.map"
   },
   "entrypoints": [
-    "static/css/main.e0cda7ae.css",
-    "static/js/main.f0daa56c.js"
+    "static/css/main.5da7dee7.css",
+    "static/js/main.6ffe4917.js"
   ]
 }
