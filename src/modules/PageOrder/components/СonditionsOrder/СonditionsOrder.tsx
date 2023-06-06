@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./СonditionsOrder.css";
 
-const СonditionsOrder = () => {
-  const [isChecked, setIsChcked] = useState(false);
+const СonditionsOrder = (props: any) => {
+  const { StateAgreeConditionPyments, ChangeStateAgreeConditionPyments } =
+    props;
+
+  const [value, setValue] = useState(false);
 
   return (
     <div className="СonditionsOrder">
@@ -10,7 +13,7 @@ const СonditionsOrder = () => {
         <input
           type="checkbox"
           className="check__input"
-          onChange={() => setIsChcked((isChecked) => !isChecked)}
+          onChange={() => setValue((value) => !value)}
         />
         <span className="check_box"></span>
         <span>Я хочу взять на себя сервисный сбор Tapper (41.6₽)</span>
@@ -19,7 +22,10 @@ const СonditionsOrder = () => {
         <input
           type="checkbox"
           className="check__input"
-          onChange={() => setIsChcked((isChecked) => !isChecked)}
+          onChange={() =>
+            ChangeStateAgreeConditionPyments(!StateAgreeConditionPyments)
+          }
+          checked={StateAgreeConditionPyments}
         />
         <span className="check_box"></span>
         <span>

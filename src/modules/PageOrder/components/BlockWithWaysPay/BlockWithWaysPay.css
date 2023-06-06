@@ -1,82 +1,135 @@
 .BlockWithWaysPay {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    background: #fff;
-    border-radius: 20px 20px 0 0;
-    bottom: 0px;
-    box-shadow: 1px 0 11px rgba(0, 0, 0, 0.09);
-    left: 0;
-    padding: 9px 16px 16px;
-    position: fixed;
-    right: 0;
-    z-index: 1;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  bottom: 0px;
+  box-shadow: 1px 0 11px rgba(0, 0, 0, 0.09);
+  left: 0;
+  padding: 9px 16px 16px;
+  position: fixed;
+  right: 0;
+  z-index: 1;
 }
 
 .BlockWithWaysPay__header {
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    margin-bottom: 13px;
-    width: 100%;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 13px;
+  width: 100%;
 }
 
 .BlockWithWaysPay__ico {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
 .BlockWithWaysPay_title-block {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .BlockWithWaysPay_title {
-    color: #80869a;
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 16px;
+  color: #80869a;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
 }
 
 .BlockWithWaysPay__subtitle {
-    color: #343d5d;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 18px;
+  color: #343d5d;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
 }
 
 .BlockWithWaysPay_subtitle {
-    color: #343d5d;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 18px;
+  color: #343d5d;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
 }
 
 .BlockWithWaysPay__arrow {
-
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .baseButton {
-
-    border: none;
-    border-radius: 41px;
-    color: #343d5d;
-    cursor: pointer;
-    font-family: Commissioner, sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: .03em;
-    line-height: 22px;
-    outline: none;
-    padding-bottom: 16px;
-    padding-top: 16px;
-    text-align: center;
-    width: 100%;
-
+  border: none;
+  border-radius: 41px;
+  color: #343d5d;
+  cursor: pointer;
+  font-family: Commissioner, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 22px;
+  outline: none;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  text-align: center;
+  width: 100%;
 }
 
 .baseButton_blue {
+  background: #6764ff;
+  color: #fff;
+}
 
-    background: #6764ff;
-    color: #fff;
+.BlockWithWaysPay__list {
+
+    padding: 0;
+}
+
+/* стили для инпутов в этом месте*/
+.check__input {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.BlockWithWaysPay__check {
+  display: flex;
+  justify-content: baseline;
+  padding-left: 1.2em;
+  color: #80869a;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-bottom: 8px;
+
+  margin-left: auto;
+}
+.BlockWithWaysPay__check_box {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  height: 40px;
+  min-width: 40px;
+
+  margin-right: 1.2em;
+  border-radius: 50%;
+  border: 1.5px solid #dcdee3;
+  background-color: white;
+}
+
+.BlockWithWaysPay__check_box::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 18px;
+  border-style: solid;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  border-color: #413dff;
+  display: block; 
+  left: 13px;
+  top: 7px;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.check__input:checked + .BlockWithWaysPay__check_box::before {
+  opacity: 1;
 }
