@@ -5,6 +5,7 @@ import Header from "@shared/components/Header";
 import { orderStore } from "@store/index";
 import { observer } from "mobx-react-lite";
 
+import BlockWithWaysPay from "./components/BlockWithWaysPay";
 import GeneralAmount from "./components/GeneralAmount";
 import ListOrders from "./components/ListOrders";
 import Tips from "./components/Tips";
@@ -36,6 +37,10 @@ const PageOrder = observer(() => {
           tips={cbTips}
         />
         <СonditionsOrder />
+        <BlockWithWaysPay
+          general_order={InfoAboutOrder?.general_order}
+          tips={cbTips}
+        />
       </div>
     </div>
   );

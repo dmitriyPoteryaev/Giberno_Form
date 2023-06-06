@@ -1,0 +1,82 @@
+.BlockWithWaysPay {
+    display: flex;
+    flex-direction: column;
+
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    bottom: 0px;
+    box-shadow: 1px 0 11px rgba(0, 0, 0, 0.09);
+    left: 0;
+    padding: 9px 16px 16px;
+    position: fixed;
+    right: 0;
+    z-index: 1;
+}
+
+.BlockWithWaysPay__header {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    margin-bottom: 13px;
+    width: 100%;
+}
+
+.BlockWithWaysPay__ico {
+    margin-right: 12px;
+}
+
+.BlockWithWaysPay_title-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.BlockWithWaysPay_title {
+    color: #80869a;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.BlockWithWaysPay__subtitle {
+    color: #343d5d;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+.BlockWithWaysPay_subtitle {
+    color: #343d5d;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+.BlockWithWaysPay__arrow {
+
+    margin-left: auto;
+}
+
+.baseButton {
+
+    border: none;
+    border-radius: 41px;
+    color: #343d5d;
+    cursor: pointer;
+    font-family: Commissioner, sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    line-height: 22px;
+    outline: none;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    text-align: center;
+    width: 100%;
+
+}
+
+.baseButton_blue {
+
+    background: #6764ff;
+    color: #fff;
+}

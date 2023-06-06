@@ -26,7 +26,7 @@ const GeneralAmount = memo((props: any) => {
       <div className="GeneralAmount__divider"></div>
       <div className="GeneralAmount__sepateOrders_container itog">
         <div>Итог к оплате: </div>
-        <div>{+general_order + +tips} ₽</div>
+        <div>{(+general_order + +tips).toFixed(2)} ₽</div>
       </div>
     </div>
   );

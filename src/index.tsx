@@ -54,7 +54,6 @@ import App from "./App/App";
 // кнопка неавтина если есть второй чекбокс
 // и если минимальная сумма чаевых указана - она не должна быть меньше 49 рублей
 
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
