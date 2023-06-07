@@ -35,6 +35,7 @@ const PageOrder = observer(() => {
           wrapperClassName="wrapperBlock"
           name_waiter={InfoAboutOrder?.name_waiter}
           general_order={InfoAboutOrder?.general_order}
+          tips={cbTips}
         />
         <GeneralAmount
           wrapperClassName="wrapperBlock"

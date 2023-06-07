@@ -63,10 +63,14 @@
   font-size: 20px;
   font-weight: 800;
 }
+
+::placeholder {
+  color: #010d35;
+}
 .Tips__typeCurrency {
   position: absolute;
   transform: translateX(-50%);
-  left: calc(50% + 15px);
+  left: calc(50% + 7px);
 
   font-weight: 800;
 }

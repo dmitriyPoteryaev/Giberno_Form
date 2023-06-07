@@ -5,6 +5,7 @@ import { orderStore } from "@store/index";
 import classNames from "classnames";
 
 import ButtonChangeTips from "./ButtonChangeTips";
+import TipsMaskInput from "./TipsMaskInput";
 
 const ALL_PER_TIPS: any = {
   "0": false,
@@ -15,9 +16,9 @@ const ALL_PER_TIPS: any = {
 };
 
 const Tips = (props: any) => {
-  const { wrapperClassName, name_waiter, general_order } = props;
+  const { wrapperClassName, name_waiter, general_order, tips } = props;
 
-  const { ChangeAmountTips, cbTips } = orderStore;
+  const { ChangeAmountTips } = orderStore;
 
   const [AllPercentagesTips, setAllPercentagesTips] = useState<string>(" ");
 
@@ -27,7 +28,7 @@ const Tips = (props: any) => {
 
   const tipsREf = useRef<string>();
 
-  tipsREf.current = cbTips;
+  tipsREf.current = tips;
 
   const svg_waiter: string = require("@assets/Waiter.svg").default;
 
@@ -40,36 +41,37 @@ const Tips = (props: any) => {
     [`${wrapperClassName}`]: !!wrapperClassName,
     Tips__wrapperInput: true,
   });
-
   const handlerChangeValueTips = useCallback((currentValueBtn: any) => {
-    if (
-      +currentValueBtn.target.value > 999999 ||
-      +currentValueBtn.target.value < 0 ||
-      +currentValueBtn.target.value.toString().match(/\.(\d+)/)?.[1].length > 2
-    ) {
+    if (currentValueBtn.target.className === "cross") {
+      ChangeAmountTips("0");
       return;
     }
 
-    if (currentValueBtn.target.className === "cross") {
-      ChangeAmountTips("0");
-    }
-
-    if (
-      currentValueBtn.type === "click" &&
-      general_orderREf.current &&
-      tipsREf.current !== undefined
-    ) {
+    if (currentValueBtn.type === "click" && general_orderREf.current) {
+      console.log("here");
       const calculated =
         (general_orderREf.current *
           +currentValueBtn.target.innerHTML.slice(0, -2)) /
         100;
-      ChangeAmountTips(calculated.toString());
+      const res = Math.round(calculated);
+      ChangeAmountTips(res.toString());
+      setAllPercentagesTips(currentValueBtn.target.innerHTML);
+      return;
     }
-    if (currentValueBtn.type === "change" && tipsREf.current !== undefined) {
-      ChangeAmountTips(currentValueBtn.target.value);
+    if (currentValueBtn.target.value === "") {
+      ChangeAmountTips("0");
+      return;
     }
 
-    setAllPercentagesTips(currentValueBtn.target.innerHTML);
+    if (currentValueBtn.type === "change" && tipsREf.current) {
+      ChangeAmountTips(currentValueBtn.target.value);
+      return;
+    }
+    if (+currentValueBtn.target.value === 0) {
+      ChangeAmountTips("0");
+      return;
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -87,10 +89,11 @@ const Tips = (props: any) => {
         </div>
       </div>
       <label className={WrraperInputClasses}>
-        <input
-          type="number"
-          value={cbTips}
+        <TipsMaskInput
           className="Tips__inputTip"
+          value={tips}
+          placeholder="0"
+          type="text"
           onChange={handlerChangeValueTips}
         />
         <span className="Tips__typeCurrency">₽</span>

@@ -1,0 +1,35 @@
+.Modal_order__Сonditions {
+  position: fixed;
+  background: rgba(101, 94, 94, 0.5);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+}
+.Modal_order__СonditionsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  bottom: 0px;
+  box-shadow: 1px 0 11px rgba(0, 0, 0, 0.09);
+  left: 0;
+  padding: 9px 16px 16px;
+  position: fixed;
+  right: 0;
+  height: 75%;
+  z-index: 2;
+  overflow-y: scroll;
+}
+
+.Modal_order__header {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-bottom: 16px;
+  text-align: center;
+  text-transform: uppercase;
+}
