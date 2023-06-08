@@ -12,7 +12,21 @@ const OBJECT_WITH_SVG_WATS_PAY: any = {
 const BlockWithWaysPay = (props: any) => {
   const [isSelectWayPay, setIsSelectWayPay] = useState<boolean>(false);
   const [wayPay, setWayPay] = useState<string>("Банковская карта");
-  const { general_order, tips, isActiveGenetalButton } = props;
+  const {
+    general_order,
+    tips,
+    isActiveGenetalButton,
+    ServiceChargeAmount,
+    getIsServiceChargeAmount,
+  } = props;
+
+  const generalAmout = () => {
+    return (
+      +general_order +
+      +tips +
+      +(getIsServiceChargeAmount ? ServiceChargeAmount : 0)
+    ).toFixed(2);
+  };
 
   if (isSelectWayPay) {
     return (
@@ -95,7 +109,7 @@ const BlockWithWaysPay = (props: any) => {
           style={!isActiveGenetalButton ? { backgroundColor: "gray" } : {}}
         >
           {" "}
-          Oплатить {+general_order + +tips}
+          Oплатить {generalAmout() === "NaN" ? "" : generalAmout()}
         </button>
       </div>
     </div>

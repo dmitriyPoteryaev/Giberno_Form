@@ -75,6 +75,8 @@ const PageOrder = observer(() => {
           general_order={InfoAboutOrder?.general_order}
           tips={cbTips}
           isActiveGenetalButton={isActiveGenetalButton}
+          ServiceChargeAmount={ServiceChargeAmount}
+          getIsServiceChargeAmount={getIsServiceChargeAmount}
         />
       </div>
     </div>
