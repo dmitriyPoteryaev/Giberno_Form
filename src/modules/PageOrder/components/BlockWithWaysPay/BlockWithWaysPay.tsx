@@ -72,7 +72,7 @@ const BlockWithWaysPay = (props: any) => {
             <div className="BlockWithWaysPay_body">
               <button className="baseButton baseButton_blue">
                 {" "}
-                Oплатить {+general_order + +tips}
+                Oплатить {generalAmout() === "NaN" ? "" : generalAmout()}
               </button>
             </div>
           </div>
