@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Giberno_Form/static/css/main.4fef1242.css",
-    "main.js": "/Giberno_Form/static/js/main.bd5dfd1e.js",
+    "main.css": "/Giberno_Form/static/css/main.27a815e6.css",
+    "main.js": "/Giberno_Form/static/js/main.17206cc5.js",
     "static/media/Waiter.svg": "/Giberno_Form/static/media/Waiter.0d84c4d13a30cf5dfb11e16d2ddff0c1.svg",
     "static/media/card.svg": "/Giberno_Form/static/media/card.f4b2b9d9e4f0922f85c0eadeb05c2d70.svg",
     "static/media/SFP.svg": "/Giberno_Form/static/media/SFP.7acde8373248fd5ad8e7689db076a3fe.svg",
     "index.html": "/Giberno_Form/index.html",
     "static/media/arrow.svg": "/Giberno_Form/static/media/arrow.d8c5f0364ee0c7f22937af287bf5d179.svg",
-    "main.4fef1242.css.map": "/Giberno_Form/static/css/main.4fef1242.css.map",
-    "main.bd5dfd1e.js.map": "/Giberno_Form/static/js/main.bd5dfd1e.js.map"
+    "main.27a815e6.css.map": "/Giberno_Form/static/css/main.27a815e6.css.map",
+    "main.17206cc5.js.map": "/Giberno_Form/static/js/main.17206cc5.js.map"
   },
   "entrypoints": [
-    "static/css/main.4fef1242.css",
-    "static/js/main.bd5dfd1e.js"
+    "static/css/main.27a815e6.css",
+    "static/js/main.17206cc5.js"
   ]
 }
