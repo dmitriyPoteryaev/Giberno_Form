@@ -3,8 +3,6 @@ import "./BlockWithWaysPay.css";
 import "./SelectWaysPay.css";
 
 const svg_waysPay_arrow: string = require("@assets/waysPay/arrow.svg").default;
-const svg_waysPay_card: string = require("@assets/waysPay/card.svg").default;
-const svg_waysPay_SFP: string = require("@assets/waysPay/SFP.svg").default;
 
 const OBJECT_WITH_SVG_WATS_PAY: any = {
   "Банковская карта": require("@assets/waysPay/card.svg").default,

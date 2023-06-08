@@ -12,6 +12,7 @@ const getInfoAboutOrder = () => {
               " - морс клубнично-ягодный 200",
             ],
             price: "620",
+            separatePosition: false,
           },
           {
             title: "3 БЛЮДА СУП+САЛАТ+ГОРЯЧЕЕ",
@@ -22,6 +23,7 @@ const getInfoAboutOrder = () => {
               " - морс клубнично-ягодный 200",
             ],
             price: "620",
+            separatePosition: false,
           },
           {
             title: "3 БЛЮДА СУП+САЛАТ+ГОРЯЧЕЕ",
@@ -32,6 +34,7 @@ const getInfoAboutOrder = () => {
               " - морс клубнично-ягодный 200",
             ],
             price: "620",
+            separatePosition: false,
           },
         ],
         name_waiter: "Иван Иванович",

@@ -5,6 +5,7 @@ import Header from "@shared/components/Header";
 import { orderStore, GenetalButtonStore } from "@store/index";
 import { observer } from "mobx-react-lite";
 
+import BlockSeparateOrder from "./components/BlockSeparateOrder";
 import BlockWithWaysPay from "./components/BlockWithWaysPay";
 import GeneralAmount from "./components/GeneralAmount";
 import ListOrders from "./components/ListOrders";
@@ -19,6 +20,9 @@ const PageOrder = observer(() => {
     ServiceChargeAmount,
     getIsServiceChargeAmount,
     ChangeIsServiceChargeAmount,
+    getIsMakeSeparateOrder,
+    ChangeIsMakeSeparateOrder,
+    ChangeSomePositionInOrdersStoreState,
   } = orderStore;
   const {
     isActiveGenetalButton,
@@ -34,9 +38,18 @@ const PageOrder = observer(() => {
     <div className="pageOrder">
       <Header></Header>
       <div className="OrderContent">
+        <BlockSeparateOrder
+          wrapperClassName="wrapperBlock"
+          getIsMakeSeparateOrder={getIsMakeSeparateOrder}
+          ChangeIsMakeSeparateOrder={ChangeIsMakeSeparateOrder}
+        />
         <ListOrders
           wrapperClassName="wrapperBlock"
           orders={InfoAboutOrder?.Orders}
+          getIsMakeSeparateOrder={getIsMakeSeparateOrder}
+          ChangeSomePositionInOrdersStoreState={
+            ChangeSomePositionInOrdersStoreState
+          }
         />
         <Tips
           wrapperClassName="wrapperBlock"

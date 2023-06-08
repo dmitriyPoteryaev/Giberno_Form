@@ -41,4 +41,73 @@
     max-width: 20%;
     text-overflow: ellipsis;
     overflow: hidden;
+    text-align: right;
   }
+  .ListOrders__check {
+    display: flex;
+    justify-content: baseline;
+    color: #80869a;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    margin-bottom: 8px;
+  
+  }
+  
+  .ListOrders__option {
+  
+    margin-bottom: 0.25em;
+
+    position: relative;
+  }
+  
+  .check__input {
+  
+    position: absolute;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+  }
+  
+  .ListOrders__check_box {
+  
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: 14px;
+    min-width: 14px;
+  
+    margin-right: 1.2em;
+    border-radius: 0.25em;
+    border: 1.5px solid #dcdee3;
+    background-color: white;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+  }
+  
+  .ListOrders__check_box::before {
+  
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 10px;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    border-color: #413dff;
+    display: block;
+    left: 3px;
+    opacity: 0;
+    transition: .2s;
+  
+  }
+  
+  .check__input:checked + .ListOrders__check_box::before {
+  
+    opacity: 1;
+  }
+  

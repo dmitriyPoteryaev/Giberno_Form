@@ -8,6 +8,7 @@ class OrdersStore {
 
   tips: string = "0";
   isServiceChargeAmount: boolean = true;
+  isMakeSeparateOrder: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -22,6 +23,12 @@ class OrdersStore {
   get cbTips() {
     return this.tips;
   }
+  get getIsMakeSeparateOrder() {
+    return this.isMakeSeparateOrder;
+  }
+  ChangeIsMakeSeparateOrder = () => {
+    this.isMakeSeparateOrder = !this.isMakeSeparateOrder;
+  };
   get InfoAboutOrder() {
     return this.OrdersStoreState;
   }
@@ -30,6 +37,12 @@ class OrdersStore {
   }
   ChangeIsServiceChargeAmount = () => {
     this.isServiceChargeAmount = !this.isServiceChargeAmount;
+  };
+  ChangeSomePositionInOrdersStoreState = (newOrderS: any) => {
+    this.OrdersStoreState = {
+      ...this.OrdersStoreState,
+      Orders: [...newOrderS],
+    };
   };
   get ServiceChargeAmount() {
     const calculated =
