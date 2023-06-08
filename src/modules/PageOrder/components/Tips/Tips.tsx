@@ -44,11 +44,11 @@ const Tips = (props: any) => {
   const handlerChangeValueTips = useCallback((currentValueBtn: any) => {
     if (currentValueBtn.target.className === "cross") {
       ChangeAmountTips("0");
+      setAllPercentagesTips("0 %");
       return;
     }
 
     if (currentValueBtn.type === "click" && general_orderREf.current) {
-      console.log("here");
       const calculated =
         (general_orderREf.current *
           +currentValueBtn.target.innerHTML.slice(0, -2)) /
@@ -65,6 +65,7 @@ const Tips = (props: any) => {
 
     if (currentValueBtn.type === "change" && tipsREf.current) {
       ChangeAmountTips(currentValueBtn.target.value);
+      setAllPercentagesTips("");
       return;
     }
     if (+currentValueBtn.target.value === 0) {

@@ -36,7 +36,7 @@ const getInfoAboutOrder = () => {
         ],
         name_waiter: "Иван Иванович",
         number_tabel: 4,
-        general_order: 15552,
+        general_order: 800,
       };
 
       resolve(InfoAboutOrder);

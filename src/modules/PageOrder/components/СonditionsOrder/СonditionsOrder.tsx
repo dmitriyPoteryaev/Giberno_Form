@@ -3,10 +3,14 @@ import "./СonditionsOrder.css";
 import "./ModalOrderCondition.css";
 
 const СonditionsOrder = (props: any) => {
-  const { StateAgreeConditionPyments, ChangeStateAgreeConditionPyments } =
-    props;
+  const {
+    StateAgreeConditionPyments,
+    ChangeStateAgreeConditionPyments,
+    ServiceChargeAmount,
+    getIsServiceChargeAmount,
+    ChangeIsServiceChargeAmount,
+  } = props;
 
-  const [value, setValue] = useState(false);
   const [isVisModalCondirion, setisVisModalCondirion] = useState(false);
 
   if (isVisModalCondirion) {
@@ -449,12 +453,13 @@ const СonditionsOrder = (props: any) => {
     <div className="СonditionsOrder">
       <label className="check option">
         <input
+          checked={getIsServiceChargeAmount}
           type="checkbox"
           className="check__input"
-          onChange={() => setValue((value) => !value)}
+          onChange={() => ChangeIsServiceChargeAmount()}
         />
         <span className="check_box"></span>
-        <span>Я хочу взять на себя сервисный сбор Гиберно (41.6₽)</span>
+        <span>{`Я хочу взять на себя сервисный сбор Гиберно ( ${ServiceChargeAmount} )`}</span>
       </label>
       <label className="check option">
         <input

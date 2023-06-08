@@ -7,6 +7,7 @@ class OrdersStore {
   OrdersStoreState: any = {};
 
   tips: string = "0";
+  isServiceChargeAmount: boolean = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -23,6 +24,18 @@ class OrdersStore {
   }
   get InfoAboutOrder() {
     return this.OrdersStoreState;
+  }
+  get getIsServiceChargeAmount() {
+    return this.isServiceChargeAmount;
+  }
+  ChangeIsServiceChargeAmount = () => {
+    this.isServiceChargeAmount = !this.isServiceChargeAmount;
+  };
+  get ServiceChargeAmount() {
+    const calculated =
+      ((+this.tips + this.OrdersStoreState.general_order) * 35) / 100;
+    const res = calculated >= 299 ? 299 : calculated;
+    return Math.round(res);
   }
 
   ChangeAmountTips = (value: string) => {

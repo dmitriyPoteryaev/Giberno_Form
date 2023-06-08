@@ -12,7 +12,14 @@ import Tips from "./components/Tips";
 import СonditionsOrder from "./components/СonditionsOrder";
 
 const PageOrder = observer(() => {
-  const { getDataAboutOrders, InfoAboutOrder, cbTips } = orderStore;
+  const {
+    getDataAboutOrders,
+    InfoAboutOrder,
+    cbTips,
+    ServiceChargeAmount,
+    getIsServiceChargeAmount,
+    ChangeIsServiceChargeAmount,
+  } = orderStore;
   const {
     isActiveGenetalButton,
     StateAgreeConditionPyments,
@@ -41,10 +48,15 @@ const PageOrder = observer(() => {
           wrapperClassName="wrapperBlock"
           general_order={InfoAboutOrder?.general_order}
           tips={cbTips}
+          getIsServiceChargeAmount={getIsServiceChargeAmount}
+          ServiceChargeAmount={ServiceChargeAmount}
         />
         <СonditionsOrder
           StateAgreeConditionPyments={StateAgreeConditionPyments}
           ChangeStateAgreeConditionPyments={ChangeStateAgreeConditionPyments}
+          ServiceChargeAmount={ServiceChargeAmount}
+          getIsServiceChargeAmount={getIsServiceChargeAmount}
+          ChangeIsServiceChargeAmount={ChangeIsServiceChargeAmount}
         />
         <BlockWithWaysPay
           general_order={InfoAboutOrder?.general_order}

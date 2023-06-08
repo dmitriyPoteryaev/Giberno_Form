@@ -4,12 +4,26 @@ import "./GeneralAmount.css";
 import classNames from "classnames";
 
 const GeneralAmount = memo((props: any) => {
-  const { general_order, wrapperClassName, tips } = props;
+  const {
+    general_order,
+    wrapperClassName,
+    tips,
+    getIsServiceChargeAmount,
+    ServiceChargeAmount,
+  } = props;
 
   const GeneralAmountClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
     GeneralAmount: true,
   });
+
+  const generalAmout = () => {
+    return (
+      +general_order +
+      +tips +
+      (getIsServiceChargeAmount ? ServiceChargeAmount : 0)
+    ).toFixed(2);
+  };
 
   return (
     <div className={GeneralAmountClasses}>
@@ -26,7 +40,7 @@ const GeneralAmount = memo((props: any) => {
       <div className="GeneralAmount__divider"></div>
       <div className="GeneralAmount__sepateOrders_container itog">
         <div>Итог к оплате: </div>
-        <div>{(+general_order + +tips).toFixed(2)} ₽</div>
+        <div>{generalAmout()} ₽</div>
       </div>
     </div>
   );
