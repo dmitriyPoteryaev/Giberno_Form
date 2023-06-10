@@ -19,7 +19,7 @@
   padding: 9px 16px 16px;
   position: fixed;
   right: 0;
-  height: 65%;
+  min-height: 40%;
   z-index: 2;
 }
 .Modal_order__SelectBankheader {
@@ -46,8 +46,8 @@
   flex-direction: column;
   height: 65px;
   justify-content: center;
-  margin-left: 8px;
-  width: calc(33.333% - 8px);
+  margin-right: 8px;
+  width: calc(33.33% - 8px);
 }
 .Modal_order__PositionSelectBank__nameBank {
   color: #343d5d;
@@ -65,4 +65,93 @@
   height: 25px;
   margin-bottom: 2px;
   width: 25px;
+}
+.Modal_order__chooseAllBanks {
+  margin-bottom: 20px;
+  width: 100%;
+}
+.Modal_order__chooseAllBanks_button {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+}
+.Modal_order__chooseAllBanks_arrow {
+  margin-left: auto;
+}
+.Modal_order__chooseAllBanks_button_description {
+  border-bottom: 1px solid #edeef1;
+  color: #80869a;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  width: 100%;
+}
+.Modal_order__chooseAllBanks_check {
+  width: 100%;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 14px;
+}
+.Modal_order__chooseAllBanks_check__input {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.Modal_order__chooseAllBanks_GiveCheck {
+  color: #80869a;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-left: 13px;
+}
+.Modal_order__chooseAllBanks_check_box {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  height: 14px;
+  min-width: 14px;
+
+  margin-right: 1.2em;
+  border-radius: 0.25em;
+  border: 1.5px solid #dcdee3;
+  background-color: white;
+}
+.Modal_order__chooseAllBanks_check_box::before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 10px;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  border-color: #413dff;
+  display: block;
+  left: 3px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.Modal_order__chooseAllBanks_check__input:checked
+  + .Modal_order__chooseAllBanks_check_box::before {
+  opacity: 1;
+}
+.Modal_order__chooseAllBanks_wrapperInput {
+  background: #fff;
+  border: 1px solid #e6e7eb;
+  border-radius: 12px;
+  height: 52px;
+  position: relative;
+  width: 100%;
+}
+.Modal_order__chooseAllBanks_Input {
+  border: none;
+  bottom: 0;
+  color: #010d35;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 13px 12px 0;
+  width: 100%;
 }

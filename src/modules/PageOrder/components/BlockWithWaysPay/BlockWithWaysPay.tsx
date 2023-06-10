@@ -42,12 +42,7 @@ const BlockWithWaysPay = (props: any) => {
   };
 
   if (ValueSelectBank) {
-    return (
-      <SelectBank
-        ValueSelectBank={ValueSelectBank}
-        setValueSelectBank={setValueSelectBank}
-      />
-    );
+    return <SelectBank setValueSelectBank={setValueSelectBank} />;
   }
   if (isSelectWayPay) {
     return (
