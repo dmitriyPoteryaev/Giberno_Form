@@ -4,55 +4,63 @@ import ReactDOM from "react-dom/client";
 
 import "./style/index.css";
 import App from "./App/App";
-
-// стили для главного блока, который будет в самом низу
-// ackground: #fff;
+// стили для виджета, на котором будет отображаться список всех банков - div
+// стили для вреппера
+// background: #fff;
 //     border-radius: 20px 20px 0 0;
-//     bottom: 89px;
-//     box-shadow: 1px 0 11px rgba(0,0,0,.09);
-//     left: 0;
-//     padding: 9px 16px 16px;
-//     position: fixed;
-//     right: 0;
-//     z-index: 1;
+//     padding: 16px 16px 32px;
+//     position: relative;
+//     width: 100%;
+//     z-index: 2;
+// стили для тайтла, в кототом будет строчка - выберите банк для оплаты - div
+// color: #010d35;
+// font-size: 20px;
+// font-weight: 600;
+// margin-bottom: 16px;
+// отдельный блок под список всех банков - ul
+// align-items: center;
+//     display: flex;
+//     flex-wrap: wrap;
+//     margin-bottom: 8px;
+//     margin-left: -8px;
+// стили для отдельного блока банка- li
+// align-items: center;
+//     border: 1px solid #e6e7eb;
+//     border-radius: 11px;
+//     cursor: pointer;
+//     display: flex;
+//     flex-direction: column;
+//     height: 65px;
+//     justify-content: center;
+//     margin-bottom: 8px;
+//     margin-left: 8px;
+//     width: calc(33.333% - 8px);
+// стили для картинки  банка -  i,mg
 
-// https://tapper.cloud/_nuxt/img/card_icon.f4b2b9d.svg - svg для карточки
+// height: 25px;
+// margin-bottom: 2px;
+// width: 25px;
+// стили для название банка
 
-// верхний блок в этой карточке
+// color: #343d5d;
+//     font-size: 15px;
+//     font-weight: 500;
+//     line-height: 20px;
+//     overflow: hidden;
+//     padding: 0 10px;
+//     text-align: center;
+//     text-overflow: ellipsis;
+//     white-space: nowrap;
+//     width: 111px;
+
+// class="paymentAllBanks-list__inner" - нет стилей
+//  внутри этого блока
+
 // align-items: center;
 // cursor: pointer;
 // display: flex;
-// margin-bottom: 13px;
-// width: 100%;
+// height: 40px;
 // }
-
-// блок для кнопки
-// если кнопка неактивна
-// cursor: no-drop;
-// opacity: .5;
-// стили для кнгопки
-// background: #6764ff;
-// color: #fff;
-
-// основные стили
-
-// border: none;
-// border-radius: 41px;
-// color: #343d5d;
-// cursor: pointer;
-// font-family: Commissioner,sans-serif;
-// font-size: 17px;
-// font-weight: 600;
-// letter-spacing: .03em;
-// line-height: 22px;
-// outline: none;
-// padding-bottom: 16px;
-// padding-top: 16px;
-// text-align: center;
-// width: 100%;
-
-// кнопка неавтина если есть второй чекбокс
-// и если минимальная сумма чаевых указана - она не должна быть меньше 49 рублей
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

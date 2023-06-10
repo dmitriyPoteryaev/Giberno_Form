@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+
 import "./BlockWithWaysPay.css";
 import "./SelectWaysPay.css";
+import SelectBank from "@shared/components/Widget/SelectBank";
 
 const svg_waysPay_arrow: string = require("@assets/waysPay/arrow.svg").default;
 
@@ -12,6 +14,7 @@ const OBJECT_WITH_SVG_WATS_PAY: any = {
 const BlockWithWaysPay = (props: any) => {
   const [isSelectWayPay, setIsSelectWayPay] = useState<boolean>(false);
   const [wayPay, setWayPay] = useState<string>("Банковская карта");
+  const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
   const {
     general_order,
     tips,
@@ -28,6 +31,24 @@ const BlockWithWaysPay = (props: any) => {
     ).toFixed(2);
   };
 
+  const handler = () => {
+    if (wayPay === "Система быстрых платежей") {
+      setValueSelectBank(true);
+
+      // );
+    } else {
+      return;
+    }
+  };
+
+  if (ValueSelectBank) {
+    return (
+      <SelectBank
+        ValueSelectBank={ValueSelectBank}
+        setValueSelectBank={setValueSelectBank}
+      />
+    );
+  }
   if (isSelectWayPay) {
     return (
       <div
@@ -70,7 +91,7 @@ const BlockWithWaysPay = (props: any) => {
               )}
             </ul>
             <div className="BlockWithWaysPay_body">
-              <button className="baseButton baseButton_blue">
+              <button className="baseButton baseButton_blue" onClick={handler}>
                 {" "}
                 Oплатить {generalAmout() === "NaN" ? "" : generalAmout()}
               </button>
@@ -107,6 +128,7 @@ const BlockWithWaysPay = (props: any) => {
           className="baseButton baseButton_blue"
           disabled={!isActiveGenetalButton}
           style={!isActiveGenetalButton ? { backgroundColor: "gray" } : {}}
+          onClick={handler}
         >
           {" "}
           Oплатить {generalAmout() === "NaN" ? "" : generalAmout()}

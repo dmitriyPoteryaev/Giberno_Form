@@ -8,6 +8,7 @@
         "@api/*": ["src/api/*"],
         "@assets/*": ["src/assets/*"],
         "@components/*": ["src/components/*"],
+        "@script/*": ["src/script/*"],
         "@config/*": ["src/config/*"],
         "@styles/*": ["src/styles/*"],
         "@utils/*": ["src/utils/*"]
