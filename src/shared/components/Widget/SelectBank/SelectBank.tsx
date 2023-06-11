@@ -5,6 +5,7 @@ import "./FillListBanksStyle.css";
 import "@script/slide-up-widget.js";
 import { sortNamesBanksByLetter } from "@utils/sortNamesBanksByLetter";
 
+const ICON_SEARCH = require("@assets/seach.svg").default;
 const ICON_ARROW: string = require("@assets/waysPay/arrow.svg").default;
 const ARRAY_WITH_POPULAR = ["Сбербанк", "Тинькофф Банк", "АЛЬФА-БАНК"];
 const ICON_SFP = require("@assets/waysPay/SFP.svg").default;
@@ -16,6 +17,9 @@ const SelectBank = (props: any) => {
   const [PopularAllBanks, setPopularAllBanks] = useState<any>([]);
   const [isGiveCheck, setIsGiveCheck] = useState<boolean>(false);
   const [isShowAllBanks, setIsShowAllBanks] = useState<boolean>(false);
+  const [filterInput, setFilterInput] = useState<string>("");
+  const [searchPlaceholder, setSearchPlaceholder] =
+    useState<string>("Поиск...");
 
   useEffect(() => {
     const slideUpWidget = new (window as any).SlideUpWidget(
@@ -45,7 +49,7 @@ const SelectBank = (props: any) => {
       .then((popualarBanks: any) => setPopularAllBanks(popualarBanks));
   }, []);
 
-  const sortBanks = sortNamesBanksByLetter(allBanks);
+  const sortBanks = sortNamesBanksByLetter(allBanks, filterInput);
 
   if (isShowAllBanks) {
     return (
@@ -58,7 +62,38 @@ const SelectBank = (props: any) => {
         <div onClick={(event) => event.stopPropagation()}>
           <div className="Modal_order__SelectBankContent">
             <div className="Modal_order__SelectBankheader">
-              Выберите банк для оплаты
+              <div
+                className="Modal_order__SelectBankheader__arrowBackPage"
+                onClick={() =>
+                  setIsShowAllBanks((setIsShowAllBanks) => !setIsShowAllBanks)
+                }
+              >
+                {"<"}
+              </div>
+              <div className="Modal_order__SelectBankheader__TitlechooseWaysPay">
+                Выберите банк для оплаты
+              </div>
+            </div>
+            <div className="Modal_order__SelectBankheader__BlockSearch">
+              <input
+                value={filterInput}
+                onChange={(event) => setFilterInput(event.target.value)}
+                onFocus={() => setSearchPlaceholder("")}
+                onBlur={() => setSearchPlaceholder("Поиск...")}
+                className="Modal_order__SelectBankheader__InputSearch"
+                placeholder={searchPlaceholder}
+              />
+              <img
+                className="Modal_order__SelectBankheader__IconSearch"
+                alt="icon_search"
+                src={ICON_SEARCH}
+              />
+              <div className="Modal_order__SelectBankheader__wrap_buttonCross">
+                <button
+                  className="Modal_order__SelectBankheader__cross"
+                  onClick={() => setFilterInput("")}
+                ></button>
+              </div>
             </div>
             <div className="Modal_order__SelectBankheader_FullList">
               {Object.keys(sortBanks).map((categoryBank, i) => (

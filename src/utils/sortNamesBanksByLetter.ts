@@ -5,32 +5,38 @@ const POPULAR_BANKS = [
   "Банк ВТБ",
   "Райффайзенбанк",
 ];
-export const sortNamesBanksByLetter = (arrayWithBanks: any) => {
+export const sortNamesBanksByLetter = (
+  arrayWithBanks: any,
+  filterInput: any
+) => {
   const new_obj: any = {
     Популярные: [],
   };
 
-  arrayWithBanks.forEach((InfoAboutbank: any) => {
-    const INDEX_WORD = 0;
+  arrayWithBanks
+    .filter((bank: any) =>
+      bank.bankName.toLowerCase().includes(filterInput.toLowerCase())
+    )
+    .forEach((InfoAboutbank: any) => {
+      const INDEX_WORD = 0;
 
-    const FIRST_LETTER_NAME_BANK = InfoAboutbank.bankName[INDEX_WORD];
-    if (
-      POPULAR_BANKS.some(
-        (popularBank: any) => popularBank === InfoAboutbank.bankName
-      )
-    ) {
-      new_obj["Популярные"] = [...new_obj["Популярные"], InfoAboutbank];
-    }
-    if (Object.keys(new_obj).includes(FIRST_LETTER_NAME_BANK)) {
-      new_obj[FIRST_LETTER_NAME_BANK] = [
-        ...new_obj[FIRST_LETTER_NAME_BANK],
-        InfoAboutbank,
-      ];
-    } else {
-      new_obj[FIRST_LETTER_NAME_BANK] = [InfoAboutbank];
-    }
-  });
+      const FIRST_LETTER_NAME_BANK = InfoAboutbank.bankName[INDEX_WORD];
+      if (
+        POPULAR_BANKS.some(
+          (popularBank: any) => popularBank === InfoAboutbank.bankName
+        )
+      ) {
+        new_obj["Популярные"] = [...new_obj["Популярные"], InfoAboutbank];
+      }
+      if (Object.keys(new_obj).includes(FIRST_LETTER_NAME_BANK)) {
+        new_obj[FIRST_LETTER_NAME_BANK] = [
+          ...new_obj[FIRST_LETTER_NAME_BANK],
+          InfoAboutbank,
+        ];
+      } else {
+        new_obj[FIRST_LETTER_NAME_BANK] = [InfoAboutbank];
+      }
+    });
 
-  // { Популярные: [...new_obj["Популярные"]], ...new_obj }
   return new_obj;
 };

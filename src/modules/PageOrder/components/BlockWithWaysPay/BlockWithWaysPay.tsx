@@ -86,7 +86,14 @@ const BlockWithWaysPay = (props: any) => {
               )}
             </ul>
             <div className="BlockWithWaysPay_body">
-              <button className="baseButton baseButton_blue" onClick={handler}>
+              <button
+                className="baseButton baseButton_blue"
+                disabled={!isActiveGenetalButton}
+                style={
+                  !isActiveGenetalButton ? { backgroundColor: "gray" } : {}
+                }
+                onClick={handler}
+              >
                 {" "}
                 Oплатить {generalAmout() === "NaN" ? "" : generalAmout()}
               </button>
