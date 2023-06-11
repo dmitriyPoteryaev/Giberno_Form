@@ -19,11 +19,11 @@
 }
 .Modal_order__SelectBankheader__TitlechooseWaysPay {
     position: relative;
-    font-size: 18px;
+    font-size: 15px;
 }
 .Modal_order__SelectBankheader__arrowBackPage {
  position: absolute;
- left: 15px;
+ left: 7px;
  top: 5px;
     
 }

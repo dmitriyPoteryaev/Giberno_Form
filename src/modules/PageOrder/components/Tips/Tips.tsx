@@ -37,9 +37,9 @@ const Tips = (props: any) => {
     Tips: true,
   });
 
-  const WrraperInputClasses = classNames({
+  const BlockInputClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
-    Tips__wrapperInput: true,
+    Tips__BlockInput: true,
   });
   const handlerChangeValueTips = useCallback((currentValueBtn: any) => {
     if (currentValueBtn.target.className === "cross") {
@@ -89,15 +89,17 @@ const Tips = (props: any) => {
           <div className="Tips__name">{name_waiter}</div>
         </div>
       </div>
-      <label className={WrraperInputClasses}>
-        <TipsMaskInput
-          className="Tips__inputTip"
-          value={tips}
-          placeholder="0"
-          type="text"
-          onChange={handlerChangeValueTips}
-        />
-        <span className="Tips__typeCurrency">₽</span>
+      <label className={BlockInputClasses}>
+        <div className="Tips__WrapperInputTip">
+          <TipsMaskInput
+            className="Tips__inputTip"
+            value={tips}
+            placeholder="0"
+            type="text"
+            onChange={handlerChangeValueTips}
+          />
+          <span className="Tips__typeCurrency">₽</span>
+        </div>
         <div className="wrap_buttonCross">
           <button className="cross" onClick={handlerChangeValueTips}></button>
         </div>

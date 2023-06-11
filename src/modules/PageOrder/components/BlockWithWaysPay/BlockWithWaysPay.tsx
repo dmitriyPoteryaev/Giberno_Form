@@ -4,7 +4,8 @@ import "./BlockWithWaysPay.css";
 import "./SelectWaysPay.css";
 import SelectBank from "@shared/components/Widget/SelectBank";
 
-const svg_waysPay_arrow: string = require("@assets/waysPay/arrow.svg").default;
+const svg_waysPay_arrow: string =
+  require("@assets/waysPay/right_arrow.svg").default;
 
 const OBJECT_WITH_SVG_WATS_PAY: any = {
   "Банковская карта": require("@assets/waysPay/card.svg").default,
@@ -88,14 +89,10 @@ const BlockWithWaysPay = (props: any) => {
             <div className="BlockWithWaysPay_body">
               <button
                 className="baseButton baseButton_blue"
-                disabled={!isActiveGenetalButton}
-                style={
-                  !isActiveGenetalButton ? { backgroundColor: "gray" } : {}
-                }
-                onClick={handler}
+                onClick={() => setIsSelectWayPay(false)}
               >
                 {" "}
-                Oплатить {generalAmout() === "NaN" ? "" : generalAmout()}
+                Выбрать
               </button>
             </div>
           </div>

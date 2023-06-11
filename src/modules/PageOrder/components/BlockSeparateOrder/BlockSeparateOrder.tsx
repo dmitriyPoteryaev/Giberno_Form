@@ -18,6 +18,7 @@ const BlockSeparateOrder = (props: any) => {
 
   return (
     <div className={SeparateOrderClasses}>
+      Разделить счёт
       <Switch
         checked={getIsMakeSeparateOrder}
         onChange={ChangeIsMakeSeparateOrder}

@@ -9,7 +9,7 @@
   }
   
   .Order__content {
-    max-width: 80%;
+    max-width: 65%;
   }
   .Order__title {
     text-overflow: ellipsis;

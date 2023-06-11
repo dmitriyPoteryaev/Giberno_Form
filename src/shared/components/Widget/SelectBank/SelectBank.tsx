@@ -5,8 +5,10 @@ import "./FillListBanksStyle.css";
 import "@script/slide-up-widget.js";
 import { sortNamesBanksByLetter } from "@utils/sortNamesBanksByLetter";
 
+const ICON_LEFT_ARROW: string = require("@assets/left_arrow.svg").default;
 const ICON_SEARCH = require("@assets/seach.svg").default;
-const ICON_ARROW: string = require("@assets/waysPay/arrow.svg").default;
+const ICON_RIGHT_ARROW: string =
+  require("@assets/waysPay/right_arrow.svg").default;
 const ARRAY_WITH_POPULAR = ["Сбербанк", "Тинькофф Банк", "АЛЬФА-БАНК"];
 const ICON_SFP = require("@assets/waysPay/SFP.svg").default;
 
@@ -62,14 +64,14 @@ const SelectBank = (props: any) => {
         <div onClick={(event) => event.stopPropagation()}>
           <div className="Modal_order__SelectBankContent">
             <div className="Modal_order__SelectBankheader">
-              <div
+              <img
                 className="Modal_order__SelectBankheader__arrowBackPage"
+                alt="icon_left_arrow"
+                src={ICON_LEFT_ARROW}
                 onClick={() =>
                   setIsShowAllBanks((setIsShowAllBanks) => !setIsShowAllBanks)
                 }
-              >
-                {"<"}
-              </div>
+              />
               <div className="Modal_order__SelectBankheader__TitlechooseWaysPay">
                 Выберите банк для оплаты
               </div>
@@ -171,7 +173,7 @@ const SelectBank = (props: any) => {
               <img src={ICON_SFP} alt="icon_sfp" />
               Все банки
               <img
-                src={ICON_ARROW}
+                src={ICON_RIGHT_ARROW}
                 className="Modal_order__chooseAllBanks_arrow"
                 alt="icon_arrow"
               />

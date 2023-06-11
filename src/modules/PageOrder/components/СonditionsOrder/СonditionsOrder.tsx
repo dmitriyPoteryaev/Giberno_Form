@@ -459,7 +459,10 @@ const СonditionsOrder = (props: any) => {
           onChange={() => ChangeIsServiceChargeAmount()}
         />
         <span className="check_box"></span>
-        <span>{`Я хочу взять на себя сервисный сбор Гиберно ( ${ServiceChargeAmount} )`}</span>
+        <span>
+          Я хочу взять на себя сервисный сбор Гиберно{" "}
+          {`(${ServiceChargeAmount}₽)`}
+        </span>
       </label>
       <label className="check option">
         <input
