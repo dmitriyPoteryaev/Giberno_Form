@@ -17,16 +17,16 @@ const BlockWithWaysPay = (props: any) => {
   const [wayPay, setWayPay] = useState<string>("Банковская карта");
   const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
   const {
-    general_order,
     tips,
     isActiveGenetalButton,
     ServiceChargeAmount,
     getIsServiceChargeAmount,
+    getCalcutedOrded,
   } = props;
 
   const generalAmout = () => {
     return (
-      +general_order +
+      getCalcutedOrded +
       +tips +
       +(getIsServiceChargeAmount ? ServiceChargeAmount : 0)
     ).toFixed(2);

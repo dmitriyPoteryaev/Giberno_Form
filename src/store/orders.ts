@@ -23,6 +23,18 @@ class OrdersStore {
   get cbTips() {
     return this.tips;
   }
+  get getCalcutedOrded() {
+    return this.OrdersStoreState?.Orders?.reduce(
+      (accumulator: any, positionOrder: any) => {
+        if (positionOrder.separatePosition || !this.isMakeSeparateOrder) {
+          return accumulator + positionOrder.price;
+        } else {
+          return accumulator + 0;
+        }
+      },
+      0
+    );
+  }
   get getIsMakeSeparateOrder() {
     return this.isMakeSeparateOrder;
   }

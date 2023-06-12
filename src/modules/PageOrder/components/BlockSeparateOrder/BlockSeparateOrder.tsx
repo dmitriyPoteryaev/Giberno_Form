@@ -9,6 +9,11 @@ const BlockSeparateOrder = (props: any) => {
     wrapperClassName,
     getIsMakeSeparateOrder,
     ChangeIsMakeSeparateOrder,
+    getisSepatatedOrder,
+    ChangeIsSepatatedOrder,
+    orders,
+    ChangeSomePositionInOrdersStoreState,
+    ChangeisPayPositionsSepatatedOrder,
   } = props;
 
   const SeparateOrderClasses = classNames({
@@ -16,12 +21,28 @@ const BlockSeparateOrder = (props: any) => {
     BlockSeparateOrder: true,
   });
 
+  const handlerChangeIsSepatatedOrder = () => {
+    if (getisSepatatedOrder) {
+      ChangeSomePositionInOrdersStoreState(
+        orders.map((elem: any, k: any) => {
+          return { ...elem, separatePosition: false };
+        })
+      );
+      ChangeisPayPositionsSepatatedOrder(false);
+    }
+
+    ChangeIsSepatatedOrder(!getisSepatatedOrder);
+  };
+
   return (
     <div className={SeparateOrderClasses}>
       Разделить счёт
       <Switch
         checked={getIsMakeSeparateOrder}
-        onChange={ChangeIsMakeSeparateOrder}
+        onChange={() => {
+          ChangeIsMakeSeparateOrder();
+          handlerChangeIsSepatatedOrder();
+        }}
       />
     </div>
   );

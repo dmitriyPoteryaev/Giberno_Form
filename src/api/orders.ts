@@ -11,7 +11,7 @@ const getInfoAboutOrder = () => {
               " - морс клубнично-ягодный 200",
               " - морс клубнично-ягодный 200",
             ],
-            price: "620",
+            price: 620,
             separatePosition: false,
           },
           {
@@ -22,7 +22,7 @@ const getInfoAboutOrder = () => {
               " - морс клубнично-ягодный 200",
               " - морс клубнично-ягодный 200",
             ],
-            price: "620",
+            price: 620,
             separatePosition: false,
           },
           {
@@ -33,7 +33,7 @@ const getInfoAboutOrder = () => {
               " - морс клубнично-ягодный 200",
               " - морс клубнично-ягодный 200",
             ],
-            price: "620",
+            price: 620,
             separatePosition: false,
           },
         ],

@@ -23,11 +23,15 @@ const PageOrder = observer(() => {
     getIsMakeSeparateOrder,
     ChangeIsMakeSeparateOrder,
     ChangeSomePositionInOrdersStoreState,
+    getCalcutedOrded,
   } = orderStore;
   const {
     isActiveGenetalButton,
     StateAgreeConditionPyments,
     ChangeStateAgreeConditionPyments,
+    getisSepatatedOrder,
+    ChangeIsSepatatedOrder,
+    ChangeisPayPositionsSepatatedOrder,
   } = GenetalButtonStore;
 
   useEffect(() => {
@@ -42,6 +46,15 @@ const PageOrder = observer(() => {
           wrapperClassName="wrapperBlock"
           getIsMakeSeparateOrder={getIsMakeSeparateOrder}
           ChangeIsMakeSeparateOrder={ChangeIsMakeSeparateOrder}
+          getisSepatatedOrder={getisSepatatedOrder}
+          ChangeIsSepatatedOrder={ChangeIsSepatatedOrder}
+          orders={InfoAboutOrder?.Orders}
+          ChangeSomePositionInOrdersStoreState={
+            ChangeSomePositionInOrdersStoreState
+          }
+          ChangeisPayPositionsSepatatedOrder={
+            ChangeisPayPositionsSepatatedOrder
+          }
         />
         <ListOrders
           wrapperClassName="wrapperBlock"
@@ -49,6 +62,11 @@ const PageOrder = observer(() => {
           getIsMakeSeparateOrder={getIsMakeSeparateOrder}
           ChangeSomePositionInOrdersStoreState={
             ChangeSomePositionInOrdersStoreState
+          }
+          ChangeIsSepatatedOrder={ChangeIsSepatatedOrder}
+          getisSepatatedOrder={getisSepatatedOrder}
+          ChangeisPayPositionsSepatatedOrder={
+            ChangeisPayPositionsSepatatedOrder
           }
         />
         <Tips
@@ -63,6 +81,7 @@ const PageOrder = observer(() => {
           tips={cbTips}
           getIsServiceChargeAmount={getIsServiceChargeAmount}
           ServiceChargeAmount={ServiceChargeAmount}
+          getCalcutedOrded={getCalcutedOrded}
         />
         <СonditionsOrder
           StateAgreeConditionPyments={StateAgreeConditionPyments}
@@ -77,6 +96,7 @@ const PageOrder = observer(() => {
           isActiveGenetalButton={isActiveGenetalButton}
           ServiceChargeAmount={ServiceChargeAmount}
           getIsServiceChargeAmount={getIsServiceChargeAmount}
+          getCalcutedOrded={getCalcutedOrded}
         />
       </div>
     </div>

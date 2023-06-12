@@ -5,11 +5,11 @@ import classNames from "classnames";
 
 const GeneralAmount = memo((props: any) => {
   const {
-    general_order,
     wrapperClassName,
     tips,
     getIsServiceChargeAmount,
     ServiceChargeAmount,
+    getCalcutedOrded,
   } = props;
 
   const GeneralAmountClasses = classNames({
@@ -19,7 +19,7 @@ const GeneralAmount = memo((props: any) => {
 
   const generalAmout = () => {
     return (
-      +general_order +
+      getCalcutedOrded +
       +tips +
       (getIsServiceChargeAmount ? ServiceChargeAmount : 0)
     ).toFixed(2);
@@ -30,7 +30,7 @@ const GeneralAmount = memo((props: any) => {
       <div className="GeneralAmount__sepateOrders">
         <div className="GeneralAmount__sepateOrders_container general_Order">
           <div>Общий счёт: </div>
-          <div>{general_order} ₽</div>
+          <div>{getCalcutedOrded} ₽</div>
         </div>
         <div className="GeneralAmount__sepateOrders_container">
           <div>Чаевые: </div>

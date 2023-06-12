@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 
 import "./ListOrders.css";
 import classNames from "classnames";
@@ -9,6 +9,7 @@ const ListOrders = memo((props: any) => {
     orders,
     getIsMakeSeparateOrder,
     ChangeSomePositionInOrdersStoreState,
+    ChangeisPayPositionsSepatatedOrder,
   } = props;
 
   const OrderClasses = classNames({
@@ -16,8 +17,26 @@ const ListOrders = memo((props: any) => {
     Order: true,
   });
 
+  const ordersrRef = useRef<any>();
+
+  const changeStatus = () => {
+    const newArr = [
+      ...[
+        ...[...ordersrRef.current.childNodes].map(
+          (elem: any) => elem.childNodes
+        ),
+      ]
+        .map((elem: any) => elem[0])
+        .map((elem: any) => elem.childNodes)
+        .map((elem: any) => elem[0].checked),
+    ];
+    ChangeisPayPositionsSepatatedOrder(
+      newArr.some((elem: any) => elem === true)
+    );
+  };
+
   return (
-    <ul className="ListOrders">
+    <ul ref={ordersrRef} className="ListOrders">
       {orders?.map((order: any, i: any) => (
         <li key={i} className={OrderClasses}>
           {getIsMakeSeparateOrder && (
@@ -26,7 +45,8 @@ const ListOrders = memo((props: any) => {
                 type="checkbox"
                 className="check__input"
                 checked={order.separatePosition}
-                onChange={() =>
+                onChange={(event) => {
+                  changeStatus();
                   ChangeSomePositionInOrdersStoreState(
                     orders.map((elem: any, k: any) => {
                       if (k === i) {
@@ -38,8 +58,8 @@ const ListOrders = memo((props: any) => {
                         return elem;
                       }
                     })
-                  )
-                }
+                  );
+                }}
               />
               <span className="ListOrders__check_box"></span>
             </label>
