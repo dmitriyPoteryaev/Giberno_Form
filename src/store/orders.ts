@@ -9,6 +9,7 @@ class OrdersStore {
   tips: string = "0";
   isServiceChargeAmount: boolean = true;
   isMakeSeparateOrder: boolean = false;
+  isLoading: boolean = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -16,12 +17,16 @@ class OrdersStore {
 
   getDataAboutOrders = () => {
     getInfoAboutOrder().then((infoOrders: any) => {
+      this.isLoading = false;
       return (this.OrdersStoreState = { ...infoOrders });
     });
   };
 
   get cbTips() {
     return this.tips;
+  }
+  get Loading() {
+    return this.isLoading;
   }
   get getCalcutedOrded() {
     return this.OrdersStoreState?.Orders?.reduce(

@@ -43,7 +43,7 @@ const getInfoAboutOrder = () => {
       };
 
       resolve(InfoAboutOrder);
-    }, 0)
+    }, 4000)
   );
 };
 
