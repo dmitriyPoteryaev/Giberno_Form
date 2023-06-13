@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./BlockSeparateOrder.css";
+import PopupShare from "@shared/components/PopupShare/PopupShare";
 import { Switch } from "antd";
 import classNames from "classnames";
 
+const ICON_SHARE: string = require("@assets/share.svg").default;
+
 const BlockSeparateOrder = (props: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const {
     wrapperClassName,
     getIsMakeSeparateOrder,
@@ -18,7 +23,11 @@ const BlockSeparateOrder = (props: any) => {
 
   const SeparateOrderClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
-    BlockSeparateOrder: true,
+    BlockSeparateOrder__MakeSeparatedOrder: true,
+  });
+  const ShareOrderButtonClasses = classNames({
+    [`${wrapperClassName}`]: !!wrapperClassName,
+    BlockSeparateOrder__ShareOrderButton: true,
   });
 
   const handlerChangeIsSepatatedOrder = () => {
@@ -35,15 +44,25 @@ const BlockSeparateOrder = (props: any) => {
   };
 
   return (
-    <div className={SeparateOrderClasses}>
-      Разделить счёт
-      <Switch
-        checked={getIsMakeSeparateOrder}
-        onChange={() => {
-          ChangeIsMakeSeparateOrder();
-          handlerChangeIsSepatatedOrder();
-        }}
+    <div className="BlockSeparateOrder">
+      <div className={SeparateOrderClasses}>
+        Разделить счёт
+        <Switch
+          checked={getIsMakeSeparateOrder}
+          onChange={() => {
+            ChangeIsMakeSeparateOrder();
+            handlerChangeIsSepatatedOrder();
+          }}
+        />
+      </div>
+
+      <img
+        src={ICON_SHARE}
+        alt="share_icon"
+        className={ShareOrderButtonClasses}
+        onClick={() => setIsOpen((isOpen: any) => !isOpen)}
       />
+      <PopupShare setIsOpen={setIsOpen} isOpen={isOpen} />
     </div>
   );
 };
