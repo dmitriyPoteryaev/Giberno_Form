@@ -1,49 +1,65 @@
 import React, { memo } from "react";
 
 import "./GeneralAmount.css";
+import { orderStore } from "@store/index";
 import classNames from "classnames";
+import { observer } from "mobx-react-lite";
 
-const GeneralAmount = memo((props: any) => {
-  const {
-    wrapperClassName,
-    tips,
-    getIsServiceChargeAmount,
-    ServiceChargeAmount,
-    getCalcutedOrded,
-  } = props;
+const GeneralAmount = memo(
+  observer((props: any) => {
+    const { wrapperClassName } = props;
 
-  const GeneralAmountClasses = classNames({
-    [`${wrapperClassName}`]: !!wrapperClassName,
-    GeneralAmount: true,
-  });
+    const GeneralAmountClasses = classNames({
+      [`${wrapperClassName}`]: !!wrapperClassName,
+      GeneralAmount: true,
+    });
 
-  const generalAmout = () => {
+    const {
+      getCalcutedOrded,
+      getTips,
+      getIsServiceChargeAmount,
+      getServiceChargeAmount,
+      getDeposit,
+      getIsTips,
+    } = orderStore;
+
+    const generalAmout = () => {
+      return (
+        getCalcutedOrded +
+        +getTips +
+        (getIsServiceChargeAmount ? getServiceChargeAmount : 0) -
+        (typeof getDeposit === "number" ? getDeposit : 0)
+      ).toFixed(2);
+    };
+
     return (
-      getCalcutedOrded +
-      +tips +
-      (getIsServiceChargeAmount ? ServiceChargeAmount : 0)
-    ).toFixed(2);
-  };
-
-  return (
-    <div className={GeneralAmountClasses}>
-      <div className="GeneralAmount__sepateOrders">
-        <div className="GeneralAmount__sepateOrders_container general_Order">
-          <div>Общий счёт: </div>
-          <div>{getCalcutedOrded} ₽</div>
+      <div className={GeneralAmountClasses}>
+        <div className="GeneralAmount__sepateOrders">
+          <div className="GeneralAmount__sepateOrders_container general_Order">
+            <div>Общий счёт: </div>
+            <div>{getCalcutedOrded} ₽</div>
+          </div>
+          {getIsTips && (
+            <div className="GeneralAmount__sepateOrders_container">
+              <div>Чаевые: </div>
+              <div>{`${getTips} ₽`}</div>
+            </div>
+          )}
+          {typeof getDeposit === "number" && (
+            <div className="GeneralAmount__sepateOrders_container">
+              <div>Депозит: </div>
+              <div>{`${getDeposit} ₽`}</div>
+            </div>
+          )}
         </div>
-        <div className="GeneralAmount__sepateOrders_container">
-          <div>Чаевые: </div>
-          <div>{`${tips} ₽`}</div>
+        <div className="GeneralAmount__divider"></div>
+        <div className="GeneralAmount__sepateOrders_container itog">
+          <div>Итог к оплате: </div>
+          <div>{generalAmout()} ₽</div>
         </div>
       </div>
-      <div className="GeneralAmount__divider"></div>
-      <div className="GeneralAmount__sepateOrders_container itog">
-        <div>Итог к оплате: </div>
-        <div>{generalAmout()} ₽</div>
-      </div>
-    </div>
-  );
-});
+    );
+  })
+);
 
 export default GeneralAmount;

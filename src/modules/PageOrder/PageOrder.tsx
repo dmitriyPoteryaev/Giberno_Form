@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import "./PageOrder.css";
 import Header from "@shared/components/Header";
-import { orderStore, GenetalButtonStore } from "@store/index";
+import { orderStore } from "@store/index";
 import { Spin } from "antd";
 import { observer } from "mobx-react-lite";
 
@@ -14,33 +14,13 @@ import Tips from "./components/Tips";
 import СonditionsOrder from "./components/СonditionsOrder";
 
 const PageOrder = observer(() => {
-  const {
-    getDataAboutOrders,
-    InfoAboutOrder,
-    cbTips,
-    ServiceChargeAmount,
-    getIsServiceChargeAmount,
-    ChangeIsServiceChargeAmount,
-    getIsMakeSeparateOrder,
-    ChangeIsMakeSeparateOrder,
-    ChangeSomePositionInOrdersStoreState,
-    getCalcutedOrded,
-    Loading,
-  } = orderStore;
-  const {
-    isActiveGenetalButton,
-    StateAgreeConditionPyments,
-    ChangeStateAgreeConditionPyments,
-    getisSepatatedOrder,
-    ChangeIsSepatatedOrder,
-    ChangeisPayPositionsSepatatedOrder,
-  } = GenetalButtonStore;
+  const { ChangeDataAboutOrders, getIsLoading, getIsTips } = orderStore;
 
   useEffect(() => {
-    getDataAboutOrders();
-  }, [getDataAboutOrders]);
+    ChangeDataAboutOrders();
+  }, [ChangeDataAboutOrders]);
 
-  if (Loading) {
+  if (getIsLoading) {
     return (
       <div className="pageOrder__loader">
         <div className="pageOrder__loader_Content">
@@ -63,62 +43,12 @@ const PageOrder = observer(() => {
     <div className="pageOrder">
       <Header></Header>
       <div className="OrderContent">
-        <BlockSeparateOrder
-          wrapperClassName="wrapperBlock"
-          getIsMakeSeparateOrder={getIsMakeSeparateOrder}
-          ChangeIsMakeSeparateOrder={ChangeIsMakeSeparateOrder}
-          getisSepatatedOrder={getisSepatatedOrder}
-          ChangeIsSepatatedOrder={ChangeIsSepatatedOrder}
-          orders={InfoAboutOrder?.Orders}
-          ChangeSomePositionInOrdersStoreState={
-            ChangeSomePositionInOrdersStoreState
-          }
-          ChangeisPayPositionsSepatatedOrder={
-            ChangeisPayPositionsSepatatedOrder
-          }
-        />
-        <ListOrders
-          wrapperClassName="wrapperBlock"
-          orders={InfoAboutOrder?.Orders}
-          getIsMakeSeparateOrder={getIsMakeSeparateOrder}
-          ChangeSomePositionInOrdersStoreState={
-            ChangeSomePositionInOrdersStoreState
-          }
-          ChangeIsSepatatedOrder={ChangeIsSepatatedOrder}
-          getisSepatatedOrder={getisSepatatedOrder}
-          ChangeisPayPositionsSepatatedOrder={
-            ChangeisPayPositionsSepatatedOrder
-          }
-        />
-        <Tips
-          wrapperClassName="wrapperBlock"
-          name_waiter={InfoAboutOrder?.name_waiter}
-          general_order={InfoAboutOrder?.general_order}
-          tips={cbTips}
-        />
-        <GeneralAmount
-          wrapperClassName="wrapperBlock"
-          general_order={InfoAboutOrder?.general_order}
-          tips={cbTips}
-          getIsServiceChargeAmount={getIsServiceChargeAmount}
-          ServiceChargeAmount={ServiceChargeAmount}
-          getCalcutedOrded={getCalcutedOrded}
-        />
-        <СonditionsOrder
-          StateAgreeConditionPyments={StateAgreeConditionPyments}
-          ChangeStateAgreeConditionPyments={ChangeStateAgreeConditionPyments}
-          ServiceChargeAmount={ServiceChargeAmount}
-          getIsServiceChargeAmount={getIsServiceChargeAmount}
-          ChangeIsServiceChargeAmount={ChangeIsServiceChargeAmount}
-        />
-        <BlockWithWaysPay
-          general_order={InfoAboutOrder?.general_order}
-          tips={cbTips}
-          isActiveGenetalButton={isActiveGenetalButton}
-          ServiceChargeAmount={ServiceChargeAmount}
-          getIsServiceChargeAmount={getIsServiceChargeAmount}
-          getCalcutedOrded={getCalcutedOrded}
-        />
+        <BlockSeparateOrder wrapperClassName="wrapperBlock" />
+        <ListOrders wrapperClassName="wrapperBlock" />
+        {getIsTips && <Tips wrapperClassName="wrapperBlock" />}
+        <GeneralAmount wrapperClassName="wrapperBlock" />
+        <СonditionsOrder />
+        <BlockWithWaysPay />
       </div>
     </div>
   );

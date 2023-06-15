@@ -1,8 +1,9 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 
 import "./Tips.css";
 import { orderStore } from "@store/index";
 import classNames from "classnames";
+import { observer } from "mobx-react-lite";
 
 import ButtonChangeTips from "./ButtonChangeTips";
 import TipsMaskInput from "./TipsMaskInput";
@@ -14,23 +15,31 @@ const ALL_PER_TIPS: any = {
   "20": false,
   "25": false,
 };
+const svg_waiter: string = require("@assets/Waiter.svg").default;
 
-const Tips = (props: any) => {
-  const { wrapperClassName, name_waiter, general_order, tips } = props;
+const Tips = observer((props: any) => {
+  const { wrapperClassName } = props;
 
-  const { ChangeAmountTips } = orderStore;
+  const {
+    ChangeTips,
+    getCalcutedOrded,
+    getTips,
+    getIsSplitBillCheckBox,
+    getEmployee,
+    getInfoAboutTips,
+  } = orderStore;
 
-  const [AllPercentagesTips, setAllPercentagesTips] = useState<string>(" ");
+  const [AllPercentagesTips, setAllPercentagesTips] = useState<string>(
+    `${getInfoAboutTips.tipsDefault} %`
+  );
 
-  const general_orderREf = useRef<number>();
+  const getCalcutedOrdedREf = useRef<number>();
 
-  general_orderREf.current = general_order;
+  getCalcutedOrdedREf.current = getCalcutedOrded;
 
-  const tipsREf = useRef<string>();
+  const getTipsREf = useRef<string>();
 
-  tipsREf.current = tips;
-
-  const svg_waiter: string = require("@assets/Waiter.svg").default;
+  getTipsREf.current = getTips;
 
   const TipsClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
@@ -43,38 +52,53 @@ const Tips = (props: any) => {
   });
   const handlerChangeValueTips = useCallback((currentValueBtn: any) => {
     if (currentValueBtn.target.className === "cross") {
-      ChangeAmountTips("0");
+      ChangeTips("0");
       setAllPercentagesTips("0 %");
       return;
     }
 
-    if (currentValueBtn.type === "click" && general_orderREf.current) {
+    if (currentValueBtn.type === "click" && getCalcutedOrdedREf.current) {
       const calculated =
-        (general_orderREf.current *
+        (getCalcutedOrdedREf.current *
           +currentValueBtn.target.innerHTML.slice(0, -2)) /
         100;
       const res = Math.round(calculated);
-      ChangeAmountTips(res.toString());
+      ChangeTips(res.toString());
       setAllPercentagesTips(currentValueBtn.target.innerHTML);
       return;
     }
     if (currentValueBtn.target.value === "") {
-      ChangeAmountTips("0");
+      ChangeTips("0");
       return;
     }
 
-    if (currentValueBtn.type === "change" && tipsREf.current) {
-      ChangeAmountTips(currentValueBtn.target.value);
+    if (currentValueBtn.type === "change" && getTipsREf.current) {
+      ChangeTips(currentValueBtn.target.value);
       setAllPercentagesTips("");
       return;
     }
     if (+currentValueBtn.target.value === 0) {
-      ChangeAmountTips("0");
+      ChangeTips("0");
       return;
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (getCalcutedOrdedREf?.current !== undefined) {
+      const res = Math.round(
+        (getCalcutedOrdedREf?.current * getInfoAboutTips.tipsDefault) / 100
+      );
+
+      if (getCalcutedOrdedREf?.current === 0) {
+        setAllPercentagesTips("");
+      } else {
+        setAllPercentagesTips(`${getInfoAboutTips.tipsDefault} %`);
+      }
+      ChangeTips(res.toString());
+    }
+  }, [getIsSplitBillCheckBox, getCalcutedOrded, ChangeTips, getInfoAboutTips]);
   return (
     <div className={TipsClasses}>
       <div className="Tips__title"> Чаевые </div>
@@ -85,15 +109,14 @@ const Tips = (props: any) => {
           alt="photo_waiter"
         />
         <div className="Tips__NameWaiter">
-          <div className="Tips__Position"> Официант </div>
-          <div className="Tips__name">{name_waiter}</div>
+          <div className="Tips__name">{getEmployee}</div>
         </div>
       </div>
       <label className={BlockInputClasses}>
         <div className="Tips__WrapperInputTip">
           <TipsMaskInput
             className="Tips__inputTip"
-            value={tips}
+            value={getTips}
             placeholder="0"
             type="text"
             onChange={handlerChangeValueTips}
@@ -117,6 +140,6 @@ const Tips = (props: any) => {
       </div>
     </div>
   );
-};
+});
 
 export default Tips;

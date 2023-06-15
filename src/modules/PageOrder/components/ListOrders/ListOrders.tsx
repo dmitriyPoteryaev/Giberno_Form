@@ -1,23 +1,26 @@
-import React, { memo, useRef } from "react";
+import React, { useRef } from "react";
 
 import "./ListOrders.css";
+import { orderStore } from "@store/index";
 import classNames from "classnames";
+import { observer } from "mobx-react-lite";
 
-const ListOrders = memo((props: any) => {
+const ListOrders = observer((props: any) => {
+  const { wrapperClassName } = props;
+
+  const ordersrRef = useRef<any>();
+
   const {
-    wrapperClassName,
-    orders,
-    getIsMakeSeparateOrder,
+    getOrdersStoreState,
+    ChangeIsPayPositionsSepatatedOrderCheckBox,
     ChangeSomePositionInOrdersStoreState,
-    ChangeisPayPositionsSepatatedOrder,
-  } = props;
+    getIsSplitBillCheckBox,
+  } = orderStore;
 
   const OrderClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
     Order: true,
   });
-
-  const ordersrRef = useRef<any>();
 
   const changeStatus = () => {
     const newArr = [
@@ -30,16 +33,16 @@ const ListOrders = memo((props: any) => {
         .map((elem: any) => elem.childNodes)
         .map((elem: any) => elem[0].checked),
     ];
-    ChangeisPayPositionsSepatatedOrder(
+    ChangeIsPayPositionsSepatatedOrderCheckBox(
       newArr.some((elem: any) => elem === true)
     );
   };
 
   return (
     <ul ref={ordersrRef} className="ListOrders">
-      {orders?.map((order: any, i: any) => (
+      {getOrdersStoreState?.items.map((order: any, i: any) => (
         <li key={i} className={OrderClasses}>
-          {getIsMakeSeparateOrder && (
+          {getIsSplitBillCheckBox && (
             <label className="ListOrders__check ListOrders__option">
               <input
                 type="checkbox"
@@ -48,11 +51,11 @@ const ListOrders = memo((props: any) => {
                 onChange={(event) => {
                   changeStatus();
                   ChangeSomePositionInOrdersStoreState(
-                    orders.map((elem: any, k: any) => {
+                    getOrdersStoreState?.items.map((elem: any, k: any) => {
                       if (k === i) {
                         return {
                           ...elem,
-                          separatePosition: !elem.separatePosition,
+                          separatePosition: !elem?.separatePosition,
                         };
                       } else {
                         return elem;
@@ -65,16 +68,16 @@ const ListOrders = memo((props: any) => {
             </label>
           )}
           <div className="Order__content">
-            <div className="Order__title"> {order.title}</div>
+            <div className="Order__title"> {order.name}</div>
             <div className="Order__order">
-              {order.order.map((positionOrder: any, i: any) => (
+              {[order.description].map((description: any, i: any) => (
                 <div key={i} className="Order__positionOrder">
-                  {positionOrder}
+                  {description}
                 </div>
               ))}
             </div>
           </div>
-          <div className="Order__price">{`${order.price} ₽`}</div>
+          <div className="Order__price">{`${order.amount} ₽`}</div>
         </li>
       ))}
     </ul>

@@ -3,45 +3,52 @@ import React, { useState } from "react";
 import "./BlockWithWaysPay.css";
 import "./SelectWaysPay.css";
 import SelectBank from "@shared/components/Widget/SelectBank";
+import { orderStore } from "@store/index";
+import { observer } from "mobx-react-lite";
 
 const svg_waysPay_arrow: string =
   require("@assets/waysPay/right_arrow.svg").default;
 
 const OBJECT_WITH_SVG_WATS_PAY: any = {
-  "Банковская карта": require("@assets/waysPay/card.svg").default,
-  "Система быстрых платежей": require("@assets/waysPay/SFP.svg").default,
+  BANK_CARD: [require("@assets/waysPay/card.svg").default, "Банковская карта"],
+  SBP: [require("@assets/waysPay/SFP.svg").default, "Система быстрых платежей"],
+  YANDEX_PAY: [
+    require("@assets/waysPay/yandex-pay.svg").default,
+    "Яндекс оплата",
+  ],
 };
 
-const BlockWithWaysPay = (props: any) => {
-  const [isSelectWayPay, setIsSelectWayPay] = useState<boolean>(false);
-  const [wayPay, setWayPay] = useState<string>("Банковская карта");
-  const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
+const BlockWithWaysPay = observer((props: any) => {
   const {
-    tips,
-    isActiveGenetalButton,
-    ServiceChargeAmount,
-    getIsServiceChargeAmount,
     getCalcutedOrded,
-  } = props;
+    getTips,
+    getIsServiceChargeAmount,
+    getServiceChargeAmount,
+    getisActiveGenetalButton,
+    getArrayWithWaysPay,
+    getDeposit,
+  } = orderStore;
+
+  const [isSelectWayPay, setIsSelectWayPay] = useState<boolean>(false);
+  const [wayPay, setWayPay] = useState<string>("SBP");
+  const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
 
   const generalAmout = () => {
     return (
       getCalcutedOrded +
-      +tips +
-      +(getIsServiceChargeAmount ? ServiceChargeAmount : 0)
+      +getTips +
+      (getIsServiceChargeAmount ? getServiceChargeAmount : 0) -
+      (typeof getDeposit === "number" ? getDeposit : 0)
     ).toFixed(2);
   };
 
   const handler = () => {
-    if (wayPay === "Система быстрых платежей") {
+    if (wayPay === "SBP") {
       setValueSelectBank(true);
-
-      // );
     } else {
       return;
     }
   };
-
   if (ValueSelectBank) {
     return <SelectBank setValueSelectBank={setValueSelectBank} />;
   }
@@ -55,8 +62,13 @@ const BlockWithWaysPay = (props: any) => {
           <div className="BlockWithWaysPay">
             <header>Способ Оплаты</header>
             <ul className="BlockWithWaysPay__list">
-              {Object.values(OBJECT_WITH_SVG_WATS_PAY).map(
-                (svgIcon: any, i: number) => (
+              {Object.values(OBJECT_WITH_SVG_WATS_PAY)
+                .filter((elem, i) =>
+                  getArrayWithWaysPay.includes(
+                    Object.keys(OBJECT_WITH_SVG_WATS_PAY)[i]
+                  )
+                )
+                .map(([svgIcon, name]: any, i: number) => (
                   <li className="BlockWithWaysPay__header" key={i}>
                     <img
                       src={svgIcon}
@@ -64,10 +76,7 @@ const BlockWithWaysPay = (props: any) => {
                       className="BlockWithWaysPay__ico"
                     />
                     <div className="BlockWithWaysPay_title-block">
-                      <div className="BlockWithWaysPay_subtitle">
-                        {" "}
-                        {Object.keys(OBJECT_WITH_SVG_WATS_PAY)[i]}{" "}
-                      </div>
+                      <div className="BlockWithWaysPay_subtitle"> {name}</div>
                     </div>
                     <label className="BlockWithWaysPay__check option">
                       <input
@@ -83,8 +92,7 @@ const BlockWithWaysPay = (props: any) => {
                       <span className="BlockWithWaysPay__check_box"></span>
                     </label>
                   </li>
-                )
-              )}
+                ))}
             </ul>
             <div className="BlockWithWaysPay_body">
               <button
@@ -108,13 +116,16 @@ const BlockWithWaysPay = (props: any) => {
         onClick={() => setIsSelectWayPay((isSelectWayPay) => !isSelectWayPay)}
       >
         <img
-          src={OBJECT_WITH_SVG_WATS_PAY[wayPay]}
+          src={OBJECT_WITH_SVG_WATS_PAY[wayPay][0]}
           alt="way_to_pay"
           className="BlockWithWaysPay__ico"
         />
         <div className="BlockWithWaysPay_title-block">
           <div className="BlockWithWaysPay_title"> Способ оплаты </div>
-          <div className="BlockWithWaysPay_subtitle"> {wayPay} </div>
+          <div className="BlockWithWaysPay_subtitle">
+            {" "}
+            {OBJECT_WITH_SVG_WATS_PAY[wayPay][1]}{" "}
+          </div>
         </div>
         <img
           src={svg_waysPay_arrow}
@@ -125,8 +136,8 @@ const BlockWithWaysPay = (props: any) => {
       <div className="BlockWithWaysPay_body">
         <button
           className="baseButton baseButton_blue"
-          disabled={!isActiveGenetalButton}
-          style={!isActiveGenetalButton ? { backgroundColor: "gray" } : {}}
+          disabled={getisActiveGenetalButton}
+          style={getisActiveGenetalButton ? { backgroundColor: "gray" } : {}}
           onClick={handler}
         >
           {" "}
@@ -135,6 +146,6 @@ const BlockWithWaysPay = (props: any) => {
       </div>
     </div>
   );
-};
+});
 
 export default BlockWithWaysPay;

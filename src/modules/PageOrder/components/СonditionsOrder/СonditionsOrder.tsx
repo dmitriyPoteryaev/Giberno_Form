@@ -1,17 +1,21 @@
 import React, { useState } from "react";
+
 import "./СonditionsOrder.css";
 import "./ModalOrderCondition.css";
+import { orderStore } from "@store/index";
+import { observer } from "mobx-react-lite";
 
-const СonditionsOrder = (props: any) => {
+const СonditionsOrder = observer((props: any) => {
+  const [isVisModalCondirion, setisVisModalCondirion] = useState(false);
+
   const {
-    StateAgreeConditionPyments,
-    ChangeStateAgreeConditionPyments,
-    ServiceChargeAmount,
+    getIsAgreeConditionPymentsCheckBox,
+    ChangeIsAgreeConditionPymentsCheckBox,
     getIsServiceChargeAmount,
     ChangeIsServiceChargeAmount,
-  } = props;
-
-  const [isVisModalCondirion, setisVisModalCondirion] = useState(false);
+    getServiceChargeAmount,
+    getIsServiceFee,
+  } = orderStore;
 
   if (isVisModalCondirion) {
     return (
@@ -451,27 +455,27 @@ const СonditionsOrder = (props: any) => {
 
   return (
     <div className="СonditionsOrder">
+      {getIsServiceFee && (
+        <label className="check option">
+          <input
+            checked={getIsServiceChargeAmount}
+            type="checkbox"
+            className="check__input"
+            onChange={() => ChangeIsServiceChargeAmount()}
+          />
+          <span className="check_box"></span>
+          <span>
+            Я хочу взять на себя сервисный сбор Гиберно{" "}
+            {`(${getServiceChargeAmount}₽)`}
+          </span>
+        </label>
+      )}
       <label className="check option">
         <input
-          checked={getIsServiceChargeAmount}
           type="checkbox"
           className="check__input"
-          onChange={() => ChangeIsServiceChargeAmount()}
-        />
-        <span className="check_box"></span>
-        <span>
-          Я хочу взять на себя сервисный сбор Гиберно{" "}
-          {`(${ServiceChargeAmount}₽)`}
-        </span>
-      </label>
-      <label className="check option">
-        <input
-          type="checkbox"
-          className="check__input"
-          onChange={() =>
-            ChangeStateAgreeConditionPyments(!StateAgreeConditionPyments)
-          }
-          checked={StateAgreeConditionPyments}
+          onChange={ChangeIsAgreeConditionPymentsCheckBox}
+          checked={getIsAgreeConditionPymentsCheckBox}
         />
         <span className="check_box"></span>
         <span
@@ -488,6 +492,6 @@ const СonditionsOrder = (props: any) => {
       </label>
     </div>
   );
-};
+});
 
 export default СonditionsOrder;

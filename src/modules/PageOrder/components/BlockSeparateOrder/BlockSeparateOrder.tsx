@@ -2,24 +2,25 @@ import React, { useState } from "react";
 
 import "./BlockSeparateOrder.css";
 import PopupShare from "@shared/components/PopupShare/PopupShare";
+import { orderStore } from "@store/index";
 import { Switch } from "antd";
 import classNames from "classnames";
+import { observer } from "mobx-react-lite";
 
 const ICON_SHARE: string = require("@assets/share.svg").default;
 
-const BlockSeparateOrder = (props: any) => {
+const BlockSeparateOrder = observer((props: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { wrapperClassName } = props;
   const {
-    wrapperClassName,
-    getIsMakeSeparateOrder,
-    ChangeIsMakeSeparateOrder,
-    getisSepatatedOrder,
-    ChangeIsSepatatedOrder,
-    orders,
+    getIsSplitBill,
+    getIsSplitBillCheckBox,
+    ChangeIsSplitBillCheckBox,
     ChangeSomePositionInOrdersStoreState,
-    ChangeisPayPositionsSepatatedOrder,
-  } = props;
+    getOrdersStoreState,
+    ChangeIsPayPositionsSepatatedOrderCheckBox,
+  } = orderStore;
 
   const SeparateOrderClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
@@ -31,30 +32,26 @@ const BlockSeparateOrder = (props: any) => {
   });
 
   const handlerChangeIsSepatatedOrder = () => {
-    if (getisSepatatedOrder) {
-      ChangeSomePositionInOrdersStoreState(
-        orders.map((elem: any, k: any) => {
-          return { ...elem, separatePosition: false };
-        })
-      );
-      ChangeisPayPositionsSepatatedOrder(false);
-    }
-
-    ChangeIsSepatatedOrder(!getisSepatatedOrder);
+    ChangeIsSplitBillCheckBox();
+    ChangeSomePositionInOrdersStoreState(
+      getOrdersStoreState?.items?.reduce((acc: any, item: any) => {
+        return [...acc, { ...item, separatePosition: false }];
+      }, [])
+    );
+    ChangeIsPayPositionsSepatatedOrderCheckBox(false);
   };
 
   return (
     <div className="BlockSeparateOrder">
-      <div className={SeparateOrderClasses}>
-        Разделить счёт
-        <Switch
-          checked={getIsMakeSeparateOrder}
-          onChange={() => {
-            ChangeIsMakeSeparateOrder();
-            handlerChangeIsSepatatedOrder();
-          }}
-        />
-      </div>
+      {getIsSplitBill && (
+        <div
+          className={SeparateOrderClasses}
+          onClick={handlerChangeIsSepatatedOrder}
+        >
+          Разделить счёт
+          <Switch checked={getIsSplitBillCheckBox} />
+        </div>
+      )}
 
       <img
         src={ICON_SHARE}
@@ -65,6 +62,6 @@ const BlockSeparateOrder = (props: any) => {
       <PopupShare setIsOpen={setIsOpen} isOpen={isOpen} />
     </div>
   );
-};
+});
 
 export default BlockSeparateOrder;

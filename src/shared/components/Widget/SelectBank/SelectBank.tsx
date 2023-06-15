@@ -4,6 +4,7 @@ import "./SelectBank.css";
 import "./FillListBanksStyle.css";
 import "@script/slide-up-widget.js";
 import { sortNamesBanksByLetter } from "@utils/sortNamesBanksByLetter";
+import { observer } from "mobx-react-lite";
 
 const ICON_LEFT_ARROW: string = require("@assets/left_arrow.svg").default;
 const ICON_SEARCH = require("@assets/seach.svg").default;
@@ -12,7 +13,7 @@ const ICON_RIGHT_ARROW: string =
 const ARRAY_WITH_POPULAR = ["Сбербанк", "Тинькофф Банк", "АЛЬФА-БАНК"];
 const ICON_SFP = require("@assets/waysPay/SFP.svg").default;
 
-const SelectBank = (props: any) => {
+const SelectBank = observer((props: any) => {
   const { setValueSelectBank } = props;
 
   const [allBanks, setAllBanks] = useState<any>([]);
@@ -205,6 +206,6 @@ const SelectBank = (props: any) => {
       </div>
     </div>
   );
-};
+});
 
 export default SelectBank;

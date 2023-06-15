@@ -1,49 +1,52 @@
 const getInfoAboutOrder = () => {
+  // return axios
+  //   .get(`https://api.giberno.ru/invoice/`, {
+  //     params: {
+  //       form_pay: "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+  //     },
+  //   })
+  //   .then((response) => {
+  //     return response.data.data;
+  //   });
   return new Promise<any>((resolve, reject) =>
+    // "https://api.giberno.ru/invoice/?form_pay=497f6eca-6276-4993-bfeb-53cbbbba6f08"
     setTimeout(() => {
-      const InfoAboutOrder: any = {
-        Orders: [
+      const data: any = {
+        formID: 5,
+        formName: 'Ресторан "Замес" 2',
+        splitBill: true,
+        deposit: 0.0,
+        employee: null,
+        serviceFee: true,
+        items: [
           {
-            title: "3 БЛЮДА СУП+САЛАТ+ГОРЯЧЕЕ",
-            order: [
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-            ],
-            price: 620,
-            separatePosition: false,
+            name: "Устрицы",
+            description: "string",
+            amount: 100.0,
           },
           {
-            title: "3 БЛЮДА СУП+САЛАТ+ГОРЯЧЕЕ",
-            order: [
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-            ],
-            price: 620,
-            separatePosition: false,
-          },
-          {
-            title: "3 БЛЮДА СУП+САЛАТ+ГОРЯЧЕЕ",
-            order: [
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-              " - морс клубнично-ягодный 200",
-            ],
-            price: 620,
-            separatePosition: false,
+            name: "Жаркое",
+            description: "string",
+            amount: 150.0,
           },
         ],
-        name_waiter: "Иван Иванович",
-        number_tabel: 4,
-        general_order: 800,
+        PaymentTypes: ["SBP", "BANK_CARD", "YANDEX_PAY"],
+        tips: true,
+        email: false,
+        emailRequire: false,
+        serviceInfo: {
+          serviceFeeDefault: true,
+          serviceFeeWarning: true,
+          serviceFeePercentage: 1.0,
+          serviceFeeMax: 100.0,
+        },
+        tipsInfo: {
+          tipsDefault: 0,
+        },
       };
 
-      resolve(InfoAboutOrder);
-    }, 4000)
+      resolve(data);
+    }, 0)
   );
 };
 
