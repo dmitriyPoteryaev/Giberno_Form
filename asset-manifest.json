@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Giberno_Form/static/css/main.49f10a1a.css",
-    "main.js": "/Giberno_Form/static/js/main.d0a0242c.js",
+    "main.js": "/Giberno_Form/static/js/main.8bca1583.js",
     "static/media/yandex-pay.svg": "/Giberno_Form/static/media/yandex-pay.92b6d76654c91c4e1b78d0117a0b2370.svg",
     "static/media/Waiter.svg": "/Giberno_Form/static/media/Waiter.62f84c34653c2b0be47e32deb8650f7d.svg",
     "static/media/card.svg": "/Giberno_Form/static/media/card.f4b2b9d9e4f0922f85c0eadeb05c2d70.svg",
@@ -12,10 +12,10 @@
     "static/media/left_arrow.svg": "/Giberno_Form/static/media/left_arrow.475417b4fc21cc814404e7990ac16e90.svg",
     "static/media/right_arrow.svg": "/Giberno_Form/static/media/right_arrow.d8c5f0364ee0c7f22937af287bf5d179.svg",
     "main.49f10a1a.css.map": "/Giberno_Form/static/css/main.49f10a1a.css.map",
-    "main.d0a0242c.js.map": "/Giberno_Form/static/js/main.d0a0242c.js.map"
+    "main.8bca1583.js.map": "/Giberno_Form/static/js/main.8bca1583.js.map"
   },
   "entrypoints": [
     "static/css/main.49f10a1a.css",
-    "static/js/main.d0a0242c.js"
+    "static/js/main.8bca1583.js"
   ]
 }
