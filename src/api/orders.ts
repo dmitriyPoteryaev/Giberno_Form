@@ -48,7 +48,7 @@ const getInfoAboutOrder = () => {
       };
 
       resolve(data);
-    }, 3000)
+    }, 0)
   );
 };
 

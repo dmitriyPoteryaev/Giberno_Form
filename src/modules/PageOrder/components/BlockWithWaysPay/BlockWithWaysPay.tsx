@@ -34,12 +34,14 @@ const BlockWithWaysPay = observer((props: any) => {
   const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
 
   const generalAmout = () => {
-    return (
+    const generalAmout = (
       getCalcutedOrded +
       +getTips +
       (getIsServiceChargeAmount ? getServiceChargeAmount : 0) -
       (typeof getDeposit === "number" ? getDeposit : 0)
     ).toFixed(2);
+
+    return +generalAmout >= 0 ? generalAmout : 0;
   };
 
   const handler = () => {

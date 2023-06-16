@@ -24,12 +24,14 @@ const GeneralAmount = memo(
     } = orderStore;
 
     const generalAmout = () => {
-      return (
+      const generalAmout = (
         getCalcutedOrded +
         +getTips +
         (getIsServiceChargeAmount ? getServiceChargeAmount : 0) -
         (typeof getDeposit === "number" ? getDeposit : 0)
       ).toFixed(2);
+
+      return +generalAmout >= 0 ? generalAmout : 0;
     };
 
     return (
@@ -45,7 +47,7 @@ const GeneralAmount = memo(
               <div>{`${getTips} ₽`}</div>
             </div>
           )}
-          {typeof getDeposit === "number" && (
+          {typeof getDeposit !== "number" && getDeposit !== 0 && (
             <div className="GeneralAmount__sepateOrders_container">
               <div>Депозит: </div>
               <div>{`${getDeposit} ₽`}</div>
