@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useCallback, useRef, useEffect } from "react";
 
 import "./Tips.css";
 import { orderStore } from "@store/index";
@@ -26,12 +26,9 @@ const Tips = observer((props: any) => {
     getTips,
     getIsSplitBillCheckBox,
     getEmployee,
-    getInfoAboutTips,
+    getDedaultProcentTips,
+    ChangeDedaultProcentTips,
   } = orderStore;
-
-  const [AllPercentagesTips, setAllPercentagesTips] = useState<string>(
-    `${getInfoAboutTips.tipsDefault} %`
-  );
 
   const getCalcutedOrdedREf = useRef<number>();
 
@@ -53,7 +50,7 @@ const Tips = observer((props: any) => {
   const handlerChangeValueTips = useCallback((currentValueBtn: any) => {
     if (currentValueBtn.target.className === "cross") {
       ChangeTips("0");
-      setAllPercentagesTips("0 %");
+      ChangeDedaultProcentTips("0 %");
       return;
     }
 
@@ -64,7 +61,7 @@ const Tips = observer((props: any) => {
         100;
       const res = Math.round(calculated);
       ChangeTips(res.toString());
-      setAllPercentagesTips(currentValueBtn.target.innerHTML);
+      ChangeDedaultProcentTips(currentValueBtn.target.innerHTML);
       return;
     }
     if (currentValueBtn.target.value === "") {
@@ -74,7 +71,7 @@ const Tips = observer((props: any) => {
 
     if (currentValueBtn.type === "change" && getTipsREf.current) {
       ChangeTips(currentValueBtn.target.value);
-      setAllPercentagesTips("");
+      ChangeDedaultProcentTips("");
       return;
     }
     if (+currentValueBtn.target.value === 0) {
@@ -88,17 +85,24 @@ const Tips = observer((props: any) => {
   useEffect(() => {
     if (getCalcutedOrdedREf?.current !== undefined) {
       const res = Math.round(
-        (getCalcutedOrdedREf?.current * getInfoAboutTips.tipsDefault) / 100
+        (getCalcutedOrdedREf?.current * getDedaultProcentTips.slice(0, -2)) /
+          100
       );
 
       if (getCalcutedOrdedREf?.current === 0) {
-        setAllPercentagesTips("");
+        ChangeDedaultProcentTips(getDedaultProcentTips);
       } else {
-        setAllPercentagesTips(`${getInfoAboutTips.tipsDefault} %`);
+        ChangeDedaultProcentTips(getDedaultProcentTips);
       }
       ChangeTips(res.toString());
     }
-  }, [getIsSplitBillCheckBox, getCalcutedOrded, ChangeTips, getInfoAboutTips]);
+  }, [
+    getIsSplitBillCheckBox,
+    getCalcutedOrded,
+    ChangeTips,
+    getDedaultProcentTips,
+    ChangeDedaultProcentTips,
+  ]);
   return (
     <div className={TipsClasses}>
       <div className="Tips__title"> Чаевые </div>
@@ -132,7 +136,7 @@ const Tips = observer((props: any) => {
           <ButtonChangeTips
             key={percentages}
             onClick={handlerChangeValueTips}
-            disabled={AllPercentagesTips}
+            disabled={getDedaultProcentTips}
           >
             {`${percentages} %`}
           </ButtonChangeTips>

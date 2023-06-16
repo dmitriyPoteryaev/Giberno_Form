@@ -1,3 +1,5 @@
+// import axios from "axios";
+
 const getInfoAboutOrder = () => {
   // return axios
   //   .get(`https://api.giberno.ru/invoice/`, {
@@ -46,7 +48,7 @@ const getInfoAboutOrder = () => {
       };
 
       resolve(data);
-    }, 0)
+    }, 3000)
   );
 };
 

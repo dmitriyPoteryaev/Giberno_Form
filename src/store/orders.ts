@@ -14,7 +14,7 @@ class OrdersStore {
 
   Employee: any;
 
-  DefaultInfoAboutTips: any;
+  DefaultProcentTips: any;
   ArrayWithWaysPay: any;
 
   // ВСЕ ПАРАМЕТРЫ, ОТВЕЧАЮЩИЕ ЗА ГЛАВНУЮ КНОПКУ - "ОПЛАТИТЬ"
@@ -51,7 +51,7 @@ class OrdersStore {
       this.Employee = infoOrders?.employee;
       this.Deposit = infoOrders?.deposit;
       this.IsTips = infoOrders?.tips;
-      this.DefaultInfoAboutTips = infoOrders?.tipsInfo;
+      this.DefaultProcentTips = infoOrders?.tipsInfo?.tipsDefault.toString();
       this.ArrayWithWaysPay = infoOrders?.PaymentTypes;
       return (this.OrdersStoreState = {
         ...infoOrders,
@@ -95,9 +95,14 @@ class OrdersStore {
     return this.Employee ? this.Employee : "";
   }
 
-  get getInfoAboutTips() {
-    return this.DefaultInfoAboutTips;
+  get getDedaultProcentTips() {
+    return this.DefaultProcentTips?.includes("%")
+      ? this.DefaultProcentTips
+      : `${this.DefaultProcentTips} %`;
   }
+  ChangeDedaultProcentTips = (value: any) => {
+    return (this.DefaultProcentTips = value);
+  };
 
   get getArrayWithWaysPay() {
     return this.ArrayWithWaysPay;
