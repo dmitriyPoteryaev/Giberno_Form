@@ -1,11 +1,15 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, FC } from "react";
 
 import "./ListOrders.css";
 import { orderStore } from "@store/index";
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 
-const ListOrders = observer((props: any) => {
+export interface BLOCK_LISTORDERSprops {
+  wrapperClassName: string;
+}
+
+const BLOCK_LISTORDERS: FC<BLOCK_LISTORDERSprops> = observer((props) => {
   const { wrapperClassName } = props;
 
   const ordersrRef = useRef<any>();
@@ -19,26 +23,8 @@ const ListOrders = observer((props: any) => {
 
   const OrderClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
-    Order: true,
+    "Block-SpecificPosition": true,
   });
-
-  // const changeStatus = () => {
-  //   // const newArr = [
-  //   //   ...[
-  //   //     ...[...ordersrRef.current.childNodes].map(
-  //   //       (elem: any) => elem.childNodes
-  //   //     ),
-  //   //   ]
-  //   //     .map((elem: any) => elem[0])
-  //   //     .map((elem: any) => elem.childNodes)
-  //   //     .map((elem: any) => elem[0].checked),
-  //   // ];
-  //   // .map((elem: any) => elem[0].checked)
-  //   console.log(ordersrRef.current.checked);
-  //   // ChangeIsPayPositionsSepatatedOrderCheckBox(
-  //   //   newArr.some((elem: any) => elem === true)
-  //   // );
-  // };
 
   useEffect(() => {
     const newArr = [
@@ -60,8 +46,8 @@ const ListOrders = observer((props: any) => {
   }, [getOrdersStoreState, ChangeIsPayPositionsSepatatedOrderCheckBox]);
 
   return (
-    <ul ref={ordersrRef} className="ListOrders">
-      {getOrdersStoreState?.items.map((order: any, i: any) => (
+    <ul ref={ordersrRef} className="Block-ListSpecificPosition">
+      {getOrdersStoreState.items.map((order: any, i: any) => (
         <li
           key={i}
           className={OrderClasses}
@@ -132,4 +118,4 @@ const ListOrders = observer((props: any) => {
   );
 });
 
-export default ListOrders;
+export default BLOCK_LISTORDERS;

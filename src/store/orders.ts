@@ -1,5 +1,6 @@
 import { orderAPI } from "@api/orders";
 // import { CONST_WAYS_OBJECT_PAY } from "@constants/waysPay";
+import { mapOrderItems } from "@utils/mapOrderItems";
 import { makeAutoObservable } from "mobx";
 
 const { getInfoAboutOrder } = orderAPI;
@@ -26,6 +27,9 @@ class OrdersStore {
 
   DefaultProcentTips: any;
   ArrayWithWaysPay: any;
+
+  IsEmail: any;
+  IsEmailRequire: any;
 
   // ВСЕ ПАРАМЕТРЫ, ОТВЕЧАЮЩИЕ ЗА ГЛАВНУЮ КНОПКУ - "ОПЛАТИТЬ"
 
@@ -61,13 +65,13 @@ class OrdersStore {
       this.Employee = infoOrders?.employee;
       this.Deposit = infoOrders?.deposit;
       this.IsTips = infoOrders?.tips;
+      this.IsEmail = infoOrders?.email;
+      this.IsEmailRequire = infoOrders?.emailRequire;
       this.DefaultProcentTips = infoOrders?.tipsInfo?.tipsDefault.toString();
       this.ArrayWithWaysPay = infoOrders?.PaymentTypes;
       return (this.OrdersStoreState = {
         ...infoOrders,
-        items: infoOrders.items.reduce((acc: any, item: any) => {
-          return [...acc, { ...item, separatePosition: false }];
-        }, []),
+        items: mapOrderItems(infoOrders.items),
       });
     });
   };
@@ -97,12 +101,20 @@ class OrdersStore {
     this.tips = value;
   };
 
-  get getIsServiceChargeAmount() {
+  get getIsServiceChargeAmount(): boolean {
     return this.isServiceChargeAmount;
   }
 
   get getEmployee() {
     return this.Employee ? this.Employee : "";
+  }
+
+  get getIsEmail() {
+    return this.IsEmail;
+  }
+
+  get getIsEmailRequire() {
+    return this.IsEmailRequire;
   }
 
   get getDedaultProcentTips() {

@@ -1,12 +1,12 @@
 
-.BlockSeparateOrder {
+.Block-SeparateOrder {
 
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-.BlockSeparateOrder__MakeSeparatedOrder {
+.Block-SeparateOrder__SWITCHSeparatedOrder {
 
     display: flex;
     justify-content: space-between;
@@ -18,14 +18,14 @@
     line-height: 22px;
 }
 
-.BlockSeparateOrder__ShareOrderButton {
+.Block-SeparateOrder__BUTTONShareOrder {
     width: 64px;
     height: 48px;
     margin-left: 15px;
 }
 
 @media (max-width: 315px) {
-    .BlockSeparateOrder__MakeSeparatedOrder {
+    .Block-SeparateOrder__SWITCHSeparatedOrder{
       padding: 0;
       align-items: center;
     }

@@ -1,12 +1,11 @@
-.ListOrders {
+.Block-ListSpecificPosition {
     padding: 0;
     margin: 0;
     width: 100%;
   }
-  .Order {
+  .Block-SpecificPosition {
     display: flex;
     position: relative;
-    /* justify-content: space-between; */
   }
   
   .Order__content {

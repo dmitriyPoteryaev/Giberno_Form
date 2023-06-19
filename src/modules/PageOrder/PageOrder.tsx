@@ -6,10 +6,10 @@ import { orderStore } from "@store/index";
 import { Spin } from "antd";
 import { observer } from "mobx-react-lite";
 
-import BlockSeparateOrder from "./components/BlockSeparateOrder";
+import BLOCK_LISTORDERS from "./components/BLOCK_LISTORDERS";
+import BLOCK_SEPARATEORDER from "./components/BLOCK_SEPARATEORDER";
 import BlockWithWaysPay from "./components/BlockWithWaysPay";
 import GeneralAmount from "./components/GeneralAmount";
-import ListOrders from "./components/ListOrders";
 import Tips from "./components/Tips";
 import СonditionsOrder from "./components/СonditionsOrder";
 
@@ -43,8 +43,8 @@ const PageOrder = observer(() => {
     <div className="pageOrder">
       <Header></Header>
       <div className="OrderContent">
-        <BlockSeparateOrder wrapperClassName="wrapperBlock" />
-        <ListOrders wrapperClassName="wrapperBlock" />
+        <BLOCK_SEPARATEORDER wrapperClassName="wrapperBlock" />
+        <BLOCK_LISTORDERS wrapperClassName="wrapperBlock" />
         {getIsTips && <Tips wrapperClassName="wrapperBlock" />}
         <GeneralAmount wrapperClassName="wrapperBlock" />
         <СonditionsOrder />

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./SelectBank.css";
 import "./FillListBanksStyle.css";
 import "@script/slide-up-widget.js";
+import { orderStore } from "@store/index";
 import { sortNamesBanksByLetter } from "@utils/sortNamesBanksByLetter";
 import { observer } from "mobx-react-lite";
 
@@ -16,9 +17,11 @@ const ICON_SFP = require("@assets/waysPay/SFP.svg").default;
 const SelectBank = observer((props: any) => {
   const { setValueSelectBank } = props;
 
+  const { getIsEmailRequire, getIsEmail } = orderStore;
+
   const [allBanks, setAllBanks] = useState<any>([]);
   const [PopularAllBanks, setPopularAllBanks] = useState<any>([]);
-  const [isGiveCheck, setIsGiveCheck] = useState<boolean>(false);
+  const [isGiveCheck, setIsGiveCheck] = useState<boolean>(getIsEmailRequire);
   const [isShowAllBanks, setIsShowAllBanks] = useState<boolean>(false);
   const [filterInput, setFilterInput] = useState<string>("");
   const [searchPlaceholder, setSearchPlaceholder] =
@@ -184,18 +187,20 @@ const SelectBank = observer((props: any) => {
             Выбрав банк, вы перейдете в мобильное <br />
             приложение для завершения оплаты
           </div>
-          <label className="Modal_order__chooseAllBanks_check">
-            <input
-              checked={isGiveCheck}
-              type="checkbox"
-              className="Modal_order__chooseAllBanks_check__input"
-              onChange={() => setIsGiveCheck((isGiveCheck) => !isGiveCheck)}
-            />
-            <span className="Modal_order__chooseAllBanks_check_box"></span>
-            <span className="Modal_order__chooseAllBanks_GiveCheck">
-              Хочу получить чек
-            </span>
-          </label>
+          {getIsEmail && (
+            <label className="Modal_order__chooseAllBanks_check">
+              <input
+                checked={isGiveCheck}
+                type="checkbox"
+                className="Modal_order__chooseAllBanks_check__input"
+                onChange={() => setIsGiveCheck((isGiveCheck) => !isGiveCheck)}
+              />
+              <span className="Modal_order__chooseAllBanks_check_box"></span>
+              <span className="Modal_order__chooseAllBanks_GiveCheck">
+                Хочу получить чек
+              </span>
+            </label>
+          )}
           {isGiveCheck && (
             <input
               placeholder="Укажите свой e-mail"

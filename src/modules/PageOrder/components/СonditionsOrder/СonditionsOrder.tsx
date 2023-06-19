@@ -7,6 +7,8 @@ import { observer } from "mobx-react-lite";
 
 const СonditionsOrder = observer((props: any) => {
   const [isVisModalCondirion, setisVisModalCondirion] = useState(false);
+  const [isVisModalServiceFeeWarning, setiIsVisModalServiceFeeWarning] =
+    useState(false);
 
   const {
     getIsAgreeConditionPymentsCheckBox,
@@ -15,7 +17,32 @@ const СonditionsOrder = observer((props: any) => {
     ChangeIsServiceChargeAmount,
     getServiceChargeAmount,
     getIsServiceFee,
+    getIsServiceFeeWarning,
   } = orderStore;
+
+  if (isVisModalServiceFeeWarning && getIsServiceFeeWarning) {
+    return (
+      <div
+        className="Modal_order__Сonditions"
+        onClick={() =>
+          setiIsVisModalServiceFeeWarning(
+            (isVisModalServiceFeeWarning) => !isVisModalServiceFeeWarning
+          )
+        }
+      >
+        <div onClick={(event) => event.stopPropagation()}>
+          <div className="Modal_order__ServiceFeeWarningContent">
+            <h2 className="Modal_order__header">СЕРВИСНЫЙ СБОР</h2>
+            <div>
+              Оплачивая сервисный сбор. Вы помогаете делать сервис Гиберно ещё
+              лучше и покрываете издержки официанту, чтобы он получил полную
+              сумму чая
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isVisModalCondirion) {
     return (
@@ -464,7 +491,13 @@ const СonditionsOrder = observer((props: any) => {
             onChange={() => ChangeIsServiceChargeAmount()}
           />
           <span className="check_box"></span>
-          <span>
+          <span
+            onClick={() =>
+              setiIsVisModalServiceFeeWarning(
+                (isVisModalServiceFeeWarning) => !isVisModalServiceFeeWarning
+              )
+            }
+          >
             Я хочу взять на себя сервисный сбор Гиберно{" "}
             {`(${getServiceChargeAmount}₽)`}
           </span>
