@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 import "./ListOrders.css";
 import { orderStore } from "@store/index";
@@ -22,7 +22,25 @@ const ListOrders = observer((props: any) => {
     Order: true,
   });
 
-  const changeStatus = () => {
+  // const changeStatus = () => {
+  //   // const newArr = [
+  //   //   ...[
+  //   //     ...[...ordersrRef.current.childNodes].map(
+  //   //       (elem: any) => elem.childNodes
+  //   //     ),
+  //   //   ]
+  //   //     .map((elem: any) => elem[0])
+  //   //     .map((elem: any) => elem.childNodes)
+  //   //     .map((elem: any) => elem[0].checked),
+  //   // ];
+  //   // .map((elem: any) => elem[0].checked)
+  //   console.log(ordersrRef.current.checked);
+  //   // ChangeIsPayPositionsSepatatedOrderCheckBox(
+  //   //   newArr.some((elem: any) => elem === true)
+  //   // );
+  // };
+
+  useEffect(() => {
     const newArr = [
       ...[
         ...[...ordersrRef.current.childNodes].map(
@@ -33,15 +51,40 @@ const ListOrders = observer((props: any) => {
         .map((elem: any) => elem.childNodes)
         .map((elem: any) => elem[0].checked),
     ];
-    ChangeIsPayPositionsSepatatedOrderCheckBox(
-      newArr.some((elem: any) => elem === true)
-    );
-  };
+
+    if (!newArr.every((elem) => typeof elem === "undefined")) {
+      ChangeIsPayPositionsSepatatedOrderCheckBox(
+        newArr.some((elem: any) => elem === true)
+      );
+    }
+  }, [getOrdersStoreState, ChangeIsPayPositionsSepatatedOrderCheckBox]);
 
   return (
     <ul ref={ordersrRef} className="ListOrders">
       {getOrdersStoreState?.items.map((order: any, i: any) => (
-        <li key={i} className={OrderClasses}>
+        <li
+          key={i}
+          className={OrderClasses}
+          onClick={(event) => {
+            event.preventDefault();
+            if (getIsSplitBillCheckBox) {
+              ChangeSomePositionInOrdersStoreState(
+                getOrdersStoreState?.items.map((elem: any, k: any) => {
+                  if (k === i) {
+                    return {
+                      ...elem,
+                      separatePosition: !elem?.separatePosition,
+                    };
+                  } else {
+                    return elem;
+                  }
+                })
+              );
+            } else {
+              return;
+            }
+          }}
+        >
           {getIsSplitBillCheckBox && (
             <label className="ListOrders__check ListOrders__option">
               <input
@@ -49,19 +92,23 @@ const ListOrders = observer((props: any) => {
                 className="check__input"
                 checked={order.separatePosition}
                 onChange={(event) => {
-                  changeStatus();
-                  ChangeSomePositionInOrdersStoreState(
-                    getOrdersStoreState?.items.map((elem: any, k: any) => {
-                      if (k === i) {
-                        return {
-                          ...elem,
-                          separatePosition: !elem?.separatePosition,
-                        };
-                      } else {
-                        return elem;
-                      }
-                    })
-                  );
+                  event.preventDefault();
+                  if (getIsSplitBillCheckBox) {
+                    ChangeSomePositionInOrdersStoreState(
+                      getOrdersStoreState?.items.map((elem: any, k: any) => {
+                        if (k === i) {
+                          return {
+                            ...elem,
+                            separatePosition: !elem?.separatePosition,
+                          };
+                        } else {
+                          return elem;
+                        }
+                      })
+                    );
+                  } else {
+                    return;
+                  }
                 }}
               />
               <span className="ListOrders__check_box"></span>
@@ -69,13 +116,15 @@ const ListOrders = observer((props: any) => {
           )}
           <div className="Order__content">
             <div className="Order__title"> {order.name}</div>
-            <div className="Order__order">
-              {[order.description].map((description: any, i: any) => (
-                <div key={i} className="Order__positionOrder">
-                  {description}
-                </div>
-              ))}
-            </div>
+            {order.description && (
+              <div className="Order__order">
+                {[order.description].map((description: any, i: any) => (
+                  <div key={i} className="Order__positionOrder">
+                    {description}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="Order__price">{`${order.amount} ₽`}</div>
         </li>

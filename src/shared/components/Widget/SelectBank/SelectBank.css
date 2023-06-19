@@ -149,7 +149,8 @@
   width: 100%;
 }
 .Modal_order__chooseAllBanks_Input {
-  border: none;
+  border: 1px solid black;
+  border-radius: 4px;
   bottom: 0;
   color: #010d35;
   font-size: 16px;

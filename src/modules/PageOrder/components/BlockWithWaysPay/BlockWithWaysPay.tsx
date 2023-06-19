@@ -9,15 +9,6 @@ import { observer } from "mobx-react-lite";
 const svg_waysPay_arrow: string =
   require("@assets/waysPay/right_arrow.svg").default;
 
-const OBJECT_WITH_SVG_WATS_PAY: any = {
-  BANK_CARD: [require("@assets/waysPay/card.svg").default, "Банковская карта"],
-  SBP: [require("@assets/waysPay/SFP.svg").default, "Система быстрых платежей"],
-  YANDEX_PAY: [
-    require("@assets/waysPay/yandex-pay.svg").default,
-    "Яндекс оплата",
-  ],
-};
-
 const BlockWithWaysPay = observer((props: any) => {
   const {
     getCalcutedOrded,
@@ -25,12 +16,14 @@ const BlockWithWaysPay = observer((props: any) => {
     getIsServiceChargeAmount,
     getServiceChargeAmount,
     getisActiveGenetalButton,
-    getArrayWithWaysPay,
+    getObjectWithWaysPay,
     getDeposit,
   } = orderStore;
 
   const [isSelectWayPay, setIsSelectWayPay] = useState<boolean>(false);
-  const [wayPay, setWayPay] = useState<string>("SBP");
+  const [wayPay, setWayPay] = useState<string>(
+    Object.keys(getObjectWithWaysPay)[0]
+  );
   const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
 
   const generalAmout = () => {
@@ -51,6 +44,16 @@ const BlockWithWaysPay = observer((props: any) => {
       return;
     }
   };
+
+  const ShowWayPays = () => {
+    if (Object.keys(getObjectWithWaysPay).length <= 1) {
+      return;
+    } else {
+      setIsSelectWayPay((isSelectWayPay) => !isSelectWayPay);
+      return;
+    }
+  };
+
   if (ValueSelectBank) {
     return <SelectBank setValueSelectBank={setValueSelectBank} />;
   }
@@ -64,13 +67,8 @@ const BlockWithWaysPay = observer((props: any) => {
           <div className="BlockWithWaysPay">
             <header>Способ Оплаты</header>
             <ul className="BlockWithWaysPay__list">
-              {Object.values(OBJECT_WITH_SVG_WATS_PAY)
-                .filter((elem, i) =>
-                  getArrayWithWaysPay.includes(
-                    Object.keys(OBJECT_WITH_SVG_WATS_PAY)[i]
-                  )
-                )
-                .map(([svgIcon, name]: any, i: number) => (
+              {Object.values(getObjectWithWaysPay).map(
+                ([svgIcon, name]: any, i: number) => (
                   <li className="BlockWithWaysPay__header" key={i}>
                     <img
                       src={svgIcon}
@@ -85,16 +83,17 @@ const BlockWithWaysPay = observer((props: any) => {
                         type="checkbox"
                         className="check__input"
                         onChange={() =>
-                          setWayPay(Object.keys(OBJECT_WITH_SVG_WATS_PAY)[i])
+                          setWayPay(Object.keys(getObjectWithWaysPay)[i])
                         }
                         checked={
-                          Object.keys(OBJECT_WITH_SVG_WATS_PAY)[i] === wayPay
+                          Object.keys(getObjectWithWaysPay)[i] === wayPay
                         }
                       />
                       <span className="BlockWithWaysPay__check_box"></span>
                     </label>
                   </li>
-                ))}
+                )
+              )}
             </ul>
             <div className="BlockWithWaysPay_body">
               <button
@@ -110,15 +109,12 @@ const BlockWithWaysPay = observer((props: any) => {
       </div>
     );
   }
-
+  // setIsSelectWayPay((isSelectWayPay) => !isSelectWayPay)}
   return (
     <div className="BlockWithWaysPay">
-      <div
-        className="BlockWithWaysPay__header"
-        onClick={() => setIsSelectWayPay((isSelectWayPay) => !isSelectWayPay)}
-      >
+      <div className="BlockWithWaysPay__header" onClick={ShowWayPays}>
         <img
-          src={OBJECT_WITH_SVG_WATS_PAY[wayPay][0]}
+          src={getObjectWithWaysPay[wayPay][0]}
           alt="way_to_pay"
           className="BlockWithWaysPay__ico"
         />
@@ -126,14 +122,16 @@ const BlockWithWaysPay = observer((props: any) => {
           <div className="BlockWithWaysPay_title"> Способ оплаты </div>
           <div className="BlockWithWaysPay_subtitle">
             {" "}
-            {OBJECT_WITH_SVG_WATS_PAY[wayPay][1]}{" "}
+            {getObjectWithWaysPay[wayPay][1]}{" "}
           </div>
         </div>
-        <img
-          src={svg_waysPay_arrow}
-          alt="way_to_pay"
-          className="BlockWithWaysPay__arrow"
-        />
+        {Object.keys(getObjectWithWaysPay).length > 1 && (
+          <img
+            src={svg_waysPay_arrow}
+            alt="way_to_pay"
+            className="BlockWithWaysPay__arrow"
+          />
+        )}
       </div>
       <div className="BlockWithWaysPay_body">
         <button

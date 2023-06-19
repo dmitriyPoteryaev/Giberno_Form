@@ -1,7 +1,17 @@
 import { orderAPI } from "@api/orders";
+// import { CONST_WAYS_OBJECT_PAY } from "@constants/waysPay";
 import { makeAutoObservable } from "mobx";
 
 const { getInfoAboutOrder } = orderAPI;
+
+const CONST_WAYS_OBJECT_PAY = {
+  BANK_CARD: [require("@assets/waysPay/card.svg").default, "Банковская карта"],
+  SBP: [require("@assets/waysPay/SFP.svg").default, "Система быстрых платежей"],
+  YANDEX_PAY: [
+    require("@assets/waysPay/yandex-pay.svg").default,
+    "Яндекс оплата",
+  ],
+};
 
 // ВСЁ ЧТО НАЧИНАЕТСЯ НА GET - ЭТО ПРОСТО ВЗЯТЬ ЗНАЧЕНИЕ
 // ВСЁ ЧТО НАЧИНАЕТСЯ НА CHANGE - ЭТО ИЗМЕНИТЬ ЭТО ЗНАЧЕНИЕ
@@ -104,8 +114,23 @@ class OrdersStore {
     return (this.DefaultProcentTips = value);
   };
 
-  get getArrayWithWaysPay() {
-    return this.ArrayWithWaysPay;
+  get getObjectWithWaysPay() {
+    return Object.values(CONST_WAYS_OBJECT_PAY).reduce(
+      (acc: any, item: any, index: any) => {
+        const KEY_WAY_PAY: string = Object.keys(CONST_WAYS_OBJECT_PAY)[index];
+
+        if (
+          this.ArrayWithWaysPay.includes(
+            Object.keys(CONST_WAYS_OBJECT_PAY)[index]
+          )
+        ) {
+          return { ...acc, [KEY_WAY_PAY]: item };
+        } else {
+          return acc;
+        }
+      },
+      {}
+    );
   }
 
   ChangeIsServiceChargeAmount = () => {
@@ -154,7 +179,7 @@ class OrdersStore {
   get getIsPayPositionsSepatatedOrderCheckBox() {
     return this.IsPayPositionsSepatatedOrderCheckBox;
   }
-  ChangeIsPayPositionsSepatatedOrderCheckBox = (value: boolean) => {
+  ChangeIsPayPositionsSepatatedOrderCheckBox = (value: any) => {
     this.IsPayPositionsSepatatedOrderCheckBox = value;
   };
 

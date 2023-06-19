@@ -31,6 +31,12 @@ const getInfoAboutOrder = () => {
             description: "string",
             amount: 150.0,
           },
+
+          {
+            name: "Жарwerewrfwerwerwerwekjrewjfhareofejrnofarejngmnrakgomeroigjneognjqreogengjnre;ieqneiuinreinое",
+            description: "string",
+            amount: 150.0,
+          },
         ],
         PaymentTypes: ["SBP", "BANK_CARD", "YANDEX_PAY"],
         tips: true,
