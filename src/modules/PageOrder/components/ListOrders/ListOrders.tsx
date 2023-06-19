@@ -66,8 +66,8 @@ const ListOrders = observer((props: any) => {
           key={i}
           className={OrderClasses}
           onClick={(event) => {
-            event.preventDefault();
             if (getIsSplitBillCheckBox) {
+              event.preventDefault();
               ChangeSomePositionInOrdersStoreState(
                 getOrdersStoreState?.items.map((elem: any, k: any) => {
                   if (k === i) {
@@ -92,7 +92,6 @@ const ListOrders = observer((props: any) => {
                 className="check__input"
                 checked={order.separatePosition}
                 onChange={(event) => {
-                  event.preventDefault();
                   if (getIsSplitBillCheckBox) {
                     ChangeSomePositionInOrdersStoreState(
                       getOrdersStoreState?.items.map((elem: any, k: any) => {
