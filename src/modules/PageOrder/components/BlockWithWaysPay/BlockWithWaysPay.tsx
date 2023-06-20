@@ -22,7 +22,7 @@ const BlockWithWaysPay = observer((props: any) => {
 
   const [isSelectWayPay, setIsSelectWayPay] = useState<boolean>(false);
   const [wayPay, setWayPay] = useState<string>(
-    Object.keys(getObjectWithWaysPay)[0]
+    Object.keys(getObjectWithWaysPay)[0] || " "
   );
   const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
 
@@ -114,7 +114,11 @@ const BlockWithWaysPay = observer((props: any) => {
     <div className="BlockWithWaysPay">
       <div className="BlockWithWaysPay__header" onClick={ShowWayPays}>
         <img
-          src={getObjectWithWaysPay[wayPay][0]}
+          src={
+            getObjectWithWaysPay?.[wayPay]?.[0]
+              ? getObjectWithWaysPay[wayPay][0]
+              : ""
+          }
           alt="way_to_pay"
           className="BlockWithWaysPay__ico"
         />
@@ -122,7 +126,9 @@ const BlockWithWaysPay = observer((props: any) => {
           <div className="BlockWithWaysPay_title"> Способ оплаты </div>
           <div className="BlockWithWaysPay_subtitle">
             {" "}
-            {getObjectWithWaysPay[wayPay][1]}{" "}
+            {getObjectWithWaysPay?.[wayPay]?.[1]
+              ? getObjectWithWaysPay[wayPay][1]
+              : ""}{" "}
           </div>
         </div>
         {Object.keys(getObjectWithWaysPay).length > 1 && (

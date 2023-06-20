@@ -29,13 +29,13 @@ const BLOCK_LISTORDERS: FC<BLOCK_LISTORDERSprops> = observer((props) => {
   useEffect(() => {
     const newArr = [
       ...[
-        ...[...ordersrRef.current.childNodes].map(
+        ...[...ordersrRef.current.childNodes]?.map(
           (elem: any) => elem.childNodes
         ),
       ]
-        .map((elem: any) => elem[0])
-        .map((elem: any) => elem.childNodes)
-        .map((elem: any) => elem[0].checked),
+        ?.map((elem: any) => elem[0])
+        ?.map((elem: any) => elem.childNodes)
+        ?.map((elem: any) => elem[0].checked),
     ];
 
     if (!newArr.every((elem) => typeof elem === "undefined")) {
@@ -47,7 +47,7 @@ const BLOCK_LISTORDERS: FC<BLOCK_LISTORDERSprops> = observer((props) => {
 
   return (
     <ul ref={ordersrRef} className="Block-ListSpecificPosition">
-      {getOrdersStoreState.items.map((order: any, i: any) => (
+      {getOrdersStoreState.items?.map((order: any, i: any) => (
         <li
           key={i}
           className={OrderClasses}
@@ -55,7 +55,7 @@ const BLOCK_LISTORDERS: FC<BLOCK_LISTORDERSprops> = observer((props) => {
             if (getIsSplitBillCheckBox) {
               event.preventDefault();
               ChangeSomePositionInOrdersStoreState(
-                getOrdersStoreState?.items.map((elem: any, k: any) => {
+                getOrdersStoreState?.items?.map((elem: any, k: any) => {
                   if (k === i) {
                     return {
                       ...elem,
@@ -80,7 +80,7 @@ const BLOCK_LISTORDERS: FC<BLOCK_LISTORDERSprops> = observer((props) => {
                 onChange={(event) => {
                   if (getIsSplitBillCheckBox) {
                     ChangeSomePositionInOrdersStoreState(
-                      getOrdersStoreState?.items.map((elem: any, k: any) => {
+                      getOrdersStoreState?.items?.map((elem: any, k: any) => {
                         if (k === i) {
                           return {
                             ...elem,
@@ -103,7 +103,7 @@ const BLOCK_LISTORDERS: FC<BLOCK_LISTORDERSprops> = observer((props) => {
             <div className="Order__title"> {order.name}</div>
             {order.description && (
               <div className="Order__order">
-                {[order.description].map((description: any, i: any) => (
+                {[order.description]?.map((description: any, i: any) => (
                   <div key={i} className="Order__positionOrder">
                     {description}
                   </div>

@@ -15,7 +15,7 @@ export const sortNamesBanksByLetter = (
 
   arrayWithBanks
     .filter((bank: any) =>
-      bank.bankName.toLowerCase().includes(filterInput.toLowerCase())
+      bank.bankName.toLowerCase()?.includes(filterInput.toLowerCase())
     )
     .forEach((InfoAboutbank: any) => {
       const INDEX_WORD = 0;
@@ -28,7 +28,7 @@ export const sortNamesBanksByLetter = (
       ) {
         new_obj["Популярные"] = [...new_obj["Популярные"], InfoAboutbank];
       }
-      if (Object.keys(new_obj).includes(FIRST_LETTER_NAME_BANK)) {
+      if (Object.keys(new_obj)?.includes(FIRST_LETTER_NAME_BANK)) {
         new_obj[FIRST_LETTER_NAME_BANK] = [
           ...new_obj[FIRST_LETTER_NAME_BANK],
           InfoAboutbank,
