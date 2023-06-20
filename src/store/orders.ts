@@ -53,27 +53,47 @@ class OrdersStore {
   // независимые переменные
   isLoading: boolean = true;
 
+  Error: any;
+
+  // ВСЁ ДЛЯ ССЫЛКИ
+
+  Currentclient_id: any;
+
+  Currentkey_form: any;
   constructor() {
     makeAutoObservable(this);
   }
 
   // ВСЯ ЛОГИКА, КОТОРАЯ СВЯЗАНА С ЗАКАЗОМ И ПОДСЧЁТОМ ДЕНЕГ
   ChangeDataAboutOrders = () => {
-    getInfoAboutOrder().then((infoOrders: any) => {
-      this.isLoading = false;
-      this.isServiceChargeAmount = infoOrders?.serviceInfo?.serviceFeeDefault;
-      this.Employee = infoOrders?.employee;
-      this.Deposit = infoOrders?.deposit;
-      this.IsTips = infoOrders?.tips;
-      this.IsEmail = infoOrders?.email;
-      this.IsEmailRequire = infoOrders?.emailRequire;
-      this.DefaultProcentTips = infoOrders?.tipsInfo?.tipsDefault.toString();
-      this.ArrayWithWaysPay = infoOrders?.PaymentTypes;
-      return (this.OrdersStoreState = {
-        ...infoOrders,
-        items: mapOrderItems(infoOrders.items),
+    return getInfoAboutOrder()
+      .then(({ config, infoOrders }: any) => {
+        if (typeof infoOrders !== "object") {
+          this.Currentclient_id = config.client_id;
+          this.Currentkey_form = config.key_form;
+          throw Error(infoOrders);
+        }
+        this.isServiceChargeAmount = infoOrders?.serviceInfo?.serviceFeeDefault;
+        this.Employee = infoOrders?.employee;
+        this.Deposit = infoOrders?.deposit;
+        this.IsTips = infoOrders?.tips;
+        this.IsEmail = infoOrders?.email;
+        this.IsEmailRequire = infoOrders?.emailRequire;
+        this.DefaultProcentTips = infoOrders?.tipsInfo?.tipsDefault.toString();
+        this.ArrayWithWaysPay = infoOrders?.PaymentTypes;
+        this.OrdersStoreState = {
+          ...infoOrders,
+          items: mapOrderItems(infoOrders.items),
+        };
+        this.Currentclient_id = config.client_id;
+        this.Currentkey_form = config.key_form;
+      })
+      .catch((mesError) => {
+        this.Error = mesError.message;
+      })
+      .finally(() => {
+        this.isLoading = false;
       });
-    });
   };
 
   get getOrdersStoreState() {
@@ -226,6 +246,18 @@ class OrdersStore {
   // НЕЗАВИСИМЫЕ ПАРАМЕТРЫ
   get getIsLoading() {
     return this.isLoading;
+  }
+  get getError() {
+    return this.Error;
+  }
+
+  // ПАРАМЕТРЫ ОТВЕЧАЮЩИЕ ЗА ССЫЛКУ
+  get getCurrentclient_id() {
+    return this.Currentclient_id;
+  }
+
+  get getCurrentkey_form() {
+    return this.Currentkey_form;
   }
 }
 

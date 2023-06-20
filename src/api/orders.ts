@@ -2,13 +2,23 @@ import axios from "axios";
 
 const getInfoAboutOrder = () => {
   return axios
-    .get(`https://api.giberno.ru/invoice/`, {
+    .get(`https://api.giberno.ru/invoice_qr/`, {
       params: {
-        form_pay: "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+        client_id: "7bc05553-4b68-44e8-b7bc-37be63c6d9e9",
+        key_form: "497f6eca-6276-4993-bfeb-53cbbbba6f08",
       },
     })
-    .then((response) => {
-      return response.data.data;
+    .then((response: any) => {
+      if (response.status !== 200) {
+        throw Error("Что пошло не так! Перезагрузите страницу");
+      }
+      return {
+        config: response.config.params,
+        infoOrders: response.data.data,
+      };
+    })
+    .catch((err) => {
+      return err.message;
     });
   // return new Promise<any>((resolve, reject) =>
   //   // "https://api.giberno.ru/invoice/?form_pay=497f6eca-6276-4993-bfeb-53cbbbba6f08"
@@ -53,7 +63,13 @@ const getInfoAboutOrder = () => {
   //       },
   //     };
 
-  //     resolve(data);
+  //     resolve({
+  //       config: {
+  //         client_id: "7bc05553-4b68-44e8-b7bc-37be63c6d9e9",
+  //         key_form: "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+  //       },
+  //       infoOrders: data,
+  //     });
   //   }, 0)
   // );
 };
