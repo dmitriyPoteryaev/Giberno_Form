@@ -65,8 +65,11 @@ class OrdersStore {
   }
 
   // ВСЯ ЛОГИКА, КОТОРАЯ СВЯЗАНА С ЗАКАЗОМ И ПОДСЧЁТОМ ДЕНЕГ
-  ChangeDataAboutOrders = () => {
-    return getInfoAboutOrder()
+  ChangeDataAboutOrders = (
+    client_id = "7bc05553-4b68-44e8-b7bc-37be63c6d9e9",
+    key_form = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+  ) => {
+    return getInfoAboutOrder(client_id, key_form)
       .then(({ config, infoOrders }: any) => {
         if (typeof infoOrders !== "object") {
           this.Currentclient_id = config.client_id;

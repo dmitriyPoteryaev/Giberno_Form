@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./PageOrder.css";
 import Header from "@shared/components/Header";
@@ -15,26 +15,19 @@ import СonditionsOrder from "./components/СonditionsOrder";
 
 const PageOrder = observer(() => {
   const { getIsTips, getIsLoading } = orderStore;
+  const [Curlocation, setCurLocation] = useState(window.location.href);
 
   const navigate = useNavigate();
 
-  // const client_id =
-  //   new URLSearchParams(window.location.search).get("client_id") || "";
-
-  // const key_form =
-  //   new URLSearchParams(window.location.search).get("key_form") || "";
-
-  // console.log(client_id, key_form);
-
-  // useEffect(() => {
-
-  //   if (!getIsLoading) {
-  //     navigate("/loading");
-  // }, [ChangeDataAboutOrders, getIsLoading]);
-
-  // if (getIsLoading) {
-  //   navigate("/loading");
-  // }
+  useEffect(() => {
+    return () => {
+      Curlocation.split("?")[1]
+        .split("&")
+        .forEach((line) => {
+          sessionStorage.setItem(line.split("=")[0], line.split("=")[1]);
+        });
+    };
+  }, [Curlocation]);
 
   useEffect(() => {
     if (getIsLoading) {

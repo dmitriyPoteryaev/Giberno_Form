@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { orderStore } from "@store/index";
 import { Spin } from "antd";
@@ -17,8 +17,16 @@ const Loader = observer(() => {
 
   const navigate = useNavigate();
 
+  const client_id: string =
+    sessionStorage.getItem("client_id") ||
+    "7bc05553-4b68-44e8-b7bc-37be63c6d9e9";
+
+  const key_form: string =
+    sessionStorage.getItem("key_form") ||
+    "497f6eca-6276-4993-bfeb-53cbbbba6f08";
+
   useEffect(() => {
-    ChangeDataAboutOrders();
+    ChangeDataAboutOrders(client_id, key_form);
 
     if (!getIsLoading && !getError) {
       navigate(
