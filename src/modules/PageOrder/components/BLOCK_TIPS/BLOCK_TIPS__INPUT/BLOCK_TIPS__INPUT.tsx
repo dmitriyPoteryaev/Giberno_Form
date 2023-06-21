@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
@@ -16,7 +16,17 @@ const defaultMaskOptions = {
   allowLeadingZeroes: false,
 };
 
-const BLOCK_TIPS__INPUT = ({
+export type BLOCK_TIPS__INPUTProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "value"
+> & {
+  /** Значение поля */
+  value: string;
+  /** Callback, вызываемый при вводе данных в поле */
+  onChange: (value: string) => void;
+};
+
+const BLOCK_TIPS__INPUT: FC<BLOCK_TIPS__INPUTProps> = ({
   value,
   onChange,
   maskOptions,
@@ -35,11 +45,6 @@ const BLOCK_TIPS__INPUT = ({
       onChange={onChange}
     />
   );
-};
-
-BLOCK_TIPS__INPUT.defaultProps = {
-  inputMode: "numeric",
-  maskOptions: {},
 };
 
 export default BLOCK_TIPS__INPUT;

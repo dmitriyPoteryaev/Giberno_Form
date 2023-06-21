@@ -9,6 +9,6 @@ export interface SpecificItemInOrderWiithSeparatePosition
   separatePosition: boolean;
 }
 
-export interface BLOCKFORM_withWrapper {
+export type BLOCKFORM_withWrapper = {
   wrapperClassName: string;
-}
+};

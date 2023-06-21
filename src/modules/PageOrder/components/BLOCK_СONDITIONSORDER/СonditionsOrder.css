@@ -1,25 +1,3 @@
-.СonditionsOrder {
-  display: flex;
-  flex-direction: column;
-}
-
-.check {
-  display: flex;
-  justify-content: baseline;
-  padding-left: 1.2em;
-  color: #80869a;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  margin-bottom: 8px;
-
-
-}
-
-.option {
-
-  margin-bottom: 0.25em;
-}
 
 .check__input {
 

@@ -1,4 +1,4 @@
-.BlockWithWaysPay {
+.Block-WaysPay {
   display: flex;
   flex-direction: column;
 
@@ -13,7 +13,7 @@
   z-index: 1;
 }
 
-.BlockWithWaysPay__header {
+.Block-WaysPay__header {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -21,7 +21,7 @@
   width: 100%;
 }
 
-.BlockWithWaysPay__ico {
+.Block-WaysPay_icoWayPay {
   margin-right: 12px;
 }
 

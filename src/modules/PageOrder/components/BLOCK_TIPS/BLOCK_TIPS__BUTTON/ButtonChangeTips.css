@@ -1,4 +1,4 @@
-.Tips__BtnChangeTips {
+.Block-InputTips___BUTTONChangeTips {
 
     background: #f7f8fa;
     border: 1px solid #f7f8fa;
@@ -10,7 +10,7 @@
     line-height: 20px;
     padding: 4px;
 }
-.Tips__BtnChangeTips_active  {
+.Block-InputTips___BUTTONChangeTips_active  {
 
     border-color: #6764ff;
     color: #010d35;

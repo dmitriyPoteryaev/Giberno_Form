@@ -1,19 +1,24 @@
-import React, { memo } from "react";
+import React, { memo, FC } from "react";
 
 import "./ButtonChangeTips.css";
 import classNames from "classnames";
 
-const BLOCK_TIPS__BUTTON = memo(
-  (props: any) => {
+export type BLOCK_TIPS__BUTTONProps = React.PropsWithChildren<{
+  onClick: React.MouseEventHandler;
+  disabled: string;
+}>;
+
+const BLOCK_TIPS__BUTTON: FC<BLOCK_TIPS__BUTTONProps> = memo(
+  (props) => {
     const { children, onClick, disabled } = props;
-    const WrraperButtonChangeClasses = classNames({
-      Tips__BtnChangeTips: true,
-      Tips__BtnChangeTips_active: disabled === children,
+    const BlockButtonChangeClasses = classNames({
+      "Block-InputTips___BUTTONChangeTips": true,
+      "Block-InputTips___BUTTONChangeTips_active": disabled === children,
     });
 
     return (
       <button
-        className={WrraperButtonChangeClasses}
+        className={BlockButtonChangeClasses}
         disabled={disabled === children}
         onClick={onClick}
       >

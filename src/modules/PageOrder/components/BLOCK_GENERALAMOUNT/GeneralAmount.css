@@ -1,4 +1,4 @@
-.GeneralAmount {
+.Block-GeneralAmount {
   display: flex;
   flex-direction: column;
 }
@@ -11,7 +11,7 @@
   line-height: 20px;
   padding-bottom: 16px;
 }
-.GeneralAmount__sepateOrders {
+.Block-AllInfoAboutPay {
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;
@@ -20,23 +20,27 @@
   flex-wrap: wrap;
   color: #343d5d;
 }
-.GeneralAmount__sepateOrders_container {
+.Block-AllInfoAboutPay__separate_container,
+  .Block-GeneralAmount__separate_container {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-.general_Order {
+.Block-AllInfoAboutPay__calcuatedAmount {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   font-weight: 600;
   line-height: 25px;
   margin-bottom: 6px;
 }
-.GeneralAmount__divider {
+.Block-GeneralAmount__LineDivider {
   background: #edeef1;
   height: 1px;
   margin-bottom: 15px;
   width: 100%;
 }
-.itog {
+.Block-GeneralAmount__result {
   font-size: 20px;
   font-weight: 600;
   line-height: 25px;
