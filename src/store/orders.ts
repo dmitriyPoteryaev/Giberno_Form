@@ -91,9 +91,7 @@ class OrdersStore {
       .catch((mesError) => {
         this.Error = mesError.message;
       })
-      .finally(() => {
-        this.isLoading = false;
-      });
+      .finally(() => (this.isLoading = false));
   };
 
   get getOrdersStoreState() {

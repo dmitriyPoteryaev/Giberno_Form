@@ -8,13 +8,11 @@ import { Switch } from "antd";
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 
-export interface BLOCK_SEPARATEORDERprops {
-  wrapperClassName: string;
-}
+import { BLOCKFORM_withWrapper } from "../../../../types/orderTypes";
 
 const ICON_SHARE: string = require("@assets/share.svg").default;
 
-const BLOCK_SEPARATEORDER: FC<BLOCK_SEPARATEORDERprops> = observer((props) => {
+const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { wrapperClassName } = props;
@@ -60,7 +58,7 @@ const BLOCK_SEPARATEORDER: FC<BLOCK_SEPARATEORDERprops> = observer((props) => {
         src={ICON_SHARE}
         alt="share_icon"
         className={ShareOrderButtonClasses}
-        onClick={() => setIsOpen((isOpen: any) => !isOpen)}
+        onClick={() => setIsOpen((isOpen: boolean) => !isOpen)}
       />
       <PopupShare setIsOpen={setIsOpen} isOpen={isOpen} />
     </div>

@@ -1,4 +1,4 @@
-.Block-ListSpecificPosition {
+.Block-ListSpecificPositions {
     padding: 0;
     margin: 0;
     width: 100%;
@@ -8,18 +8,18 @@
     position: relative;
   }
   
-  .Order__content {
+  .Block-SpecificPosition__content {
     max-width: 65%;
   }
-  .Order__title {
+  .Block-SpecificPosition__name {
     text-overflow: ellipsis;
     overflow: hidden;
   }
-  .Order__order {
+  .Block-SpecificPosition__description {
     display: flex;
   }
   
-  .Order__positionOrder {
+  .Block-SpecificPosition__positionOrder {
     color: #b4b7bd;
     font-size: 12px;
     line-height: 14px;
@@ -27,7 +27,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .Order__price {
+  .Block-SpecificPosition__amount {
     position: absolute;
     right: 5px;
     top: 20%;
@@ -39,7 +39,7 @@
   
     max-width: 20%;
   }
-  .ListOrders__check {
+  .Block-SpecificPosition__label {
     display: flex;
     justify-content: baseline;
     color: #80869a;
@@ -50,14 +50,14 @@
   
   }
   
-  .ListOrders__option {
+  .Block-SpecificPosition__option {
   
     margin-bottom: 0.25em;
 
     position: relative;
   }
   
-  .check__input {
+  .Block-SpecificPosition__checkInput {
   
     position: absolute;
     -webkit-appearance: none;
@@ -66,7 +66,7 @@
   
   }
   
-  .ListOrders__check_box {
+  .Block-SpecificPosition___FakeCheckbox {
   
     display: inline-block;
     position: relative;
@@ -85,7 +85,7 @@
   
   }
   
-  .ListOrders__check_box::before {
+  .Block-SpecificPosition___FakeCheckbox::before {
   
     content: "";
     position: absolute;
@@ -102,7 +102,7 @@
   
   }
   
-  .check__input:checked + .ListOrders__check_box::before {
+  .Block-SpecificPosition__checkInput:checked + .Block-SpecificPosition___FakeCheckbox::before {
   
     opacity: 1;
   }

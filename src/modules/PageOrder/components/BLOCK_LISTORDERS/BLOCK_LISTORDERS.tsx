@@ -5,11 +5,12 @@ import { orderStore } from "@store/index";
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 
-export interface BLOCK_LISTORDERSprops {
-  wrapperClassName: string;
-}
+import {
+  SpecificItemInOrderWiithSeparatePosition,
+  BLOCKFORM_withWrapper,
+} from "../../../../types/orderTypes";
 
-const BLOCK_LISTORDERS: FC<BLOCK_LISTORDERSprops> = observer((props) => {
+const BLOCK_LISTORDERS: FC<BLOCKFORM_withWrapper> = observer((props) => {
   const { wrapperClassName } = props;
 
   const ordersrRef = useRef<any>();
@@ -21,99 +22,91 @@ const BLOCK_LISTORDERS: FC<BLOCK_LISTORDERSprops> = observer((props) => {
     getIsSplitBillCheckBox,
   } = orderStore;
 
-  const OrderClasses = classNames({
+  const SpecificPositionClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
     "Block-SpecificPosition": true,
   });
 
-  useEffect(() => {
-    const newArr = [
-      ...[
-        ...[...ordersrRef.current.childNodes]?.map(
-          (elem: any) => elem.childNodes
-        ),
-      ]
-        ?.map((elem: any) => elem[0])
-        ?.map((elem: any) => elem.childNodes)
-        ?.map((elem: any) => elem[0].checked),
-    ];
-
-    if (!newArr.every((elem) => typeof elem === "undefined")) {
-      ChangeIsPayPositionsSepatatedOrderCheckBox(
-        newArr.some((elem: any) => elem === true)
+  const handlerChangeCheckBoxInSpecificPosition = (i: number) => {
+    if (getIsSplitBillCheckBox) {
+      ChangeSomePositionInOrdersStoreState(
+        getOrdersStoreState?.items?.map(
+          (elem: SpecificItemInOrderWiithSeparatePosition, k: number) => {
+            if (k === i) {
+              return {
+                ...elem,
+                separatePosition: !elem?.separatePosition,
+              };
+            } else {
+              return elem;
+            }
+          }
+        )
       );
+    } else {
+      return;
     }
+  };
+
+  useEffect(() => {
+    const someCheckBoxSpecificPositionTrue = getOrdersStoreState.items
+      ?.map(
+        (SpecificPosition: SpecificItemInOrderWiithSeparatePosition) =>
+          SpecificPosition?.separatePosition
+      )
+      .some((elem: boolean) => elem === true);
+
+    ChangeIsPayPositionsSepatatedOrderCheckBox(
+      someCheckBoxSpecificPositionTrue
+    );
   }, [getOrdersStoreState, ChangeIsPayPositionsSepatatedOrderCheckBox]);
 
   return (
-    <ul ref={ordersrRef} className="Block-ListSpecificPosition">
-      {getOrdersStoreState.items?.map((order: any, i: any) => (
-        <li
-          key={i}
-          className={OrderClasses}
-          onClick={(event) => {
-            if (getIsSplitBillCheckBox) {
+    <ul ref={ordersrRef} className="Block-ListSpecificPositions">
+      {getOrdersStoreState.items?.map(
+        (order: SpecificItemInOrderWiithSeparatePosition, i: number) => (
+          <li
+            key={i}
+            className={SpecificPositionClasses}
+            onClick={(event) => {
               event.preventDefault();
-              ChangeSomePositionInOrdersStoreState(
-                getOrdersStoreState?.items?.map((elem: any, k: any) => {
-                  if (k === i) {
-                    return {
-                      ...elem,
-                      separatePosition: !elem?.separatePosition,
-                    };
-                  } else {
-                    return elem;
-                  }
-                })
-              );
-            } else {
-              return;
-            }
-          }}
-        >
-          {getIsSplitBillCheckBox && (
-            <label className="ListOrders__check ListOrders__option">
-              <input
-                type="checkbox"
-                className="check__input"
-                checked={order.separatePosition}
-                onChange={(event) => {
-                  if (getIsSplitBillCheckBox) {
-                    ChangeSomePositionInOrdersStoreState(
-                      getOrdersStoreState?.items?.map((elem: any, k: any) => {
-                        if (k === i) {
-                          return {
-                            ...elem,
-                            separatePosition: !elem?.separatePosition,
-                          };
-                        } else {
-                          return elem;
-                        }
-                      })
-                    );
-                  } else {
-                    return;
-                  }
-                }}
-              />
-              <span className="ListOrders__check_box"></span>
-            </label>
-          )}
-          <div className="Order__content">
-            <div className="Order__title"> {order.name}</div>
-            {order.description && (
-              <div className="Order__order">
-                {[order.description]?.map((description: any, i: any) => (
-                  <div key={i} className="Order__positionOrder">
-                    {description}
-                  </div>
-                ))}
-              </div>
+              handlerChangeCheckBoxInSpecificPosition(i);
+            }}
+          >
+            {getIsSplitBillCheckBox && (
+              <label className="Block-SpecificPosition__label Block-SpecificPosition__option">
+                <input
+                  type="checkbox"
+                  className="Block-SpecificPosition__checkInput"
+                  checked={order.separatePosition}
+                  onChange={() => {
+                    handlerChangeCheckBoxInSpecificPosition(i);
+                  }}
+                />
+                <span className="Block-SpecificPosition___FakeCheckbox"></span>
+              </label>
             )}
-          </div>
-          <div className="Order__price">{`${order.amount} ₽`}</div>
-        </li>
-      ))}
+            <div className="Block-SpecificPosition__content">
+              <div className="Block-SpecificPosition__name"> {order.name}</div>
+              {order.description && (
+                <div className="Block-SpecificPosition__description">
+                  {[order.description]?.map(
+                    (description: string, i: number) => (
+                      <div
+                        key={i}
+                        className="Block-SpecificPosition__positionOrder"
+                      >
+                        {description}
+                      </div>
+                    )
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="Block-SpecificPosition__amount">{`${order.amount} ₽`}</div>
+          </li>
+        )
+      )}
     </ul>
   );
 });

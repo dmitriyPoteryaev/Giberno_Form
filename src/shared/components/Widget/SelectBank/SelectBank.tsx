@@ -35,7 +35,7 @@ const SelectBank = observer((props: any) => {
 
     slideUpWidget
       .getBankList(
-        "https://qr.nspk.ru/AS100001ORTF4GAF80KPJ53K186D9A3G?type=01&bank=100000000007&crc=0C8A"
+        "https://qr.nspk.ru/AD1000031A4PDMGD838OFSMGHLJRV12T?type=02&bank=100000000004&sum=1000&cur=RUB&crc=8C61"
       )
       .then((res: any) => {
         return JSON.stringify(res, null, 2);

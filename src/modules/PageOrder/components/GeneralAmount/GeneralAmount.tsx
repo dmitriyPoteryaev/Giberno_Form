@@ -47,7 +47,7 @@ const GeneralAmount = memo(
               <div>{`${getTips} ₽`}</div>
             </div>
           )}
-          {typeof getDeposit !== "number" && getDeposit !== 0 && (
+          {typeof getDeposit === "number" && getDeposit !== 0 && (
             <div className="GeneralAmount__sepateOrders_container">
               <div>Депозит: </div>
               <div>{`${getDeposit} ₽`}</div>

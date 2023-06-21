@@ -28,7 +28,7 @@ const getInfoAboutOrder = (client_id: string, key_form: string) => {
   //       formName: 'Ресторан "Замес" 2',
   //       splitBill: true,
   //       deposit: 0.0,
-  //       employee: null,
+  //       employee: "Иван Иванович",
   //       serviceFee: true,
   //       items: [
   //         {

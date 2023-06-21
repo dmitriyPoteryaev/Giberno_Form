@@ -1,8 +1,8 @@
-.Tips {
+.Block-Tips {
   display: flex;
   flex-direction: column;
 }
-.Tips__title {
+.Block-Tips__title {
   color: #010d35;
   font-size: 17px;
   font-weight: 600;
@@ -12,17 +12,17 @@
   align-items: flex-start;
 }
 
-.Tips__infoWaiter {
+.Block-Tips__infoEmployee {
   display: flex;
 }
 
-.Tips__photoWaiter {
+.Block-Tips__photoEmployee{
   border-radius: 50%;
   height: 35px;
   margin-right: 12px;
   min-width: 35px;
 }
-.Tips__NameWaiter {
+.Block-Tips__bodyNameEmployee {
   display: flex;
   flex-direction: column;
 
@@ -34,11 +34,11 @@
 .Tips__Position {
   color: rgb(128, 134, 154);
 }
-.Tips__name {
+.Block-Tips__nameEmployee {
   color: #343d5d;
 }
 
-.Tips__BlockInput {
+.Block-InputTips {
   position: relative;
 
   display: flex;
@@ -57,7 +57,7 @@
   border: 1px solid #e6e7eb;
   border-radius: 12px;
 }
-.Tips__WrapperInputTip{
+.WrapperInputTip {
   font-size: 17px;
   font-weight: 600;
   left: calc(50% - 35px);
@@ -65,7 +65,7 @@
   position: absolute;
   transform: translateX(-50%);
 }
-.Tips__inputTip {
+.Block-InputTips__inputTip {
   border: none;
   font-size: 17px;
   font-weight: 600;
@@ -73,14 +73,15 @@
   padding: 0;
   text-align: right;
   width: 100px;
-
 }
-.Tips__inputTip {outline:none;}
+.Block-InputTips__inputTip {
+  outline: none;
+}
 
 ::placeholder {
   color: #010d35;
 }
-.Tips__typeCurrency {
+.Block-InputTips__typeCurrency{
   /* position: absolute;
   transform: translateX(-50%); 
 
@@ -88,21 +89,21 @@
   margin-left: 2px;
 }
 
-.Tips__allPercentagesForTips {
+.Block-InputTips__allPercentagesForTips {
   display: flex;
   justify-content: space-between;
 }
 
 /* all styles for cross button */
 
-.wrap_buttonCross {
+.Block-InputTips__bodyButtonCross {
   cursor: pointer;
   position: absolute;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
 }
-.cross {
+.Block-InputTips__cross {
   align-items: center;
   background: #f7f8fa;
   border: 1px solid #edeef1;
@@ -115,7 +116,7 @@
   width: 24px;
 }
 
-.cross::before {
+.Block-InputTips__cross::before {
   background: #ec4e4e;
   border-radius: 5px;
   content: "";
@@ -127,7 +128,7 @@
   transform: translateX(-50%) rotate(45deg);
 }
 
-.cross::after {
+.Block-InputTips__cross::after {
   background: #ec4e4e;
   border-radius: 5px;
   content: "";

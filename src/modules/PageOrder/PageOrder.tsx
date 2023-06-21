@@ -10,9 +10,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import BLOCK_LISTORDERS from "./components/BLOCK_LISTORDERS";
 import BLOCK_SEPARATEORDER from "./components/BLOCK_SEPARATEORDER";
+import BLOCK_TIPS from "./components/BLOCK_TIPS";
 import BlockWithWaysPay from "./components/BlockWithWaysPay";
 import GeneralAmount from "./components/GeneralAmount";
-import Tips from "./components/Tips";
 import СonditionsOrder from "./components/СonditionsOrder";
 
 const PageOrder = observer(() => {
@@ -62,7 +62,7 @@ const PageOrder = observer(() => {
       <div className="OrderContent">
         <BLOCK_SEPARATEORDER wrapperClassName="wrapperBlock" />
         <BLOCK_LISTORDERS wrapperClassName="wrapperBlock" />
-        {getIsTips && <Tips wrapperClassName="wrapperBlock" />}
+        {getIsTips && <BLOCK_TIPS wrapperClassName="wrapperBlock" />}
         <GeneralAmount wrapperClassName="wrapperBlock" />
         <СonditionsOrder />
         <BlockWithWaysPay />

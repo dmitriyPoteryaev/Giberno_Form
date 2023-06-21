@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import "./ButtonChangeTips.css";
 import classNames from "classnames";
 
-const ButtonChangeTips = memo(
+const BLOCK_TIPS__BUTTON = memo(
   (props: any) => {
     const { children, onClick, disabled } = props;
     const WrraperButtonChangeClasses = classNames({
@@ -33,4 +33,4 @@ const ButtonChangeTips = memo(
   }
 );
 
-export default ButtonChangeTips;
+export default BLOCK_TIPS__BUTTON;

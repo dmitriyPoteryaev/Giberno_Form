@@ -8,3 +8,7 @@ export interface SpecificItemInOrderWiithSeparatePosition
   extends SpecificItemInOrder {
   separatePosition: boolean;
 }
+
+export interface BLOCKFORM_withWrapper {
+  wrapperClassName: string;
+}

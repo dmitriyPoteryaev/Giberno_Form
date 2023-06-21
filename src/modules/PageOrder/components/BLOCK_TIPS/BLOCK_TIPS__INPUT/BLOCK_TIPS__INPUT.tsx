@@ -16,7 +16,7 @@ const defaultMaskOptions = {
   allowLeadingZeroes: false,
 };
 
-const TipsMaskInput = ({
+const BLOCK_TIPS__INPUT = ({
   value,
   onChange,
   maskOptions,
@@ -37,9 +37,9 @@ const TipsMaskInput = ({
   );
 };
 
-TipsMaskInput.defaultProps = {
+BLOCK_TIPS__INPUT.defaultProps = {
   inputMode: "numeric",
   maskOptions: {},
 };
 
-export default TipsMaskInput;
+export default BLOCK_TIPS__INPUT;

@@ -1,14 +1,16 @@
-import React, { useCallback, useRef, useEffect } from "react";
+import React, { useCallback, useRef, useEffect, FC } from "react";
 
 import "./Tips.css";
 import { orderStore } from "@store/index";
+import { calculedPercentByCurrentGeneralAmount } from "@utils/calculedPercentByCurrentGeneralAmount";
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 
-import ButtonChangeTips from "./ButtonChangeTips";
-import TipsMaskInput from "./TipsMaskInput";
+import BLOCK_TIPS__BUTTON from "./BLOCK_TIPS__BUTTON";
+import BLOCK_TIPS__INPUT from "./BLOCK_TIPS__INPUT";
+import { BLOCKFORM_withWrapper } from "../../../../types/orderTypes";
 
-const ALL_PER_TIPS: any = {
+const ALL_PER_TIPS: object = {
   "0": false,
   "10": false,
   "15": false,
@@ -17,7 +19,7 @@ const ALL_PER_TIPS: any = {
 };
 const svg_waiter: string = require("@assets/Waiter.svg").default;
 
-const Tips = observer((props: any) => {
+const BLOCK_TIPS: FC<BLOCKFORM_withWrapper> = observer((props) => {
   const { wrapperClassName } = props;
 
   const {
@@ -38,28 +40,27 @@ const Tips = observer((props: any) => {
 
   getTipsREf.current = getTips;
 
-  const TipsClasses = classNames({
-    [`${wrapperClassName}`]: !!wrapperClassName,
-    Tips: true,
+  const BlockTipsClasses = classNames({
+    [wrapperClassName]: !!wrapperClassName,
+    "Block-Tips": true,
   });
 
-  const BlockInputClasses = classNames({
+  const BlockInputTipsClasses = classNames({
     [`${wrapperClassName}`]: !!wrapperClassName,
-    Tips__BlockInput: true,
+    "Block-InputTips": true,
   });
   const handlerChangeValueTips = useCallback((currentValueBtn: any) => {
-    if (currentValueBtn.target.className === "cross") {
+    if (currentValueBtn.target.className === "Block-InputTips__cross") {
       ChangeTips("0");
       ChangeDedaultProcentTips("0 %");
       return;
     }
 
     if (currentValueBtn.type === "click" && getCalcutedOrdedREf.current) {
-      const calculated =
-        (getCalcutedOrdedREf.current *
-          +currentValueBtn.target.innerHTML.slice(0, -2)) /
-        100;
-      const res = Math.round(calculated);
+      const res = calculedPercentByCurrentGeneralAmount(
+        +currentValueBtn.target.innerHTML.slice(0, -2),
+        getCalcutedOrdedREf.current
+      );
       ChangeTips(res.toString());
       ChangeDedaultProcentTips(currentValueBtn.target.innerHTML);
       return;
@@ -83,19 +84,12 @@ const Tips = observer((props: any) => {
   }, []);
 
   useEffect(() => {
-    if (getCalcutedOrdedREf?.current !== undefined) {
-      const res = Math.round(
-        (getCalcutedOrdedREf?.current * getDedaultProcentTips.slice(0, -2)) /
-          100
-      );
+    const res = calculedPercentByCurrentGeneralAmount(
+      getDedaultProcentTips.slice(0, -2),
+      getCalcutedOrded
+    );
 
-      if (getCalcutedOrdedREf?.current === 0) {
-        ChangeDedaultProcentTips(getDedaultProcentTips);
-      } else {
-        ChangeDedaultProcentTips(getDedaultProcentTips);
-      }
-      ChangeTips(res.toString());
-    }
+    ChangeTips(res.toString());
   }, [
     getIsSplitBillCheckBox,
     getCalcutedOrded,
@@ -104,46 +98,49 @@ const Tips = observer((props: any) => {
     ChangeDedaultProcentTips,
   ]);
   return (
-    <div className={TipsClasses}>
-      <div className="Tips__title"> Чаевые </div>
-      <div className="Tips__infoWaiter">
+    <div className={BlockTipsClasses}>
+      <div className="Block-Tips__title"> Чаевые </div>
+      <div className="Block-Tips__infoEmployee">
         <img
           src={svg_waiter}
-          className="Tips__photoWaiter"
+          className="Block-Tips__photoEmployee"
           alt="photo_waiter"
         />
-        <div className="Tips__NameWaiter">
-          <div className="Tips__name">{getEmployee}</div>
+        <div className="Block-Tips__bodyNameEmployee">
+          <div className="Block-Tips__nameEmployee">{getEmployee}</div>
         </div>
       </div>
-      <label className={BlockInputClasses}>
-        <div className="Tips__WrapperInputTip">
-          <TipsMaskInput
-            className="Tips__inputTip"
+      <label className={BlockInputTipsClasses}>
+        <div className="WrapperInputTip">
+          <BLOCK_TIPS__INPUT
+            className="Block-InputTips__inputTip"
             value={getTips}
             placeholder="0"
             type="text"
             onChange={handlerChangeValueTips}
           />
-          <span className="Tips__typeCurrency">₽</span>
+          <span className="Block-InputTips__typeCurrency">₽</span>
         </div>
-        <div className="wrap_buttonCross">
-          <button className="cross" onClick={handlerChangeValueTips}></button>
+        <div className="Block-InputTips__bodyButtonCross">
+          <button
+            className="Block-InputTips__cross"
+            onClick={handlerChangeValueTips}
+          ></button>
         </div>
       </label>
-      <div className="Tips__allPercentagesForTips">
-        {Object.keys(ALL_PER_TIPS).map((percentages, i) => (
-          <ButtonChangeTips
+      <div className="Block-InputTips__allPercentagesForTips">
+        {Object.keys(ALL_PER_TIPS).map((percentages) => (
+          <BLOCK_TIPS__BUTTON
             key={percentages}
             onClick={handlerChangeValueTips}
             disabled={getDedaultProcentTips}
           >
             {`${percentages} %`}
-          </ButtonChangeTips>
+          </BLOCK_TIPS__BUTTON>
         ))}
       </div>
     </div>
   );
 });
 
-export default Tips;
+export default BLOCK_TIPS;
