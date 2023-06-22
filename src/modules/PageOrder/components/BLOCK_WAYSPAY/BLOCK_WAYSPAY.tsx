@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 import "./BlockWithWaysPay.css";
-import Modal from "@shared/components/Modal/Modal";
 import SelectBank from "@shared/components/Widget/SelectBank";
 import { orderStore } from "@store/index";
 import { generalAmount } from "@utils/generalAmount";
 import { observer } from "mobx-react-lite";
+
+import BLOCK_WAYSPAY__BUTTON from "./BLOCK_WAYSPAY__BUTTON";
+import BLOCK_WAYSPAY__MODAL from "./BLOCK_WAYSPAY__MODAL/BLOCK_WAYSPAY__MODAL";
 
 const svg_waysPay_arrow: string =
   require("@assets/waysPay/right_arrow.svg").default;
@@ -21,13 +23,13 @@ const BLOCK_WAYSPAY = observer(() => {
     getDeposit,
   } = orderStore;
 
-  const [isSelectWayPay, setIsSelectWayPay] = useState<boolean>(false);
+  const [isSelectWayPay, setIsSelectWayPay] = useState<any>(false);
   const [wayPay, setWayPay] = useState<string>(
     Object.keys(getObjectWithWaysPay)[0] || " "
   );
   const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
 
-  const handler = () => {
+  const handlerSelectBank = () => {
     if (wayPay === "SBP") {
       setValueSelectBank(true);
     } else {
@@ -35,11 +37,11 @@ const BLOCK_WAYSPAY = observer(() => {
     }
   };
 
-  const ShowWayPays = () => {
+  const handlerShowWaysPay = () => {
     if (Object.keys(getObjectWithWaysPay).length <= 1) {
       return;
     } else {
-      setIsSelectWayPay((isSelectWayPay) => !isSelectWayPay);
+      setIsSelectWayPay((isSelectWayPay: any) => !isSelectWayPay);
       return;
     }
   };
@@ -49,58 +51,17 @@ const BLOCK_WAYSPAY = observer(() => {
   }
   if (isSelectWayPay) {
     return (
-      <Modal
-        setchangeVisModal={() =>
-          setIsSelectWayPay((isSelectWayPay) => !isSelectWayPay)
-        }
-        titleModal={"Способ Оплаты"}
-        height={25}
-      >
-        <div className="Block-WaysPay">
-          <header>Способ Оплаты</header>
-          <ul className="BlockWithWaysPay__list">
-            {Object.values(getObjectWithWaysPay).map(
-              ([svgIcon, name]: any, i: number) => (
-                <li className="Block-WaysPay__header" key={i}>
-                  <img
-                    src={svgIcon}
-                    alt="way_to_pay"
-                    className="Block-WaysPay_icoWayPay"
-                  />
-                  <div className="BlockWithWaysPay_title-block">
-                    <div className="BlockWithWaysPay_subtitle"> {name}</div>
-                  </div>
-                  <label className="BlockWithWaysPay__check option">
-                    <input
-                      type="checkbox"
-                      className="check__input"
-                      onChange={() =>
-                        setWayPay(Object.keys(getObjectWithWaysPay)[i])
-                      }
-                      checked={Object.keys(getObjectWithWaysPay)[i] === wayPay}
-                    />
-                    <span className="BlockWithWaysPay__check_box"></span>
-                  </label>
-                </li>
-              )
-            )}
-          </ul>
-          <div className="BlockWithWaysPay_body">
-            <button
-              className="baseButton baseButton_blue"
-              onClick={() => setIsSelectWayPay(false)}
-            >
-              {" "}
-              Выбрать
-            </button>
-          </div>
-        </div>
-      </Modal>
+      <BLOCK_WAYSPAY__MODAL
+        getObjectWithWaysPay={getObjectWithWaysPay}
+        handlerShowWaysPay={handlerShowWaysPay}
+        curWayPay={wayPay}
+        setWayPay={setWayPay}
+      ></BLOCK_WAYSPAY__MODAL>
     );
   }
   return (
     <div className="Block-WaysPay">
-      <div className="Block-WaysPay__header" onClick={ShowWayPays}>
+      <div className="Block-WaysPay__header" onClick={handlerShowWaysPay}>
         <img
           src={
             getObjectWithWaysPay?.[wayPay]?.[0]
@@ -108,11 +69,11 @@ const BLOCK_WAYSPAY = observer(() => {
               : ""
           }
           alt="way_to_pay"
-          className="Block-WaysPay_icoWayPay"
+          className="Block-WaysPay__icoWayPay"
         />
-        <div className="BlockWithWaysPay_title-block">
-          <div className="BlockWithWaysPay_title"> Способ оплаты </div>
-          <div className="BlockWithWaysPay_subtitle">
+        <div className="Block-WaysPay__bodyTitle">
+          <div className="Block-WaysPay__title"> Способ оплаты </div>
+          <div className="Block-WaysPay__subtitle">
             {" "}
             {getObjectWithWaysPay?.[wayPay]?.[1]
               ? getObjectWithWaysPay[wayPay][1]
@@ -123,28 +84,23 @@ const BLOCK_WAYSPAY = observer(() => {
           <img
             src={svg_waysPay_arrow}
             alt="way_to_pay"
-            className="BlockWithWaysPay__arrow"
+            className="Block-WaysPay__icoArrow"
           />
         )}
       </div>
-      <div className="BlockWithWaysPay_body">
-        <button
-          className="baseButton baseButton_blue"
-          disabled={getisActiveGenetalButton}
-          style={getisActiveGenetalButton ? { backgroundColor: "gray" } : {}}
-          onClick={handler}
-        >
-          {" "}
-          Oплатить{" "}
-          {generalAmount(
-            +getTips,
-            getServiceChargeAmount,
-            getDeposit,
-            getCalcutedOrded,
-            getIsServiceChargeAmount
-          )}
-        </button>
-      </div>
+      <BLOCK_WAYSPAY__BUTTON
+        disabled={getisActiveGenetalButton}
+        onClick={handlerSelectBank}
+      >
+        Oплатить
+        {generalAmount(
+          +getTips,
+          getServiceChargeAmount,
+          getDeposit,
+          getCalcutedOrded,
+          getIsServiceChargeAmount
+        )}
+      </BLOCK_WAYSPAY__BUTTON>
     </div>
   );
 });

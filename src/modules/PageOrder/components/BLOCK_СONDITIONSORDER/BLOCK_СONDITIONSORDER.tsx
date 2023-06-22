@@ -7,7 +7,8 @@ import { orderStore } from "@store/index";
 import { observer } from "mobx-react-lite";
 
 const BLOCK_СONDITIONSORDER = observer(() => {
-  const [isVisModalCondition, setisVisModalCondition] = useState(false);
+  const [isVisModalCondition, setisVisModalCondition] =
+    useState<boolean>(false);
   const [isVisModalServiceFeeWarning, setiIsVisModalServiceFeeWarning] =
     useState(false);
 
@@ -454,31 +455,41 @@ const BLOCK_СONDITIONSORDER = observer(() => {
         <CustomCheckBox
           onChange={ChangeIsServiceChargeAmount}
           checked={getIsServiceChargeAmount}
-          onClick={(event: any) => {
-            event.stopPropagation();
-            setiIsVisModalServiceFeeWarning(
-              (isVisModalServiceFeeWarning) => !isVisModalServiceFeeWarning
-            );
-          }}
-          desctiprion={`Я хочу взять на себя сервисный сбор Гиберно (${getServiceChargeAmount})`}
           classNameCheckBox={"check__input"}
           classNameFakeCheckBox={"check_box"}
-        />
+        >
+          <span
+            onClick={(event: any) => {
+              event.stopPropagation();
+              setiIsVisModalServiceFeeWarning(
+                (isVisModalServiceFeeWarning) => !isVisModalServiceFeeWarning
+              );
+            }}
+          >
+            Я хочу взять на себя сервисный сбор Гиберно ($
+            {getServiceChargeAmount})
+          </span>
+        </CustomCheckBox>
       )}
 
       <CustomCheckBox
         onChange={ChangeIsAgreeConditionPymentsCheckBox}
         checked={getIsAgreeConditionPymentsCheckBox}
-        onClick={(event: any) => {
-          event.stopPropagation();
-          setisVisModalCondition((isVisModalCondirion) => !isVisModalCondirion);
-        }}
-        desctiprion={
-          "Согласен c условиями использования Политикой конфиденциальности и обработки персональных данных Гиберно"
-        }
         classNameCheckBox={"check__input"}
         classNameFakeCheckBox={"check_box"}
-      />
+      >
+        <span
+          onClick={(event: any) => {
+            event.stopPropagation();
+            setisVisModalCondition(
+              (isVisModalCondition) => !isVisModalCondition
+            );
+          }}
+        >
+          Согласен c условиями использования Политикой конфиденциальности и
+          обработки персональных данных Гиберно
+        </span>
+      </CustomCheckBox>
     </>
   );
 });

@@ -49,34 +49,24 @@ const BLOCK_TIPS: FC<BLOCKFORM_withWrapper> = observer((props) => {
     [`${wrapperClassName}`]: !!wrapperClassName,
     "Block-InputTips": true,
   });
-  const handlerChangeValueTips = useCallback((currentValueBtn: any) => {
-    if (currentValueBtn.target.className === "Block-InputTips__cross") {
-      ChangeTips("0");
-      ChangeDedaultProcentTips("0 %");
-      return;
-    }
-
-    if (currentValueBtn.type === "click" && getCalcutedOrdedREf.current) {
+  const handlerChangeValueTips = useCallback((someEvent: any) => {
+    if (someEvent.type === "click" && getCalcutedOrdedREf.current) {
       const res = calculedPercentByCurrentGeneralAmount(
-        +currentValueBtn.target.innerHTML.slice(0, -2),
+        +someEvent.target.name.slice(0, -2),
         getCalcutedOrdedREf.current
       );
       ChangeTips(res.toString());
-      ChangeDedaultProcentTips(currentValueBtn.target.innerHTML);
+      ChangeDedaultProcentTips(someEvent.target.name);
       return;
     }
-    if (currentValueBtn.target.value === "") {
+    if (someEvent.target.value === "") {
       ChangeTips("0");
       return;
     }
 
-    if (currentValueBtn.type === "change" && getTipsREf.current) {
-      ChangeTips(currentValueBtn.target.value);
+    if (someEvent.type === "change" && getTipsREf.current) {
+      ChangeTips(someEvent.target.value);
       ChangeDedaultProcentTips("");
-      return;
-    }
-    if (+currentValueBtn.target.value === 0) {
-      ChangeTips("0");
       return;
     }
 
@@ -125,6 +115,7 @@ const BLOCK_TIPS: FC<BLOCKFORM_withWrapper> = observer((props) => {
           <button
             className="Block-InputTips__cross"
             onClick={handlerChangeValueTips}
+            name="0 %"
           ></button>
         </div>
       </label>

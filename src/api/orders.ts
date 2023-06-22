@@ -21,7 +21,7 @@ const getInfoAboutOrder = (client_id: string, key_form: string) => {
       return err.message;
     });
   // return new Promise<any>((resolve, reject) =>
-  //   // "https://api.giberno.ru/invoice/?form_pay=497f6eca-6276-4993-bfeb-53cbbbba6f08"
+  // "https://api.giberno.ru/invoice/?form_pay=497f6eca-6276-4993-bfeb-53cbbbba6f08"
   //   setTimeout(() => {
   //     const data: any = {
   //       formID: 5,

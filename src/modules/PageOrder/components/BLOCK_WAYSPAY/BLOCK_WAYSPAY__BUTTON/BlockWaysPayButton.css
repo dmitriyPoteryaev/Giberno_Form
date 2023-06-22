@@ -1,0 +1,26 @@
+.baseButton {
+  border: none;
+  border-radius: 41px;
+  color: #343d5d;
+  cursor: pointer;
+  font-family: Commissioner, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 22px;
+  outline: none;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.baseButton_blue {
+  background: #6764ff;
+  color: #fff;
+}
+
+.baseButton_gray {
+  background: gray;
+  color: #fff;
+}

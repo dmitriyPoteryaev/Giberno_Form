@@ -21,6 +21,7 @@ const BLOCK_TIPS__BUTTON: FC<BLOCK_TIPS__BUTTONProps> = memo(
         className={BlockButtonChangeClasses}
         disabled={disabled === children}
         onClick={onClick}
+        name={children?.toString()}
       >
         {children}
       </button>
