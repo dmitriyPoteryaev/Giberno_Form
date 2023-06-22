@@ -3,9 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./SelectBank.css";
 import "./FillListBanksStyle.css";
 import "@script/slide-up-widget.js";
-import CustomCheckBox from "@shared/components/CustomCheckBox";
 import Modal from "@shared/components/Modal";
-import { orderStore } from "@store/index";
 import { sortNamesBanksByLetter } from "@utils/sortNamesBanksByLetter";
 import { observer } from "mobx-react-lite";
 
@@ -19,11 +17,8 @@ const ICON_SFP = require("@assets/waysPay/SFP.svg").default;
 const SelectBank = observer((props: any) => {
   const { setValueSelectBank } = props;
 
-  const { getIsEmailRequire, getIsEmail } = orderStore;
-
   const [allBanks, setAllBanks] = useState<any>([]);
   const [PopularAllBanks, setPopularAllBanks] = useState<any>([]);
-  const [isGiveCheck, setIsGiveCheck] = useState<boolean>(getIsEmailRequire);
   const [isShowAllBanks, setIsShowAllBanks] = useState<boolean>(false);
   const [filterInput, setFilterInput] = useState<string>("");
   const [searchPlaceholder, setSearchPlaceholder] =
@@ -67,7 +62,7 @@ const SelectBank = observer((props: any) => {
         }
         titleModal={"Выберите банк для оплаты"}
       >
-        <div className="Modal_order__SelectBankContent">
+        <div className="Block-ListSelectBank_allBanks">
           <div className="Modal_order__SelectBankheader">
             <img
               className="Modal_order__SelectBankheader__arrowBackPage"
@@ -177,22 +172,6 @@ const SelectBank = observer((props: any) => {
         Выбрав банк, вы перейдете в мобильное <br />
         приложение для завершения оплаты
       </div>
-      {getIsEmail && (
-        <CustomCheckBox
-          onChange={() => setIsGiveCheck((isGiveCheck) => !isGiveCheck)}
-          checked={isGiveCheck}
-          classNameCheckBox={"Block-LabelGiveCheck__checkBox"}
-          classNameFakeCheckBox={"Block-LabelGiveCheck__fakeCheckBox"}
-          classNameLable={"Block-LabelGiveCheck"}
-        >
-          <span className="Block-LabelGiveCheck__GiveCheck">
-            Хочу получить чек
-          </span>
-        </CustomCheckBox>
-      )}
-      {isGiveCheck && (
-        <input placeholder="Укажите свой e-mail" className="Block-InputEmail" />
-      )}
     </Modal>
   );
 });

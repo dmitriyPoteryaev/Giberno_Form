@@ -1,4 +1,4 @@
-.Block-ListSelectBank_popularBanks {
+.Block-ListSelectBank_popularBanks, .Block-ListSelectBank_allBanks {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
@@ -49,7 +49,6 @@
   margin-left: auto;
 }
 .Modal__description {
-  border-bottom: 1px solid #edeef1;
   color: #80869a;
   font-size: 14px;
   font-weight: 400;

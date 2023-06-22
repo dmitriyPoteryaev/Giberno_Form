@@ -4,7 +4,7 @@ import "./PageOrder.css";
 import PageError from "@modules/PageError";
 import PageLoader from "@modules/PageLoader/PageLoader";
 import Header from "@shared/components/Header";
-import { orderStore } from "@store/index";
+import { orderStore, heightBlockStore } from "@store/index";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -17,6 +17,7 @@ import BLOCK_СONDITIONSORDER from "./components/BLOCK_СONDITIONSORDER";
 
 const PageOrder = observer(() => {
   const { getIsLoading, getError, ChangeDataAboutOrders } = orderStore;
+  const { getCurHeight } = heightBlockStore;
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -56,14 +57,17 @@ const PageOrder = observer(() => {
   }
 
   return (
-    <div className="pageOrder">
+    <div
+      className="pageOrder"
+      style={{ paddingBottom: `${getCurHeight + 150}px` }}
+    >
       <Header></Header>
       <div className="OrderContent">
         <BLOCK_SEPARATEORDER wrapperClassName="wrapperBlock" />
         <BLOCK_LISTORDERS wrapperClassName="wrapperBlock" />
         <BLOCK_TIPS wrapperClassName="wrapperBlock" />
-        <BLOCK_GENERALAMOUNT wrapperClassName="wrapperBlock" />
         <BLOCK_СONDITIONSORDER />
+        <BLOCK_GENERALAMOUNT wrapperClassName="wrapperBlock" />
         <BLOCK_WAYSPAY />
       </div>
     </div>

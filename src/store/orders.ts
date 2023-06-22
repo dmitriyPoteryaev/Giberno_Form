@@ -1,5 +1,4 @@
 import { orderAPI } from "@api/orders";
-// import { CONST_WAYS_OBJECT_PAY } from "@constants/waysPay";
 import { mapOrderItems } from "@utils/mapOrderItems";
 import { makeAutoObservable } from "mobx";
 

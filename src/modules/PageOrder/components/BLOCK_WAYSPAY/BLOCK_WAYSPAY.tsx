@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import "./BlockWithWaysPay.css";
+import CustomCheckBox from "@shared/components/CustomCheckBox";
 import SelectBank from "@shared/components/Widget/SelectBank";
-import { orderStore } from "@store/index";
+import { orderStore, heightBlockStore } from "@store/index";
 import { generalAmount } from "@utils/generalAmount";
 import { observer } from "mobx-react-lite";
 
@@ -21,13 +22,20 @@ const BLOCK_WAYSPAY = observer(() => {
     getisActiveGenetalButton,
     getObjectWithWaysPay,
     getDeposit,
+    getIsEmail,
+    getIsEmailRequire,
   } = orderStore;
 
+  const { ChangeCurHeight } = heightBlockStore;
+
   const [isSelectWayPay, setIsSelectWayPay] = useState<any>(false);
+  const [isGiveCheck, setIsGiveCheck] = useState<boolean>(getIsEmailRequire);
   const [wayPay, setWayPay] = useState<string>(
     Object.keys(getObjectWithWaysPay)[0] || " "
   );
   const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
+
+  const blockRef = useRef<any>(null);
 
   const handlerSelectBank = () => {
     if (wayPay === "SBP") {
@@ -46,6 +54,26 @@ const BLOCK_WAYSPAY = observer(() => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (blockRef.current) {
+        const height = blockRef.current.offsetHeight;
+        ChangeCurHeight(height);
+      }
+    };
+
+    // Добавляем слушатель события resize при монтировании компонента
+    window.addEventListener("resize", handleResize);
+
+    // Выполняем обработчик события resize сразу после монтирования компонента
+    handleResize();
+
+    // Удаляем слушатель события resize при размонтировании компонента
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [ChangeCurHeight, isGiveCheck, setIsGiveCheck]);
+
   if (ValueSelectBank) {
     return <SelectBank setValueSelectBank={setValueSelectBank} />;
   }
@@ -60,7 +88,7 @@ const BLOCK_WAYSPAY = observer(() => {
     );
   }
   return (
-    <div className="Block-WaysPay">
+    <div ref={blockRef} className="Block-WaysPay">
       <div className="Block-WaysPay__header" onClick={handlerShowWaysPay}>
         <img
           src={
@@ -72,13 +100,13 @@ const BLOCK_WAYSPAY = observer(() => {
           className="Block-WaysPay__icoWayPay"
         />
         <div className="Block-WaysPay__bodyTitle">
-          <div className="Block-WaysPay__title"> Способ оплаты </div>
-          <div className="Block-WaysPay__subtitle">
+          <span className="Block-WaysPay__title"> Способ оплаты </span>
+          <span className="Block-WaysPay__subtitle">
             {" "}
             {getObjectWithWaysPay?.[wayPay]?.[1]
               ? getObjectWithWaysPay[wayPay][1]
               : ""}{" "}
-          </div>
+          </span>
         </div>
         {Object.keys(getObjectWithWaysPay).length > 1 && (
           <img
@@ -101,6 +129,25 @@ const BLOCK_WAYSPAY = observer(() => {
           getIsServiceChargeAmount
         )}
       </BLOCK_WAYSPAY__BUTTON>
+
+      {getIsEmail && (
+        <div style={{ marginTop: "10px" }}>
+          <CustomCheckBox
+            onChange={() => setIsGiveCheck((isGiveCheck) => !isGiveCheck)}
+            checked={isGiveCheck}
+            classNameCheckBox={"Block-LabelGiveCheck__checkBox"}
+            classNameFakeCheckBox={"Block-LabelGiveCheck__fakeCheckBox"}
+            classNameLable={"Block-LabelGiveCheck"}
+          >
+            <span className="Block-LabelGiveCheck__GiveCheck">
+              Хочу получить чек
+            </span>
+          </CustomCheckBox>
+        </div>
+      )}
+      {isGiveCheck && (
+        <input placeholder="Укажите свой e-mail" className="Block-InputEmail" />
+      )}
     </div>
   );
 });

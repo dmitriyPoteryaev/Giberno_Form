@@ -16,11 +16,13 @@
     font-size: 17px;
     font-weight: 600;
     line-height: 22px;
+    margin-right: 10px;
 }
 
 .Block-SeparateOrder__BUTTONShareOrder {
     width: 64px;
     height: 48px;
+    margin-left: auto;
 }
 
 @media (max-width: 315px) {
