@@ -16,8 +16,7 @@ import BLOCK_WAYSPAY from "./components/BLOCK_WAYSPAY/BLOCK_WAYSPAY";
 import BLOCK_СONDITIONSORDER from "./components/BLOCK_СONDITIONSORDER";
 
 const PageOrder = observer(() => {
-  const { getIsTips, getIsLoading, getError, ChangeDataAboutOrders } =
-    orderStore;
+  const { getIsLoading, getError, ChangeDataAboutOrders } = orderStore;
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -45,16 +44,8 @@ const PageOrder = observer(() => {
         curData.key_form
     );
 
-    navigate(
-      "/formpay?client_id=" +
-        curData.client_id +
-        "&" +
-        "key_form=" +
-        curData.key_form
-    );
-
     ChangeDataAboutOrders(curData.client_id, curData.key_form);
-  }, [getIsLoading, navigate, location.search, ChangeDataAboutOrders]);
+  }, [navigate, location.search, ChangeDataAboutOrders]);
 
   if (getError) {
     return <PageError />;
@@ -70,7 +61,7 @@ const PageOrder = observer(() => {
       <div className="OrderContent">
         <BLOCK_SEPARATEORDER wrapperClassName="wrapperBlock" />
         <BLOCK_LISTORDERS wrapperClassName="wrapperBlock" />
-        {getIsTips && <BLOCK_TIPS wrapperClassName="wrapperBlock" />}
+        <BLOCK_TIPS wrapperClassName="wrapperBlock" />
         <BLOCK_GENERALAMOUNT wrapperClassName="wrapperBlock" />
         <BLOCK_СONDITIONSORDER />
         <BLOCK_WAYSPAY />

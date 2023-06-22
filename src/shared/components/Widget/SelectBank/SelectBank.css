@@ -1,36 +1,4 @@
-.Modal_order__SelectBank {
-  position: fixed;
-  background: rgba(101, 94, 94, 0.5);
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-}
-.Modal_order__SelectBankContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  border-radius: 20px 20px 0 0;
-  bottom: 0px;
-  box-shadow: 1px 0 11px rgba(0, 0, 0, 0.09);
-  left: 0;
-  padding: 9px 16px 16px;
-  position: fixed;
-  right: 0;
-  max-height: 60%;
-  z-index: 2;
-}
-.Modal_order__SelectBankheader {
-  color: #010d35;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-}
-.Modal_order__ListSelectBank {
+.Block-ListSelectBank_popularBanks {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
@@ -39,7 +7,7 @@
   box-sizing: border-box;
   width: 100%;
 }
-.Modal_order__PositionSelectBank {
+.Block-ListSelectBank__PositionSelectBank {
   align-items: center;
   border: 1px solid #e6e7eb;
   border-radius: 11px;
@@ -51,7 +19,7 @@
   margin-right: 8px;
   width: calc(33.33% - 8px);
 }
-.Modal_order__PositionSelectBank__nameBank {
+.Block-ListSelectBank__nameBank {
   color: #343d5d;
   font-size: 15px;
   font-weight: 500;
@@ -63,24 +31,24 @@
   white-space: nowrap;
   width: 100%;
 }
-.Modal_order__SelectBankIcon {
+.Block-ListSelectBank__BankIcon{
   height: 25px;
   margin-bottom: 2px;
   width: 25px;
 }
-.Modal_order__chooseAllBanks {
+.wrapper_Block-chooseAllBanks {
   margin-bottom: 20px;
   width: 100%;
 }
-.Modal_order__chooseAllBanks_button {
+.Block-chooseAllBanks{
   align-items: center;
   cursor: pointer;
   display: flex;
 }
-.Modal_order__chooseAllBanks_arrow {
+.Block-chooseAllBanks__icoArrow {
   margin-left: auto;
 }
-.Modal_order__chooseAllBanks_button_description {
+.Modal__description {
   border-bottom: 1px solid #edeef1;
   color: #80869a;
   font-size: 14px;
@@ -89,28 +57,32 @@
   margin-bottom: 22px;
   padding-bottom: 20px;
   width: 100%;
+  text-align: left;
 }
-.Modal_order__chooseAllBanks_check {
+
+
+
+.Block-LabelGiveCheck {
   width: 100%;
   align-items: center;
   cursor: pointer;
   display: flex;
   margin-bottom: 14px;
 }
-.Modal_order__chooseAllBanks_check__input {
+.Block-LabelGiveCheck__checkBox{
   position: absolute;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-.Modal_order__chooseAllBanks_GiveCheck {
+.Block-LabelGiveCheck__GiveCheck {
   color: #80869a;
   font-size: 15px;
   font-weight: 500;
   line-height: 20px;
   margin-left: 13px;
 }
-.Modal_order__chooseAllBanks_check_box {
+.Block-LabelGiveCheck__fakeCheckBox {
   display: inline-block;
   position: relative;
   cursor: pointer;
@@ -122,7 +94,8 @@
   border: 1.5px solid #dcdee3;
   background-color: white;
 }
-.Modal_order__chooseAllBanks_check_box::before {
+
+.Block-LabelGiveCheck__fakeCheckBox::before {
   content: "";
   position: absolute;
   width: 5px;
@@ -136,19 +109,11 @@
   opacity: 0;
   transition: 0.2s;
 }
-.Modal_order__chooseAllBanks_check__input:checked
-  + .Modal_order__chooseAllBanks_check_box::before {
+.Block-LabelGiveCheck__checkBox:checked
+  + .Block-LabelGiveCheck__fakeCheckBox::before {
   opacity: 1;
 }
-.Modal_order__chooseAllBanks_wrapperInput {
-  background: #fff;
-  border: 1px solid #e6e7eb;
-  border-radius: 12px;
-  height: 52px;
-  position: relative;
-  width: 100%;
-}
-.Modal_order__chooseAllBanks_Input {
+.Block-InputEmail {
   border: 1px solid black;
   border-radius: 4px;
   bottom: 0;

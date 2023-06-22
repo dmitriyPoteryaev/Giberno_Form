@@ -31,7 +31,6 @@ const BLOCK_СONDITIONSORDER = observer(() => {
           )
         }
         titleModal={"СЕРВИСНЫЙ СБОР"}
-        height={25}
       >
         <div>
           Оплачивая сервисный сбор. Вы помогаете делать сервис Гиберно ещё лучше
@@ -50,7 +49,6 @@ const BLOCK_СONDITIONSORDER = observer(() => {
         titleModal={
           "УСЛОВИЯ ИСПОЛЬЗОВАНИЯ И ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ Гиберно"
         }
-        height={75}
       >
         <div>
           Предисловие: Наконец появилась возможность добраться до интернета,
@@ -466,7 +464,7 @@ const BLOCK_СONDITIONSORDER = observer(() => {
               );
             }}
           >
-            Я хочу взять на себя сервисный сбор Гиберно ($
+            Я хочу взять на себя сервисный сбор Гиберно (
             {getServiceChargeAmount})
           </span>
         </CustomCheckBox>

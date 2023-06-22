@@ -26,6 +26,7 @@ const BLOCK_TIPS: FC<BLOCKFORM_withWrapper> = observer((props) => {
     ChangeTips,
     getCalcutedOrded,
     getTips,
+    getIsTips,
     getIsSplitBillCheckBox,
     getEmployee,
     getDedaultProcentTips,
@@ -88,49 +89,53 @@ const BLOCK_TIPS: FC<BLOCKFORM_withWrapper> = observer((props) => {
     ChangeDedaultProcentTips,
   ]);
   return (
-    <div className={BlockTipsClasses}>
-      <div className="Block-Tips__title"> Чаевые </div>
-      <div className="Block-Tips__infoEmployee">
-        <img
-          src={svg_waiter}
-          className="Block-Tips__photoEmployee"
-          alt="photo_waiter"
-        />
-        <div className="Block-Tips__bodyNameEmployee">
-          <div className="Block-Tips__nameEmployee">{getEmployee}</div>
+    <>
+      {getIsTips && (
+        <div className={BlockTipsClasses}>
+          <div className="Block-Tips__title"> Чаевые </div>
+          <div className="Block-Tips__infoEmployee">
+            <img
+              src={svg_waiter}
+              className="Block-Tips__photoEmployee"
+              alt="photo_waiter"
+            />
+            <div className="Block-Tips__bodyNameEmployee">
+              <div className="Block-Tips__nameEmployee">{getEmployee}</div>
+            </div>
+          </div>
+          <label className={BlockInputTipsClasses}>
+            <div className="WrapperInputTip">
+              <BLOCK_TIPS__INPUT
+                className="Block-InputTips__inputTip"
+                value={getTips}
+                placeholder="0"
+                type="text"
+                onChange={handlerChangeValueTips}
+              />
+              <span className="Block-InputTips__typeCurrency">₽</span>
+            </div>
+            <div className="Block-InputTips__bodyButtonCross">
+              <button
+                className="Block-InputTips__cross"
+                onClick={handlerChangeValueTips}
+                name="0 %"
+              ></button>
+            </div>
+          </label>
+          <div className="Block-InputTips__allPercentagesForTips">
+            {Object.keys(ALL_PER_TIPS).map((percentages) => (
+              <BLOCK_TIPS__BUTTON
+                key={percentages}
+                onClick={handlerChangeValueTips}
+                disabled={getDedaultProcentTips}
+              >
+                {`${percentages} %`}
+              </BLOCK_TIPS__BUTTON>
+            ))}
+          </div>
         </div>
-      </div>
-      <label className={BlockInputTipsClasses}>
-        <div className="WrapperInputTip">
-          <BLOCK_TIPS__INPUT
-            className="Block-InputTips__inputTip"
-            value={getTips}
-            placeholder="0"
-            type="text"
-            onChange={handlerChangeValueTips}
-          />
-          <span className="Block-InputTips__typeCurrency">₽</span>
-        </div>
-        <div className="Block-InputTips__bodyButtonCross">
-          <button
-            className="Block-InputTips__cross"
-            onClick={handlerChangeValueTips}
-            name="0 %"
-          ></button>
-        </div>
-      </label>
-      <div className="Block-InputTips__allPercentagesForTips">
-        {Object.keys(ALL_PER_TIPS).map((percentages) => (
-          <BLOCK_TIPS__BUTTON
-            key={percentages}
-            onClick={handlerChangeValueTips}
-            disabled={getDedaultProcentTips}
-          >
-            {`${percentages} %`}
-          </BLOCK_TIPS__BUTTON>
-        ))}
-      </div>
-    </div>
+      )}
+    </>
   );
 });
 

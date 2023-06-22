@@ -10,11 +10,7 @@ const BLOCK_WAYSPAY__MODAL = (props: any) => {
     props;
 
   return (
-    <Modal
-      setchangeVisModal={handlerShowWaysPay}
-      titleModal={"Способ Оплаты"}
-      height={25}
-    >
+    <Modal setchangeVisModal={handlerShowWaysPay} titleModal={"Способ Оплаты"}>
       <div className="Block-WaysPay">
         <header>Способ Оплаты</header>
         <ul className="Block-WaysPay__list">

@@ -1,10 +1,9 @@
 import React from "react";
 
 import { Spin } from "antd";
-import { observer } from "mobx-react-lite";
 import "./Loader.css";
 
-const Loader = observer(() => {
+const Loader = () => {
   return (
     <div className="pageOrder__loader">
       <div className="pageOrder__loader_Content">
@@ -21,6 +20,6 @@ const Loader = observer(() => {
       </div>
     </div>
   );
-});
+};
 
 export default Loader;
