@@ -125,8 +125,8 @@ const getInfoAboutOrder = (client_id: string, key_form: string) => {
   //       PaymentTypes: ["YANDEX_PAY", "SBP"],
   //       tips: true,
   //       email: true,
-  //       emailRequire: false,
-  //       clientEmail: false,
+  //       emailRequire: true,
+  //       clientEmail: "foregonetomb654@gmail.com",
   //       serviceInfo: {
   //         serviceFeeDefault: true,
   //         serviceFeeWarning: true,

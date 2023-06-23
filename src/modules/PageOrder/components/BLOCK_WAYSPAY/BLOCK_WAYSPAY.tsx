@@ -28,6 +28,7 @@ const BLOCK_WAYSPAY = observer(() => {
     getCurrentclient_id,
     getCurrentkey_form,
     getOrdersStoreState,
+    getClientEmail,
   } = orderStore;
 
   const { ChangeCurHeight } = heightBlockStore;
@@ -35,11 +36,15 @@ const BLOCK_WAYSPAY = observer(() => {
   const { postQr_Link } = qrLinktsStore;
 
   const [isSelectWayPay, setIsSelectWayPay] = useState<any>(false);
-  const [isGiveCheck, setIsGiveCheck] = useState<boolean>(getIsEmailRequire);
+  const [isGiveCheck, setIsGiveCheck] = useState<boolean>(false);
   const [wayPay, setWayPay] = useState<string>(
     Object.keys(getObjectWithWaysPay)[0] || " "
   );
   const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
+  const [validEmail, setValidEmail] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>(
+    getIsEmailRequire ? getClientEmail : ""
+  );
 
   const blockRef = useRef<any>(null);
 
@@ -51,7 +56,8 @@ const BLOCK_WAYSPAY = observer(() => {
         getCurrentclient_id,
         getCurrentkey_form,
         mapOrderItemsSecond(getOrdersStoreState?.items),
-        +getTips
+        +getTips,
+        getIsServiceChargeAmount
       );
     } else {
       return;
@@ -66,6 +72,14 @@ const BLOCK_WAYSPAY = observer(() => {
       return;
     }
   };
+
+  function Checkalidate(valueEmail: any) {
+    let reg: any =
+      /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    let address = valueEmail;
+
+    setValidEmail(reg.test(address));
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -143,7 +157,7 @@ const BLOCK_WAYSPAY = observer(() => {
         )}
       </BLOCK_WAYSPAY__BUTTON>
 
-      {getIsEmail && (
+      {getIsEmail && !getIsEmailRequire && (
         <div style={{ marginTop: "10px" }}>
           <CustomCheckBox
             onChange={() => setIsGiveCheck((isGiveCheck) => !isGiveCheck)}
@@ -158,8 +172,21 @@ const BLOCK_WAYSPAY = observer(() => {
           </CustomCheckBox>
         </div>
       )}
-      {isGiveCheck && (
-        <input placeholder="Укажите свой e-mail" className="Block-InputEmail" />
+
+      {(getIsEmailRequire || isGiveCheck) && (
+        <label style={{ marginTop: "10px" }}>
+          <span className="Block-WaysPay__title">Email куда придёт чек</span>
+          <input
+            placeholder="Укажите свой e-mail"
+            className="Block-InputEmail"
+            type="email"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value);
+              Checkalidate(event.target.value);
+            }}
+          />
+        </label>
       )}
     </div>
   );

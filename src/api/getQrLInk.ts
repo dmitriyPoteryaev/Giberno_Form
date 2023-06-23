@@ -6,7 +6,8 @@ const getQrLInk = (
   client_id = "fb1969e9-8fa1-4b40-a9a4-da10a3fd968e",
   key_form = "c5c5f096-15b4-4abd-b770-b7379500501a",
   items: any,
-  tip = 36
+  tip: any,
+  service: any
 ) => {
   // return new Promise<any>((resolve, reject) =>
   //   // "https://api.giberno.ru/invoice/?form_pay=497f6eca-6276-4993-bfeb-53cbbbba6f08"
@@ -141,13 +142,15 @@ const getQrLInk = (
       {
         orderID: 506,
         //  TO-DO здесь вставить аргумент
-        tipSum: 36,
-        service: true,
+        tipSum: tip,
+        service: service,
         PaymentType: "SPB",
+        //  TO-DO можно пустоту
         email: "vasya@gmail.com",
         items: items,
       },
       {
+        // Если я меняю эти параметры, то приходит 500
         params: {
           client_id: "fb1969e9-8fa1-4b40-a9a4-da10a3fd968e",
           key_form: "c5c5f096-15b4-4abd-b770-b7379500501a",
