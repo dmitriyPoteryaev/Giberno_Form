@@ -7,7 +7,7 @@ export const generalAmount = (
 ): string => {
   const generalAmout = (
     curGeneralAmount +
-    tips +
+    +tips +
     (isServiceChargeAmount ? serviceChargeAmount : 0) -
     (typeof deposit === "number" ? deposit : 0)
   ).toFixed(2);

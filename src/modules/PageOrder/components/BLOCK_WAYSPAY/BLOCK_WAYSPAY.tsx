@@ -5,6 +5,7 @@ import CustomCheckBox from "@shared/components/CustomCheckBox";
 import SelectBank from "@shared/components/Widget/SelectBank";
 import { orderStore, heightBlockStore, qrLinktsStore } from "@store/index";
 import { generalAmount } from "@utils/generalAmount";
+import { mapOrderItemsSecond } from "@utils/mapOrderItemsSecond";
 import { observer } from "mobx-react-lite";
 
 import BLOCK_WAYSPAY__BUTTON from "./BLOCK_WAYSPAY__BUTTON";
@@ -26,6 +27,7 @@ const BLOCK_WAYSPAY = observer(() => {
     getIsEmailRequire,
     getCurrentclient_id,
     getCurrentkey_form,
+    getOrdersStoreState,
   } = orderStore;
 
   const { ChangeCurHeight } = heightBlockStore;
@@ -45,7 +47,12 @@ const BLOCK_WAYSPAY = observer(() => {
     if (wayPay === "SBP") {
       setValueSelectBank(true);
 
-      postQr_Link(getCurrentclient_id, getCurrentkey_form);
+      postQr_Link(
+        getCurrentclient_id,
+        getCurrentkey_form,
+        mapOrderItemsSecond(getOrdersStoreState?.items),
+        +getTips
+      );
     } else {
       return;
     }

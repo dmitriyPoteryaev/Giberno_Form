@@ -18,8 +18,8 @@ class QrLinktsStore {
     makeAutoObservable(this);
   }
 
-  postQr_Link = (client_id: string, key_form: string) => {
-    return getQrLInk(client_id, key_form)
+  postQr_Link = (client_id: string, key_form: string, items: any, tip: any) => {
+    return getQrLInk(client_id, key_form, items, tip)
       .then(({ config, infoQrLink }: any) => {
         if (typeof infoQrLink !== "object") {
           throw Error(infoQrLink);
