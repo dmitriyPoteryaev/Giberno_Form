@@ -26,7 +26,7 @@ const getInfoAboutOrder = (client_id: string, key_form: string) => {
   //     const data: any = {
   //       formID: 5,
   //       formName: 'Ресторан "Замес" 2',
-  //       splitBill: false,
+  //       splitBill: true,
   //       deposit: 0.0,
   //       employee: "Иван Иванович",
   //       serviceFee: true,
@@ -41,7 +41,6 @@ const getInfoAboutOrder = (client_id: string, key_form: string) => {
   //           description: "string",
   //           amount: 150.0,
   //         },
-
   //         {
   //           name: "Жарwerewrfwerwerwerwekjrewjfhareofejrnofarejngmnrakgomeroigjneognjqreogengjnre;ieqneiuinreinое",
   //           description: "string",
@@ -127,6 +126,7 @@ const getInfoAboutOrder = (client_id: string, key_form: string) => {
   //       tips: true,
   //       email: true,
   //       emailRequire: false,
+  //       clientEmail: false,
   //       serviceInfo: {
   //         serviceFeeDefault: true,
   //         serviceFeeWarning: true,
@@ -137,7 +137,6 @@ const getInfoAboutOrder = (client_id: string, key_form: string) => {
   //         tipsDefault: 0,
   //       },
   //     };
-
   //     resolve({
   //       config: {
   //         client_id: "7bc05553-4b68-44e8-b7bc-37be63c6d9e9",

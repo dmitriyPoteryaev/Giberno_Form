@@ -17,8 +17,9 @@ import BLOCK_СONDITIONSORDER from "./components/BLOCK_СONDITIONSORDER";
 
 const PageOrder = observer(() => {
   const { getIsLoading, getError, ChangeDataAboutOrders } = orderStore;
-  const { getCurHeight } = heightBlockStore;
   const location = useLocation();
+
+  const { getCurHeight } = heightBlockStore;
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -53,21 +54,21 @@ const PageOrder = observer(() => {
   }
 
   if (getIsLoading) {
-    return <PageLoader />;
+    return <PageLoader description={"Ожидайте, скоро появится Ваш заказ!"} />;
   }
 
   return (
     <div
       className="pageOrder"
-      style={{ paddingBottom: `${getCurHeight + 150}px` }}
+      style={{ paddingBottom: `${getCurHeight + 0}px` }}
     >
-      <Header></Header>
+      <Header wrapperClassName="wrapperBlock"></Header>
       <div className="OrderContent">
         <BLOCK_SEPARATEORDER wrapperClassName="wrapperBlock" />
         <BLOCK_LISTORDERS wrapperClassName="wrapperBlock" />
         <BLOCK_TIPS wrapperClassName="wrapperBlock" />
-        <BLOCK_СONDITIONSORDER />
         <BLOCK_GENERALAMOUNT wrapperClassName="wrapperBlock" />
+        <BLOCK_СONDITIONSORDER />
         <BLOCK_WAYSPAY />
       </div>
     </div>

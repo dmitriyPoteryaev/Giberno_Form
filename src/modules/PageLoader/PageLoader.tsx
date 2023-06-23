@@ -2,10 +2,18 @@ import React from "react";
 
 import { Spin } from "antd";
 import "./Loader.css";
+import classNames from "classnames";
 
-const Loader = () => {
+const Loader = (props: any) => {
+  const { className, description } = props;
+
+  const BlockLoaderClasses = classNames({
+    [className]: !!className,
+    pageOrder__loader: !!className ? false : true,
+  });
+
   return (
-    <div className="pageOrder__loader">
+    <div className={BlockLoaderClasses}>
       <div className="pageOrder__loader_Content">
         <div
           style={{
@@ -14,7 +22,7 @@ const Loader = () => {
             marginBottom: "20px",
           }}
         >
-          Ожидайте, скоро появится Ваш заказ!
+          {description}
         </div>
         <Spin size="large" />
       </div>

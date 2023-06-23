@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import "./SelectBank.css";
 import "./FillListBanksStyle.css";
 import "@script/slide-up-widget.js";
+import PageLoader from "@modules/PageLoader";
 import Modal from "@shared/components/Modal";
+import { qrLinktsStore } from "@store/index";
 import { sortNamesBanksByLetter } from "@utils/sortNamesBanksByLetter";
 import { observer } from "mobx-react-lite";
 
@@ -17,6 +19,8 @@ const ICON_SFP = require("@assets/waysPay/SFP.svg").default;
 const SelectBank = observer((props: any) => {
   const { setValueSelectBank } = props;
 
+  const { getIsLoadingQr_Link, getQrLink } = qrLinktsStore;
+
   const [allBanks, setAllBanks] = useState<any>([]);
   const [PopularAllBanks, setPopularAllBanks] = useState<any>([]);
   const [isShowAllBanks, setIsShowAllBanks] = useState<boolean>(false);
@@ -29,31 +33,44 @@ const SelectBank = observer((props: any) => {
       window.localStorage,
       window.navigator
     );
+    if (getQrLink) {
+      slideUpWidget
+        .getBankList(`${getQrLink}`)
+        .then((res: any) => {
+          return JSON.stringify(res, null, 2);
+        })
+        .then((json: any) => {
+          setAllBanks(JSON.parse(json));
 
-    slideUpWidget
-      .getBankList(
-        "https://qr.nspk.ru/AD1000031A4PDMGD838OFSMGHLJRV12T?type=02&bank=100000000004&sum=1000&cur=RUB&crc=8C61"
-      )
-      .then((res: any) => {
-        return JSON.stringify(res, null, 2);
-      })
-      .then((json: any) => {
-        setAllBanks(JSON.parse(json));
-
-        return json;
-      })
-      .then((json: any) => {
-        return JSON.parse(json).filter((bank: any) => {
-          return ARRAY_WITH_POPULAR.some(
-            (popularBank: any) => popularBank === bank.bankName
-          );
-        });
-      })
-      .then((popualarBanks: any) => setPopularAllBanks(popualarBanks));
-  }, []);
+          return json;
+        })
+        .then((json: any) => {
+          return JSON.parse(json).filter((bank: any) => {
+            return ARRAY_WITH_POPULAR.some(
+              (popularBank: any) => popularBank === bank.bankName
+            );
+          });
+        })
+        .then((popualarBanks: any) => setPopularAllBanks(popualarBanks));
+    }
+  }, [getIsLoadingQr_Link, getQrLink]);
 
   const sortBanks = sortNamesBanksByLetter(allBanks, filterInput);
 
+  if (getIsLoadingQr_Link) {
+    return (
+      <Modal
+        setchangeVisModal={() =>
+          setValueSelectBank((ValueSelectBank: any) => !ValueSelectBank)
+        }
+      >
+        <PageLoader
+          className={"Block-ListSelectBank_popularBanks__PageLoaders"}
+          description={"Ожидайте"}
+        />
+      </Modal>
+    );
+  }
   if (isShowAllBanks) {
     return (
       <Modal

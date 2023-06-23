@@ -1,7 +1,6 @@
-import React, { useState, FC } from "react";
+import React, { FC } from "react";
 
 import "./BlockSeparateOrder.css";
-import PopupShare from "@shared/components/PopupShare/PopupShare";
 import { orderStore } from "@store/index";
 import { mapOrderItems } from "@utils/mapOrderItems";
 import { Switch } from "antd";
@@ -10,11 +9,7 @@ import { observer } from "mobx-react-lite";
 
 import { BLOCKFORM_withWrapper } from "../../../../types/orderTypes";
 
-const ICON_SHARE: string = require("@assets/share.svg").default;
-
 const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const { wrapperClassName } = props;
   const {
     getIsSplitBill,
@@ -29,11 +24,6 @@ const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
     [wrapperClassName]: !!wrapperClassName,
     "Block-SeparateOrder__SWITCHSeparatedOrder": true,
   });
-  const ShareOrderButtonClasses = classNames({
-    [wrapperClassName]: !!wrapperClassName,
-    "Block-SeparateOrder__BUTTONShareOrder": true,
-  });
-
   const handlerChangeIsSepatatedOrder = () => {
     ChangeIsSplitBillCheckBox();
     ChangeSomePositionInOrdersStoreState(
@@ -43,7 +33,7 @@ const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
   };
 
   return (
-    <div className="Block-SeparateOrder">
+    <>
       {getIsSplitBill && (
         <div
           className={SeparateOrderClasses}
@@ -53,15 +43,7 @@ const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
           <Switch checked={getIsSplitBillCheckBox} />
         </div>
       )}
-
-      <img
-        src={ICON_SHARE}
-        alt="share_icon"
-        className={ShareOrderButtonClasses}
-        onClick={() => setIsOpen((isOpen: boolean) => !isOpen)}
-      />
-      <PopupShare setIsOpen={setIsOpen} isOpen={isOpen} />
-    </div>
+    </>
   );
 });
 

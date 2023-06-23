@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./BlockWithWaysPay.css";
 import CustomCheckBox from "@shared/components/CustomCheckBox";
 import SelectBank from "@shared/components/Widget/SelectBank";
-import { orderStore, heightBlockStore } from "@store/index";
+import { orderStore, heightBlockStore, qrLinktsStore } from "@store/index";
 import { generalAmount } from "@utils/generalAmount";
 import { observer } from "mobx-react-lite";
 
@@ -24,9 +24,13 @@ const BLOCK_WAYSPAY = observer(() => {
     getDeposit,
     getIsEmail,
     getIsEmailRequire,
+    getCurrentclient_id,
+    getCurrentkey_form,
   } = orderStore;
 
   const { ChangeCurHeight } = heightBlockStore;
+
+  const { postQr_Link } = qrLinktsStore;
 
   const [isSelectWayPay, setIsSelectWayPay] = useState<any>(false);
   const [isGiveCheck, setIsGiveCheck] = useState<boolean>(getIsEmailRequire);
@@ -40,6 +44,8 @@ const BLOCK_WAYSPAY = observer(() => {
   const handlerSelectBank = () => {
     if (wayPay === "SBP") {
       setValueSelectBank(true);
+
+      postQr_Link(getCurrentclient_id, getCurrentkey_form);
     } else {
       return;
     }

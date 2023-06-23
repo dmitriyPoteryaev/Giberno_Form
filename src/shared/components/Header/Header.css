@@ -3,6 +3,7 @@
     color: #fff;
     height: 64px;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 8px;
     padding: 0 16px;
     width: 100%;
@@ -21,3 +22,11 @@
     margin-right: 8px;
     padding-right: 8px;
   }
+
+  .Block-SeparateOrder__BUTTONShareOrder {
+    width: 55px;
+    height: 40px;
+    margin-top: 7px;
+    margin-right: -5px;
+    margin-left: auto;
+}

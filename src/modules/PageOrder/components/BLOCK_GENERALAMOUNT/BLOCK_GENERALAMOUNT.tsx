@@ -1,7 +1,7 @@
 import React, { memo, FC } from "react";
 
 import "./GeneralAmount.css";
-import { orderStore, heightBlockStore } from "@store/index";
+import { orderStore } from "@store/index";
 import { generalAmount } from "@utils/generalAmount";
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
@@ -26,12 +26,12 @@ const BLOCK_GENERALAMOUNT: FC<BLOCKFORM_withWrapper> = memo(
       getIsTips,
     } = orderStore;
 
-    const { getCurHeight } = heightBlockStore;
+    // const { getCurHeight } = heightBlockStore;
 
     return (
       <div
         className={BlockGeneralAmountClasses}
-        style={{ bottom: `${getCurHeight}px` }}
+        // style={{ marginBottom: `-${getCurHeight -90}px` }}
       >
         <div className="Block-AllInfoAboutPay">
           <div className="Block-AllInfoAboutPay__separate_container Block-AllInfoAboutPay__calcuatedAmount">

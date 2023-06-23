@@ -23,6 +23,8 @@ class OrdersStore {
   IsEmail: any;
   IsEmailRequire: any;
 
+  clientEmail: any;
+
   // ВСЕ ПАРАМЕТРЫ, ОТВЕЧАЮЩИЕ ЗА ГЛАВНУЮ КНОПКУ - "ОПЛАТИТЬ"
 
   isAgreeConditionPymentsCheckBox: boolean = true;
@@ -67,12 +69,14 @@ class OrdersStore {
         }
         this.isServiceChargeAmount = infoOrders?.serviceInfo?.serviceFeeDefault;
         this.Employee = infoOrders?.employee;
+        this.Employee = infoOrders?.employee;
         this.Deposit = infoOrders?.deposit;
         this.IsTips = infoOrders?.tips;
         this.IsEmail = infoOrders?.email;
         this.IsEmailRequire = infoOrders?.emailRequire;
         this.DefaultProcentTips = infoOrders?.tipsInfo?.tipsDefault.toString();
         this.ArrayWithWaysPay = infoOrders?.PaymentTypes;
+        this.clientEmail = infoOrders?.clientEmail;
         this.OrdersStoreState = {
           ...infoOrders,
           items: mapOrderItems(infoOrders.items),
@@ -189,9 +193,12 @@ class OrdersStore {
     );
   }
 
-  get getIsSplitBillCheckBox() {
-    return this.isSplitBillCheckBox;
+  get getClientEmail() {
+    return this.clientEmail;
   }
+  ChangeClientEmail = (value: string) => {
+    return (this.clientEmail = value);
+  };
   ChangeIsSplitBillCheckBox = () => {
     this.isSplitBillCheckBox = !this.isSplitBillCheckBox;
   };
@@ -229,6 +236,10 @@ class OrdersStore {
   }
   get getIsTips() {
     return this.IsTips;
+  }
+
+  get getIsSplitBillCheckBox() {
+    return this.isSplitBillCheckBox;
   }
 
   // НЕЗАВИСИМЫЕ ПАРАМЕТРЫ

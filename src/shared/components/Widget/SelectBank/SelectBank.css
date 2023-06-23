@@ -1,4 +1,5 @@
-.Block-ListSelectBank_popularBanks, .Block-ListSelectBank_allBanks {
+.Block-ListSelectBank_popularBanks,
+.Block-ListSelectBank_allBanks {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
@@ -31,7 +32,7 @@
   white-space: nowrap;
   width: 100%;
 }
-.Block-ListSelectBank__BankIcon{
+.Block-ListSelectBank__BankIcon {
   height: 25px;
   margin-bottom: 2px;
   width: 25px;
@@ -40,7 +41,7 @@
   margin-bottom: 20px;
   width: 100%;
 }
-.Block-chooseAllBanks{
+.Block-chooseAllBanks {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -59,8 +60,6 @@
   text-align: left;
 }
 
-
-
 .Block-LabelGiveCheck {
   width: 100%;
   align-items: center;
@@ -68,7 +67,7 @@
   display: flex;
   margin-bottom: 14px;
 }
-.Block-LabelGiveCheck__checkBox{
+.Block-LabelGiveCheck__checkBox {
   position: absolute;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -121,4 +120,12 @@
   font-weight: 500;
   padding: 10px 5px 10px 8px;
   width: 100%;
+}
+
+.Block-ListSelectBank_popularBanks__PageLoaders {
+  height: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
