@@ -23,9 +23,21 @@ class QrLinktsStore {
     key_form: string,
     items: any,
     tip: any,
-    service: any
+    service: any,
+    getGibernoOrderId: string,
+    wayPay: string,
+    clientEmail: string
   ) => {
-    return getQrLInk(client_id, key_form, items, tip, service)
+    return getQrLInk(
+      client_id,
+      key_form,
+      items,
+      tip,
+      service,
+      getGibernoOrderId,
+      wayPay,
+      clientEmail
+    )
       .then(({ config, infoQrLink }: any) => {
         if (typeof infoQrLink !== "object") {
           throw Error(infoQrLink);

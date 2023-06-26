@@ -29,7 +29,9 @@ const BLOCK_WAYSPAY = observer(() => {
     getCurrentkey_form,
     getOrdersStoreState,
     getClientEmail,
+    ChangeClientEmail,
     ChangeValidationGeneralButton,
+    getGibernoOrderId,
   } = orderStore;
 
   const { ChangeCurHeight } = heightBlockStore;
@@ -47,17 +49,27 @@ const BLOCK_WAYSPAY = observer(() => {
   );
 
   const blockRef = useRef<any>(null);
-
   const handlerSelectBank = () => {
     if (wayPay === "SBP") {
       setValueSelectBank(true);
 
+      // client_id: string ,
+      // key_form: string ,
+      // items: any,
+      // tip: any,
+      // service: any,
+      // getGibernoOrderId: string,
+      // wayPay: string,
+      // clientEmail: string,
       postQr_Link(
         getCurrentclient_id,
         getCurrentkey_form,
         mapOrderItemsSecond(getOrdersStoreState?.items),
         +getTips,
-        getIsServiceChargeAmount
+        getIsServiceChargeAmount,
+        getGibernoOrderId,
+        wayPay,
+        getClientEmail
       );
     } else {
       return;
@@ -82,14 +94,10 @@ const BLOCK_WAYSPAY = observer(() => {
       // let reg: any =
       //   /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
       ChangeValidationGeneralButton(reg.test(valueEmail.target.value));
+      ChangeClientEmail(valueEmail.target.value);
 
       return;
     }
-
-    console.log({
-      valueEmail: valueEmail,
-      email: reg.test(email),
-    });
 
     ChangeValidationGeneralButton(!valueEmail || reg.test(email));
 

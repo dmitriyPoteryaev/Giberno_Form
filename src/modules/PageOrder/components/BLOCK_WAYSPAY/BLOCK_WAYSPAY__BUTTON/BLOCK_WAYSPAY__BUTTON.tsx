@@ -9,23 +9,25 @@ const BLOCK_WAYSPAY__BUTTON = (props: any) => {
 
   const { getButtonColor } = orderStore;
 
-  const SpecificBackgrougdColor = {
-    backgroundColor: `#${getButtonColor}`,
-  };
-  const styleSpecificBackgrougdColor = JSON.parse(
-    JSON.stringify(SpecificBackgrougdColor)
-  );
-
   const ButtonWaysPayClasses = classNames({
     baseButton_blue: !disabled,
     baseButton: true,
     baseButton_gray: disabled && children[0] === "Oплатить",
-    [styleSpecificBackgrougdColor]: !getButtonColor,
+  });
+
+  const ButtonWaysPayClassesWithNewStyle = classNames({
+    baseButton: true,
+    baseButton_gray: disabled && children[0] === "Oплатить",
   });
 
   return (
     <button
-      className={ButtonWaysPayClasses}
+      className={
+        !!getButtonColor
+          ? ButtonWaysPayClasses
+          : ButtonWaysPayClassesWithNewStyle
+      }
+      style={{ backgroundColor: getButtonColor ? `#${getButtonColor}` : "" }}
       disabled={disabled}
       onClick={onClick}
     >

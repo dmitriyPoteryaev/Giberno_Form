@@ -20,10 +20,18 @@ const Header = (props: any) => {
     "Block-SeparateOrder__BUTTONShareOrder": true,
   });
 
+  const HeaderClasses = classNames({
+    header: true,
+  });
+
+  // const HeaderClassesWithNewStyle = classNames({
+  //   header: true,
+  // });
+
   return (
     <header
-      className="header"
-      style={{ backgroundColor: getMenuColor ? getMenuColor : "#010d35" }}
+      className={HeaderClasses}
+      style={{ backgroundColor: getMenuColor ? `#${getMenuColor}` : "" }}
     >
       <div className="header__container">
         <div className="header__title">{getHeadTextOne}</div>

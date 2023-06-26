@@ -56,6 +56,8 @@ class OrdersStore {
 
   Currentkey_form: any;
 
+  gibernoOrderId: any;
+
   // ВСЁ ДЛЯ ДИЗАЙНА ВНУТРИ ФОРМЫ
   headTextOne: any;
   headTextTwo: any;
@@ -111,6 +113,7 @@ class OrdersStore {
         // для пост запроса
         this.Currentclient_id = config.client_id;
         this.Currentkey_form = config.key_form;
+        this.gibernoOrderId = infoOrders?.gibernoOrderId;
       })
       .catch((mesError) => {
         this.Error = mesError.message;
@@ -330,6 +333,10 @@ class OrdersStore {
 
   get getCurrentkey_form() {
     return this.Currentkey_form;
+  }
+
+  get getGibernoOrderId() {
+    return this.gibernoOrderId;
   }
 }
 
