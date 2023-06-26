@@ -29,6 +29,7 @@ const BLOCK_WAYSPAY = observer(() => {
     getCurrentkey_form,
     getOrdersStoreState,
     getClientEmail,
+    ChangeValidationGeneralButton,
   } = orderStore;
 
   const { ChangeCurHeight } = heightBlockStore;
@@ -41,9 +42,8 @@ const BLOCK_WAYSPAY = observer(() => {
     Object.keys(getObjectWithWaysPay)[0] || " "
   );
   const [ValueSelectBank, setValueSelectBank] = useState<boolean>(false);
-  const [validEmail, setValidEmail] = useState<boolean>(false);
   const [email, setEmail] = useState<string>(
-    getIsEmailRequire ? getClientEmail : ""
+    getClientEmail ? getClientEmail : ""
   );
 
   const blockRef = useRef<any>(null);
@@ -73,13 +73,28 @@ const BLOCK_WAYSPAY = observer(() => {
     }
   };
 
-  function Checkalidate(valueEmail: any) {
+  const GiveReciept = (valueEmail: any) => {
     let reg: any =
       /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-    let address = valueEmail;
+    if (valueEmail?.target?.checked === false) {
+      // console.log("Ты здесь", valueEmail.target.checked);
 
-    setValidEmail(reg.test(address));
-  }
+      // let reg: any =
+      //   /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+      ChangeValidationGeneralButton(reg.test(valueEmail.target.value));
+
+      return;
+    }
+
+    console.log({
+      valueEmail: valueEmail,
+      email: reg.test(email),
+    });
+
+    ChangeValidationGeneralButton(!valueEmail || reg.test(email));
+
+    return;
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -160,7 +175,10 @@ const BLOCK_WAYSPAY = observer(() => {
       {getIsEmail && !getIsEmailRequire && (
         <div style={{ marginTop: "10px" }}>
           <CustomCheckBox
-            onChange={() => setIsGiveCheck((isGiveCheck) => !isGiveCheck)}
+            onChange={(event: any) => {
+              setIsGiveCheck((isGiveCheck) => !isGiveCheck);
+              GiveReciept(event.target.checked);
+            }}
             checked={isGiveCheck}
             classNameCheckBox={"Block-LabelGiveCheck__checkBox"}
             classNameFakeCheckBox={"Block-LabelGiveCheck__fakeCheckBox"}
@@ -183,7 +201,7 @@ const BLOCK_WAYSPAY = observer(() => {
             value={email}
             onChange={(event) => {
               setEmail(event.target.value);
-              Checkalidate(event.target.value);
+              GiveReciept(event);
             }}
           />
         </label>

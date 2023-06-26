@@ -18,6 +18,7 @@ const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
     ChangeSomePositionInOrdersStoreState,
     getOrdersStoreState,
     ChangeIsPayPositionsSepatatedOrderCheckBox,
+    getDivideText,
   } = orderStore;
 
   const SeparateOrderClasses = classNames({
@@ -39,7 +40,7 @@ const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
           className={SeparateOrderClasses}
           onClick={handlerChangeIsSepatatedOrder}
         >
-          Разделить счёт
+          {getDivideText}
           <Switch checked={getIsSplitBillCheckBox} />
         </div>
       )}

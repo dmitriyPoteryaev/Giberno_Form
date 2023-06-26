@@ -22,6 +22,7 @@ class OrdersStore {
 
   IsEmail: any;
   IsEmailRequire: any;
+  validationButtonWhenOpportunityReciept: any = true;
 
   clientEmail: any;
 
@@ -54,6 +55,16 @@ class OrdersStore {
   Currentclient_id: any;
 
   Currentkey_form: any;
+
+  // ВСЁ ДЛЯ ДИЗАЙНА ВНУТРИ ФОРМЫ
+  headTextOne: any;
+  headTextTwo: any;
+  tipsText: any;
+  serviceFeeText: any;
+  divideText: any;
+  menuColor: any;
+  buttonColor: any;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -67,20 +78,37 @@ class OrdersStore {
           this.Currentkey_form = config.key_form;
           throw Error(infoOrders);
         }
-        this.isServiceChargeAmount = infoOrders?.serviceInfo?.serviceFeeDefault;
-        this.Employee = infoOrders?.employee;
+        this.isServiceChargeAmount = infoOrders?.serviceFee?.serviceFeeDefault;
         this.Employee = infoOrders?.employee;
         this.Deposit = infoOrders?.deposit;
-        this.IsTips = infoOrders?.tips;
-        this.IsEmail = infoOrders?.email;
-        this.IsEmailRequire = infoOrders?.emailRequire;
-        this.DefaultProcentTips = infoOrders?.tipsInfo?.tipsDefault.toString();
+        this.IsTips = infoOrders?.tips?.enabled;
+        this.DefaultProcentTips = infoOrders?.tips?.tipsDefault.toString();
         this.ArrayWithWaysPay = infoOrders?.PaymentTypes;
-        this.clientEmail = infoOrders?.clientEmail;
         this.OrdersStoreState = {
           ...infoOrders,
           items: mapOrderItems(infoOrders.items),
         };
+        // для текста внутри блоков
+        this.headTextOne = infoOrders?.design?.headTextOne;
+        this.headTextTwo = infoOrders?.design?.headTextTwo;
+        this.tipsText = infoOrders?.design?.tipsText;
+        this.serviceFeeText = infoOrders?.design?.serviceFeeText;
+        this.divideText = infoOrders?.design?.divideText;
+        this.menuColor = infoOrders?.design?.menuColor;
+        this.buttonColor = infoOrders?.design?.buttonColor;
+
+        // для валидации кнопки
+
+        this.IsEmail = infoOrders?.email?.enabled;
+        this.IsEmailRequire = infoOrders?.email?.emailRequire;
+        this.clientEmail = infoOrders?.email?.emailCustomer;
+
+        if (this.IsEmailRequire) {
+          this.validationButtonWhenOpportunityReciept =
+            !this.IsEmailRequire || this.clientEmail;
+        }
+
+        // для пост запроса
         this.Currentclient_id = config.client_id;
         this.Currentkey_form = config.key_form;
       })
@@ -173,11 +201,11 @@ class OrdersStore {
   get getServiceChargeAmount() {
     const calculated: number =
       ((+this.tips + this.getCalcutedOrded) *
-        this.OrdersStoreState?.serviceInfo?.serviceFeePercentage) /
+        this.OrdersStoreState?.serviceFee?.serviceFeePercentage) /
       100;
     const res: number =
       calculated >= this.OrdersStoreState?.serviceInfo?.serviceFeeMax
-        ? this.OrdersStoreState?.serviceInfo?.serviceFeeMax
+        ? this.OrdersStoreState?.serviceFee?.serviceFeeMax
         : calculated;
 
     const generalRes = this.OrdersStoreState?.serviceFee ? res : 0;
@@ -189,7 +217,9 @@ class OrdersStore {
   get getisActiveGenetalButton() {
     return !(
       this.isAgreeConditionPymentsCheckBox &&
-      (!this.isSplitBillCheckBox || this.IsPayPositionsSepatatedOrderCheckBox)
+      (!this.isSplitBillCheckBox ||
+        this.IsPayPositionsSepatatedOrderCheckBox) &&
+      this.getValidationButton
     );
   }
 
@@ -225,7 +255,7 @@ class OrdersStore {
     return this.OrdersStoreState?.splitBill;
   }
   get getIsServiceFee() {
-    return this.OrdersStoreState?.serviceFee;
+    return this.OrdersStoreState?.serviceFee?.enabled;
   }
   get getIsServiceFeeWarning() {
     return this.OrdersStoreState?.serviceInfo?.serviceFeeWarning;
@@ -241,6 +271,49 @@ class OrdersStore {
   get getIsSplitBillCheckBox() {
     return this.isSplitBillCheckBox;
   }
+
+  // ВСЁ ДЛЯ ДИЗАЙНА
+
+  get getHeadTextOne() {
+    return this.headTextOne || "Мой счёт";
+  }
+
+  get getheadTextTwo() {
+    return this.headTextTwo || "Стол";
+  }
+
+  get getTipsText() {
+    return this.tipsText || "Чаевые";
+  }
+
+  get getServiceFeeText() {
+    return (
+      this.serviceFeeText || "Я хочу взять на себя сервисный сбор Гиберно" + " "
+    );
+  }
+
+  get getDivideText() {
+    return this.divideText || "Разделить счёт";
+  }
+
+  get getMenuColor() {
+    return this.menuColor || "#010d35";
+  }
+  get getButtonColor() {
+    return this.buttonColor || "#6764ff";
+  }
+  // ВСЁ ЧТО СВЯЗАНО С ВАЛИДАЦИЕЙ КНОПНКИ
+
+  get getValidationButton() {
+    return (
+      (!this.getIsEmail && !this.IsEmailRequire) ||
+      (this.validationButtonWhenOpportunityReciept && this.getIsEmail)
+    );
+  }
+
+  ChangeValidationGeneralButton = (value: boolean) => {
+    this.validationButtonWhenOpportunityReciept = value;
+  };
 
   // НЕЗАВИСИМЫЕ ПАРАМЕТРЫ
   get getIsLoading() {

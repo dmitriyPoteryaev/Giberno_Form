@@ -20,6 +20,7 @@ const BLOCK_СONDITIONSORDER = observer(() => {
     getServiceChargeAmount,
     getIsServiceFee,
     getIsServiceFeeWarning,
+    getServiceFeeText,
   } = orderStore;
 
   if (isVisModalServiceFeeWarning && getIsServiceFeeWarning) {
@@ -464,8 +465,7 @@ const BLOCK_СONDITIONSORDER = observer(() => {
               );
             }}
           >
-            Я хочу взять на себя сервисный сбор Гиберно (
-            {getServiceChargeAmount})
+            {getServiceFeeText}({getServiceChargeAmount}₽)
           </span>
         </CustomCheckBox>
       )}

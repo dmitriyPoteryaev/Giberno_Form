@@ -30,6 +30,7 @@ const BLOCK_TIPS: FC<BLOCKFORM_withWrapper> = observer((props) => {
     getEmployee,
     getDedaultProcentTips,
     ChangeDedaultProcentTips,
+    getTipsText,
   } = orderStore;
 
   const getCalcutedOrdedREf = useRef<number>();
@@ -90,7 +91,7 @@ const BLOCK_TIPS: FC<BLOCKFORM_withWrapper> = observer((props) => {
   return (
     <>
       <div className={BlockTipsClasses}>
-        <div className="Block-Tips__title"> Чаевые </div>
+        <div className="Block-Tips__title">{getTipsText}</div>
         <div className="Block-Tips__infoEmployee">
           <img
             src={svg_waiter}

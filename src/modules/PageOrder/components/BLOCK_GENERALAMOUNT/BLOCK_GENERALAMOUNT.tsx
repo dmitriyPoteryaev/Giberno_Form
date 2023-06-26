@@ -24,6 +24,7 @@ const BLOCK_GENERALAMOUNT: FC<BLOCKFORM_withWrapper> = memo(
       getServiceChargeAmount,
       getDeposit,
       getIsTips,
+      getTipsText,
     } = orderStore;
 
     // const { getCurHeight } = heightBlockStore;
@@ -40,7 +41,7 @@ const BLOCK_GENERALAMOUNT: FC<BLOCKFORM_withWrapper> = memo(
           </div>
           {getIsTips && (
             <div className="Block-AllInfoAboutPay__separate_container">
-              <div>Чаевые: </div>
+              <div>{getTipsText}: </div>
               <div>{`${getTips} ₽`}</div>
             </div>
           )}
