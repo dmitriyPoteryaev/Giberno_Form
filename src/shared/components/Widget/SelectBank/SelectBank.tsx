@@ -34,12 +34,9 @@ const SelectBank = observer((props: any) => {
       window.navigator
     );
 
-    if (getQrLink) {
-      // `${getQrLink}`
+    if (!getIsLoadingQr_Link) {
       slideUpWidget
-        .getBankList(
-          "https://qr.nspk.ru/AD10006IFHE6OGOC81A9GFFTEGDQTMAU?type=02&bank=100000000004&sum=27369&cur=RUB&crc=CDBE"
-        )
+        .getBankList(`${getQrLink}`)
         .then((res: any) => {
           return JSON.stringify(res, null, 2);
         })
