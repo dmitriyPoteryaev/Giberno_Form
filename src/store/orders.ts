@@ -128,16 +128,15 @@ class OrdersStore {
   }
 
   get getCalcutedOrded() {
-    return this.OrdersStoreState?.items?.reduce(
-      (accumulator: any, positionOrder: any) => {
+    return this.OrdersStoreState?.items
+      ?.reduce((accumulator: any, positionOrder: any) => {
         if (positionOrder.separatePosition || !this.isSplitBillCheckBox) {
           return accumulator + positionOrder.amount;
         } else {
           return accumulator + 0;
         }
-      },
-      0
-    );
+      }, 0)
+      .toFixed(2);
   }
 
   get getTips() {
@@ -203,16 +202,19 @@ class OrdersStore {
 
   // цена за сервисный сбор
   get getServiceChargeAmount() {
-    const calculated: number =
-      ((+this.tips + this.getCalcutedOrded) *
+    const calculated: number = Math.round(
+      ((+this.tips + +this.getCalcutedOrded) *
         this.OrdersStoreState?.serviceFee?.serviceFeePercentage) /
-      100;
+        100
+    );
+
     const res: number =
-      calculated >= this.OrdersStoreState?.serviceInfo?.serviceFeeMax
+      calculated >= this.OrdersStoreState?.serviceFee?.serviceFeeMax
         ? this.OrdersStoreState?.serviceFee?.serviceFeeMax
         : calculated;
 
-    const generalRes = this.OrdersStoreState?.serviceFee ? res : 0;
+    const generalRes = this.OrdersStoreState?.serviceFee?.enabled ? res : 0;
+
     return Math.round(generalRes);
   }
 
@@ -262,7 +264,7 @@ class OrdersStore {
     return this.OrdersStoreState?.serviceFee?.enabled;
   }
   get getIsServiceFeeWarning() {
-    return this.OrdersStoreState?.serviceInfo?.serviceFeeWarning;
+    return this.OrdersStoreState?.serviceFee?.serviceFeeWarning;
   }
 
   get getDeposit() {

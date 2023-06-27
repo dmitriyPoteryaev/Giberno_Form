@@ -6,7 +6,7 @@ export const generalAmount = (
   isServiceChargeAmount: boolean
 ): string => {
   const generalAmout = (
-    curGeneralAmount +
+    +curGeneralAmount +
     +tips +
     (isServiceChargeAmount ? serviceChargeAmount : 0) -
     (typeof deposit === "number" ? deposit : 0)
