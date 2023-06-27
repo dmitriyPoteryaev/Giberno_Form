@@ -31,7 +31,7 @@ const Header = (props: any) => {
   return (
     <header
       className={HeaderClasses}
-      style={{ backgroundColor: getMenuColor ? `#${getMenuColor}` : "" }}
+      style={{ backgroundColor: getMenuColor ? `#${getMenuColor}` : "#010d35" }}
     >
       <div className="header__container">
         <div className="header__title">{getHeadTextOne}</div>

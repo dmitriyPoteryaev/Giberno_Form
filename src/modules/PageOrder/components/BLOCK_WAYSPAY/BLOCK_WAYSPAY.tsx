@@ -6,6 +6,7 @@ import SelectBank from "@shared/components/Widget/SelectBank";
 import { orderStore, heightBlockStore, qrLinktsStore } from "@store/index";
 import { generalAmount } from "@utils/generalAmount";
 import { mapOrderItemsSecond } from "@utils/mapOrderItemsSecond";
+import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 
 import BLOCK_WAYSPAY__BUTTON from "./BLOCK_WAYSPAY__BUTTON";
@@ -32,6 +33,7 @@ const BLOCK_WAYSPAY = observer(() => {
     ChangeClientEmail,
     ChangeValidationGeneralButton,
     getGibernoOrderId,
+    getValidationGeneralButton,
   } = orderStore;
 
   const { ChangeCurHeight } = heightBlockStore;
@@ -47,6 +49,14 @@ const BLOCK_WAYSPAY = observer(() => {
   const [email, setEmail] = useState<string>(
     getClientEmail ? getClientEmail : ""
   );
+
+  const InputClasses = classNames({
+    "Block-InputEmail": !(
+      getisActiveGenetalButton && !getValidationGeneralButton
+    ),
+    "Block-InputEmail_red":
+      getisActiveGenetalButton && !getValidationGeneralButton,
+  });
 
   const blockRef = useRef<any>(null);
   const handlerSelectBank = () => {
@@ -204,7 +214,7 @@ const BLOCK_WAYSPAY = observer(() => {
           <span className="Block-WaysPay__title">Email куда придёт чек</span>
           <input
             placeholder="Укажите свой e-mail"
-            className="Block-InputEmail"
+            className={InputClasses}
             type="email"
             value={email}
             onChange={(event) => {

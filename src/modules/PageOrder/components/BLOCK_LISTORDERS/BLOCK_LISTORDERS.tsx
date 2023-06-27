@@ -23,8 +23,24 @@ const BLOCK_LISTORDERS: FC<BLOCKFORM_withWrapper> = observer((props) => {
   } = orderStore;
 
   const SpecificPositionClasses = classNames({
-    [`${wrapperClassName}`]: !!wrapperClassName,
+    [`${wrapperClassName}`]: !(
+      getIsSplitBillCheckBox &&
+      !getOrdersStoreState.items
+        ?.map(
+          (SpecificPosition: SpecificItemInOrderWiithSeparatePosition) =>
+            SpecificPosition?.separatePosition
+        )
+        .some((elem: boolean) => elem === true)
+    ),
     "Block-SpecificPosition": true,
+    wrapperBlock_red:
+      getIsSplitBillCheckBox &&
+      !getOrdersStoreState.items
+        ?.map(
+          (SpecificPosition: SpecificItemInOrderWiithSeparatePosition) =>
+            SpecificPosition?.separatePosition
+        )
+        .some((elem: boolean) => elem === true),
   });
 
   const handlerChangeCheckBoxInSpecificPosition = (i: number) => {

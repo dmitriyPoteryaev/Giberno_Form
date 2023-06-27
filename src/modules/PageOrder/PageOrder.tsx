@@ -16,8 +16,13 @@ import BLOCK_WAYSPAY from "./components/BLOCK_WAYSPAY/BLOCK_WAYSPAY";
 import BLOCK_СONDITIONSORDER from "./components/BLOCK_СONDITIONSORDER";
 
 const PageOrder = observer(() => {
-  const { getIsLoading, getError, ChangeDataAboutOrders, getIsTips } =
-    orderStore;
+  const {
+    getIsLoading,
+    getError,
+    ChangeDataAboutOrders,
+    getIsTips,
+    getIsSplitBill,
+  } = orderStore;
   const location = useLocation();
 
   const { getCurHeight } = heightBlockStore;
@@ -65,7 +70,9 @@ const PageOrder = observer(() => {
     >
       <Header wrapperClassName="wrapperBlock"></Header>
       <div className="OrderContent">
-        <BLOCK_SEPARATEORDER wrapperClassName="wrapperBlock" />
+        {getIsSplitBill && (
+          <BLOCK_SEPARATEORDER wrapperClassName="wrapperBlock" />
+        )}
         <BLOCK_LISTORDERS wrapperClassName="wrapperBlock" />
         {getIsTips && <BLOCK_TIPS wrapperClassName="wrapperBlock" />}
         <BLOCK_GENERALAMOUNT wrapperClassName="wrapperBlock" />

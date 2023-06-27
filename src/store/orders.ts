@@ -37,7 +37,7 @@ class OrdersStore {
 
   // ВСЕ ПАРАМЕТРЫ, СВЯЗАННЫЕ C ОТОБРАЖЕНИЕМ КОНКРЕТНЫХ ЭЛЕМЕНТОВ
 
-  isSplitBill: boolean = this.OrdersStoreState?.splitBill;
+  isSplitBill: any;
 
   serviceFee: boolean = this.OrdersStoreState?.serviceFee;
 
@@ -74,12 +74,11 @@ class OrdersStore {
   // ВСЯ ЛОГИКА, КОТОРАЯ СВЯЗАНА С ЗАКАЗОМ И ПОДСЧЁТОМ ДЕНЕГ
   ChangeDataAboutOrders = (client_id: string, key_form: string) => {
     return getInfoAboutOrder(client_id, key_form)
-      .then(({ config, infoOrders }: any) => {
-        if (typeof infoOrders !== "object") {
-          this.Currentclient_id = config.client_id;
-          this.Currentkey_form = config.key_form;
-          throw Error(infoOrders);
+      .then((response: any) => {
+        if (typeof response !== "object") {
+          throw Error(response);
         }
+        const { config, infoOrders } = response;
         this.isServiceChargeAmount = infoOrders?.serviceFee?.serviceFeeDefault;
         this.Employee = infoOrders?.employee;
         this.Deposit = infoOrders?.deposit;
@@ -100,6 +99,7 @@ class OrdersStore {
         this.divideText = infoOrders?.design?.divideText;
         this.menuColor = infoOrders?.design?.menuColor;
         this.buttonColor = infoOrders?.design?.buttonColor;
+        this.isSplitBill = infoOrders?.splitBill?.enabled;
 
         // для валидации кнопки
 
@@ -256,7 +256,7 @@ class OrdersStore {
   // ВСЯ ЛОГИКА, СВЯЗАННАЯ C ОТОБРАЖЕНИЕМ КОНКРЕТНЫХ ЭЛЕМЕНТОВ
 
   get getIsSplitBill() {
-    return this.OrdersStoreState?.splitBill;
+    return this.isSplitBill;
   }
   get getIsServiceFee() {
     return this.OrdersStoreState?.serviceFee?.enabled;
@@ -318,6 +318,10 @@ class OrdersStore {
   ChangeValidationGeneralButton = (value: boolean) => {
     this.validationButtonWhenOpportunityReciept = value;
   };
+
+  get getValidationGeneralButton() {
+    return this.validationButtonWhenOpportunityReciept;
+  }
 
   // НЕЗАВИСИМЫЕ ПАРАМЕТРЫ
   get getIsLoading() {

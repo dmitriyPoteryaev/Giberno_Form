@@ -111,16 +111,6 @@
   + .Block-LabelGiveCheck__fakeCheckBox::before {
   opacity: 1;
 }
-.Block-InputEmail {
-  border: 1px solid black;
-  border-radius: 4px;
-  bottom: 0;
-  color: #010d35;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 10px 5px 10px 8px;
-  width: 100%;
-}
 
 .Block-ListSelectBank_popularBanks__PageLoaders {
   height: 200px;

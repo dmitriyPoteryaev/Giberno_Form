@@ -12,7 +12,6 @@ import { BLOCKFORM_withWrapper } from "../../../../types/orderTypes";
 const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
   const { wrapperClassName } = props;
   const {
-    getIsSplitBill,
     getIsSplitBillCheckBox,
     ChangeIsSplitBillCheckBox,
     ChangeSomePositionInOrdersStoreState,
@@ -34,17 +33,13 @@ const BLOCK_SEPARATEORDER: FC<BLOCKFORM_withWrapper> = observer((props) => {
   };
 
   return (
-    <>
-      {getIsSplitBill && (
-        <div
-          className={SeparateOrderClasses}
-          onClick={handlerChangeIsSepatatedOrder}
-        >
-          {getDivideText}
-          <Switch checked={getIsSplitBillCheckBox} />
-        </div>
-      )}
-    </>
+    <div
+      className={SeparateOrderClasses}
+      onClick={handlerChangeIsSepatatedOrder}
+    >
+      {getDivideText}
+      <Switch checked={getIsSplitBillCheckBox} />
+    </div>
   );
 });
 

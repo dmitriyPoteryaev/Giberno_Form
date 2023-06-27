@@ -7,6 +7,17 @@
     display: flex;
     position: relative;
   }
+
+ 
+.wrapperBlock_red {
+
+  background-color: #fff;
+  border: 1px solid red;
+  border-radius: 12px;
+  list-style-type: none;
+  padding: 12px;
+  margin-bottom: 12px;
+}
   
   .Block-SpecificPosition__content {
     max-width: 65%;
