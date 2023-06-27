@@ -85,7 +85,9 @@ class OrdersStore {
         this.Deposit = infoOrders?.deposit;
         this.IsTips = infoOrders?.tips?.enabled;
         this.DefaultProcentTips = infoOrders?.tips?.tipsDefault.toString();
-        this.ArrayWithWaysPay = infoOrders?.PaymentTypes;
+        this.ArrayWithWaysPay = infoOrders?.PaymentTypes?.map(
+          (elem: any) => Object?.values(elem)[0]
+        );
         this.OrdersStoreState = {
           ...infoOrders,
           items: mapOrderItems(infoOrders.items),
@@ -175,7 +177,6 @@ class OrdersStore {
     return Object.values(WAYS_OBJECT_PAY).reduce(
       (acc: any, item: any, index: any) => {
         const KEY_WAY_PAY: string = Object.keys(WAYS_OBJECT_PAY)[index];
-
         if (
           this.ArrayWithWaysPay?.includes(Object.keys(WAYS_OBJECT_PAY)[index])
         ) {

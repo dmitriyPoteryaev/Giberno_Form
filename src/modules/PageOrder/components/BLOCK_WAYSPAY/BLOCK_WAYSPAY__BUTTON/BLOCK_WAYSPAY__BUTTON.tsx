@@ -23,11 +23,14 @@ const BLOCK_WAYSPAY__BUTTON = (props: any) => {
   return (
     <button
       className={
-        !!getButtonColor
+        !!getButtonColor && !disabled
           ? ButtonWaysPayClasses
           : ButtonWaysPayClassesWithNewStyle
       }
-      style={{ backgroundColor: getButtonColor ? `#${getButtonColor}` : "" }}
+      style={{
+        backgroundColor:
+          getButtonColor && !disabled ? `#${getButtonColor}` : "",
+      }}
       disabled={disabled}
       onClick={onClick}
     >

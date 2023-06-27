@@ -26,7 +26,7 @@ const PageOrder = observer(() => {
   useEffect(() => {
     const curData: any = {
       client_id: "fb1969e9-8fa1-4b40-a9a4-da10a3fd968e",
-      key_form: "58441a73-5fb8-479e-88c8-9472f8d02a1c",
+      key_form: "1ac3749a-d27e-4133-b422-f6f15cd42e97",
     };
 
     location.search.split("&").forEach((line, i) => {
@@ -35,7 +35,7 @@ const PageOrder = observer(() => {
           line.split("=")[1] || "fb1969e9-8fa1-4b40-a9a4-da10a3fd968e";
       } else {
         curData.key_form =
-          line.split("=")[1] || "58441a73-5fb8-479e-88c8-9472f8d02a1c";
+          line.split("=")[1] || "1ac3749a-d27e-4133-b422-f6f15cd42e97";
       }
     });
 
