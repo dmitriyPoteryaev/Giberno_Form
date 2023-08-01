@@ -144,7 +144,7 @@ const getQrLInk = (
   ChangeisLoadingQr_Link();
   return axios
     .post(
-      `https://api.giberno.ru/invoice_qr/`,
+      `https://stage.giberno.ru:20000/test/invoice_qr/`,
       {
         orderID: getGibernoOrderId,
         //  TO-DO здесь вставить аргумент

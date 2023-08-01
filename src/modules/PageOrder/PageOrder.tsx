@@ -35,17 +35,12 @@ const PageOrder = observer(() => {
     };
 
     location.search.split("&").forEach((line, i) => {
-      if (i === 0) {
-        curData.client_id =
-          line.split("=")[1] || "fb1969e9-8fa1-4b40-a9a4-da10a3fd968e";
-      } else {
-        curData.key_form =
-          line.split("=")[1] || "1ac3749a-d27e-4133-b422-f6f15cd42e97";
-      }
+      curData[line.split("=")[0].split("?").reverse()[0]] =
+        line.split("=")[1] || "1ac3749a-d27e-4133-b422-f6f15cd42e97";
     });
 
     navigate(
-      "/formpay?client_id=" +
+      "/test/formpay?client_id=" +
         curData.client_id +
         "&" +
         "key_form=" +

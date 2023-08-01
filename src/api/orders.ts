@@ -3,7 +3,7 @@ import axios from "axios";
 const getInfoAboutOrder = (client_id: string, key_form: string) => {
   // client_id=fb1969e9-8fa1-4b40-a9a4-da10a3fd968e&key_form=c5c5f096-15b4-4abd-b770-b7379500501a
   return axios
-    .get(`https://api.giberno.ru/invoice_qr/`, {
+    .get(`https://stage.giberno.ru:20000/test/invoice_qr/?`, {
       params: {
         client_id: client_id,
         key_form: key_form,
